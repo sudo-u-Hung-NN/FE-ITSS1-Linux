@@ -165,6 +165,7 @@ function Share(props) {
                                                     <label>Name:</label>
                                                     <Select
                                                         options={mockup_ingredents} 
+                                                        onChange={(e) => console.log(e)} // Handle here
                                                     />
                                                 </div>
                                                 <div className='ingredient-add-item-amount'>
