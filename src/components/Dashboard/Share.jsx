@@ -1,89 +1,115 @@
 import React, { useEffect, useState, Component } from 'react';
 import '../../CSS/share.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillWarning } from 'react-icons/ai'
 import { RiAddCircleFill } from 'react-icons/ri';
 import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
-import * as yup from 'yup';
 import Select from 'react-select';
+import { toast, Toaster } from 'react-hot-toast';
 
 function Share(props) {
 
     const [count, setCount] = useState(1);
     const [inputList, setInputList] = useState([count]);
-    const [user, setUser] = useState();
+    const user = useSelector(state => state.auth.login.currentUser);
     const token = localStorage.getItem('access_token');
-    const userStore = useSelector((state) => state.auth.login.currentUser);
 
-    useEffect(()=>{
-        setUser(userStore)
-    },[]);
-    // const navigate = useNavigate(); Oh my zsh
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+    const [formula, setFormula] = useState('');
+    const [note, setNote] = useState('');
+    const creator = user?.id;
+    const [price, setPrice] = useState(0);
+    const [vote, setVote] = useState(0);
+    const [views, setViews] = useState(0);
+    // const navigate = useNavigate();
 
-    const formikRecipe = useFormik({
-        initialValues: {
-            name: '',
-            description: '',
-            image: '',
-            formula: '',
-            note: '',
-            creator: user?.id,
-            price: 0,
-            vote: 0,
-            views: 0
-        },
-        validationSchema: yup.object().shape({
-            name: yup.string().required("Recipe can't be empty"),
-            description: yup.string().required("Description can't be empty"),
-            formula: yup.string().required("Formula can't be empty"),
-            note: yup.string().required("Note can't be empty"),
-        }),
-        onSubmit: values => {
-            handleCreateRecipe(formikRecipe.values);
-        }
-    })
+    const recipe = {
+        name: name,
+        description: description,
+        image: JSON.stringify(image),
+        formula: formula,
+        note: note,
+        creator: creator,
+        price: price,
+        vote: vote,
+        views: views
+    }
 
-    const formikRecipeRawMaterial = useFormik({
-        initialValues: {
-            recipe_id: 0,
-            raw_material_id: 0,
-            amount: 0
-        },
-        onSubmit: values => {
+    console.log(recipe);
 
-        }
-    })
-
-    const handleCreateRecipe = (body) => {
+    const handleCreateRecipe = () => {
         const baseUrl = 'http://localhost:3000/recipe';
-        axios.post(baseUrl, body)
+        axios.post(baseUrl, recipe)
             .then(response => {
                 console.log(response.data);
-                toast.success('Sharing successfully!');
             })
             .catch(err => {
                 console.log(err);
+                toast.error('Sharing failed');
             })
     }
 
-    const handleCreateRecipeRawMaterial = (body) => {
-        const baseUrl = 'http://localhost:3000/recipematerial';
-        axios.post(baseUrl, body)
-            .then(response => {
-                console.log(response.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+    const handleChangeImage = (e) => {
+        console.log('handleChangeImage');
+        const file = e.target.files[0];
+        file.preview = URL.createObjectURL(file);
+        console.log('image: ', file);
+        setImage(file);
+    };
 
-    console.log(formikRecipe.values);
-    console.log(formikRecipe.errors);
+
+    const handleChangeForm = (e) => {
+        switch (e.target.name) {
+            case 'name':
+                setName(e.target.value);
+                break;
+            case 'description':
+                setDescription(e.target.value);
+                break;
+            case 'formula':
+                setFormula(e.target.value);
+                break;
+            case 'note':
+                setNote(e.target.value);
+                break;
+            case 'price':
+                setPrice(e.target.value);
+                break;
+            default:
+                console.log("handleChange...");
+        }
+    };
+
+    // useEffect(() => {
+    //     const recipe = {
+    //         name: name, 
+    //         description: description, 
+    //         image: image?.preview, 
+    //         formula: formula, 
+    //         note: note, 
+    //         creator: creator, 
+    //         price: price, 
+    //         views: views
+    //     }
+
+    //     console.log(recipe);
+    // });
+
+    // const handleCreateRecipeRawMaterial = (body) => {
+    //     const baseUrl = 'http://localhost:3000/recipematerial';
+    //     axios.post(baseUrl, body)
+    //         .then(response => {
+    //             console.log(response.data)
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // }
 
 
     const addInput = () => {
@@ -106,16 +132,22 @@ function Share(props) {
 
         <>
             {
-                true ? <>
-                    <form onSubmit={formikRecipe.handleSubmit} className='form-container-input'>
+                token ? <>
+                    <form onSubmit={handleCreateRecipe} className='form-container-input'>
                         <h2><span>Share</span> Your Recipes 🍔</h2>
                         <div className="share-container">
                             <div className="recipe-form-1">
                                 <div className="add-image">
                                     {
-                                        formikRecipe.values.image ?
+                                        image ?
                                             <>
-                                                {formikRecipe.values.image}
+                                                <img src={image.preview} alt=""
+                                                    style={{
+                                                        width: '400px',
+                                                        height: '400px',
+                                                        borderRadius: '10px',
+                                                    }}
+                                                />
                                             </> :
                                             <>
                                                 <label htmlFor="image">
@@ -127,10 +159,10 @@ function Share(props) {
                                                     id="image"
                                                     name="image"
                                                     className="recipe-image"
-                                                    value={formikRecipe.values.image}
+                                                    value={image}
                                                     // style={{display:"none"}}
                                                     accept="image/*"
-                                                    onChange={formikRecipe.handleChange}
+                                                    onChange={handleChangeImage}
                                                 />
                                             </>
                                     }
@@ -141,9 +173,10 @@ function Share(props) {
                                         <input type="text"
                                             id="name"
                                             name="name"
-                                            value={formikRecipe.values.name}
+                                            value={name}
                                             className="recipe-name-add-input"
-                                            onChange={formikRecipe.handleChange}
+                                            onChange={handleChangeForm}
+                                            placeholder="recipe name"
                                         />
                                     </div>
 
@@ -152,9 +185,9 @@ function Share(props) {
                                         <input type="number"
                                             id="price"
                                             name="price"
-                                            value={formikRecipe.values.price}
+                                            value={price}
                                             className="recipe-name-add-input"
-                                            onChange={formikRecipe.handleChange}
+                                            onChange={handleChangeForm}
                                         />
                                     </div>
                                     <div className="ingredient-add">
@@ -167,6 +200,7 @@ function Share(props) {
                                                         options={mockup_ingredents} 
                                                         onChange={(e) => console.log(e)} // Handle here
                                                     />
+
                                                 </div>
                                                 <div className='ingredient-add-item-amount'>
                                                     <label>Amount:</label>
@@ -181,44 +215,51 @@ function Share(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="div-input-text-add">
-                                <label>Add Description</label>
-                                <textarea
-                                    placeholder="Enter description..."
-                                    className="description-add"
-                                    id="description"
-                                    name="description"
-                                    value={formikRecipe.values.description}
-                                    onChange={formikRecipe.handleChange}
-                                ></textarea>
-                            </div>
-                            <div className="div-input-text-add">
-                                <label>Add Formula</label>
-                                <textarea
-                                    placeholder="Enter your formula..."
-                                    className="formula-add"
-                                    id="formula"
-                                    name="formula"
-                                    value={formikRecipe.values.formula}
-                                    onChange={formikRecipe.handleChange}
-                                >
-                                </textarea>
-                            </div>
-                            <div className="div-input-text-add">
-                                <label>Add Note</label>
-                                <textarea
-                                    placeholder="Note..."
-                                    className="note-add"
-                                    id="note"
-                                    name="note"
-                                    onChange={formikRecipe.handleChange}
-                                >
-                                </textarea>
+                            <div className='other-input'>
+                                <div className="styled-input wide">
+                                    <textarea
+                                        required
+                                        className="description-add"
+                                        id="description"
+                                        name="description"
+                                        value={description}
+                                        onChange={handleChangeForm}
+                                    ></textarea>
+                                    <label>Description</label>
+                                    <span></span>
+                                </div>
+                                <div className="styled-input wide">
+
+                                    <textarea
+                                        required
+                                        className="formula-add"
+                                        id="formula"
+                                        name="formula"
+                                        value={formula}
+                                        onChange={handleChangeForm}
+                                    >
+                                    </textarea>
+                                    <label>Formula</label>
+                                    <span></span>
+                                </div>
+                                <div className="styled-input wide">
+                                    <textarea
+                                        required
+                                        className="note-add"
+                                        id="note"
+                                        name="note"
+                                        value={note}
+                                        onChange={handleChangeForm}
+                                    >
+                                    </textarea>
+                                    <label>Note</label>
+                                </div>
                             </div>
 
                             <button type="submit" className="button-27">
                                 Share
                             </button>
+
                         </div>
                     </form>
                 </>
