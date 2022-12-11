@@ -57,3 +57,10 @@ export const deleteError = (dispatch, navigate) => {
   dispatch(clearRedux());
   navigate("/login");
 };
+export const getPassword = async (data, dispatch) => {
+  try {
+    const res = await axios.post("http://localhost:3000/", data);
+  } catch (err) {
+    console.log(err);
+  }
+};

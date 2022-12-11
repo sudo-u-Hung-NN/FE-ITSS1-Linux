@@ -54,12 +54,9 @@
                 // border-radius: 10px;
                 border: solid 1px rgb(209, 165, 165); 
                 // background-color: rgba(185, 151, 151, 0.25);
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 // width: 200px;
                 ul{
-                    text-align: left;
+                    text-align: left !important;
                     font-size: 1.25rem;
                     li{
                         line-height: 2;
@@ -83,7 +80,7 @@
             // position: relative;
 
             &-option{
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 height: 15vh;
                 align-items: center;
                 box-sizing: border-box;
