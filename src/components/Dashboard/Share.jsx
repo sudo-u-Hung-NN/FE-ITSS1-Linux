@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import '../../CSS/share.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { useFormik } from "formik";
@@ -10,6 +10,7 @@ import { MdDelete } from 'react-icons/md';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import * as yup from 'yup';
+import Select from 'react-select';
 
 function Share(props) {
 
@@ -97,11 +98,15 @@ function Share(props) {
         setInputList(newInputList);
     }
 
+    const mockup_ingredents = [{value: "1", label: "Rice"}, 
+    {value: "2", label: "Chicken"}, {value: "3", label: "Spice"}, {value: "4", label: "Orange"}, {value: "5", label: "Cucumber"}, {value: "6", label: "Leaf"}, 
+    {value: "7", label: "Juice"}, {value: "8", label: "Beef"}, {value: "9", label: "Wine"}]
+
     return (
 
         <>
             {
-                token ? <>
+                true ? <>
                     <form onSubmit={formikRecipe.handleSubmit} className='form-container-input'>
                         <h2><span>Share</span> Your Recipes 🍔</h2>
                         <div className="share-container">
@@ -156,19 +161,21 @@ function Share(props) {
                                         <p>Ingredient </p>
                                         {inputList.map((item, index) => (
                                             <div key={index} className="ingredient-add-item">
-                                                <div id='ingredient-add-item-name'>
+                                                <div className='ingredient-add-item-name'>
                                                     <label>Name:</label>
-                                                    <input type="text" />
+                                                    <Select
+                                                        options={mockup_ingredents} 
+                                                    />
                                                 </div>
-                                                <div id='ingredient-add-item-amount'>
+                                                <div className='ingredient-add-item-amount'>
                                                     <label>Amount:</label>
                                                     <input type="number" />
                                                 </div>
-                                                <MdDelete className='delete-item-ingredient-add-item' onClick={() => deleteInput(index)} />
+                                                <MdDelete size={26} className='delete-item-ingredient-add-item' onClick={() => deleteInput(index)} />
                                             </div>
                                         ))}
                                         {/* <button type="button" onClick={addInput}> */}
-                                        <RiAddCircleFill className='btn-add-ingredient' onClick={addInput} />
+                                        <RiAddCircleFill size={26} className='btn-add-ingredient' onClick={addInput} />
                                         {/* </button> */}
                                     </div>
                                 </div>
