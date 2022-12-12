@@ -33,12 +33,11 @@ export class RecipeController {
   createRecipeMaterial(@Body() createRecipeDto: CreateRecipeRawDto[]) {
     return this.recipeService.createRecipeMaterial(createRecipeDto);
   }
-
-  // @Public()
-  // @Get()
-  // findAll() {
-  //   return this.recipeService.findAll();
-  // }
+  @Public()
+  @Get()
+  findAll() {
+    return this.recipeService.findAll();
+  }
   @Public()
   @Get(':name')
   search(@Param('name') name: string) {
