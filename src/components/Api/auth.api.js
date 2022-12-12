@@ -59,7 +59,7 @@ export const deleteError = (dispatch, navigate) => {
 };
 export const getPassword = async (data, dispatch) => {
   try {
-    const res = await axios.post("http://localhost:3000/", data);
+    const res = await axios.post("http://localhost:3000/fogotPassword", data);
   } catch (err) {
     console.log(err);
   }
