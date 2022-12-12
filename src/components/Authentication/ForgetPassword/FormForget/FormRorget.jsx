@@ -4,10 +4,13 @@ import { useState } from "react";
 import ErrorMessageAuth from "../../ErrorMessage/ErrorMessageAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ModalForget from "./ModalFoget";
+import { getPassword } from "../../../Api/auth.api";
+import { Button, Modal } from "react-bootstrap";
 
 export default function FormRegister() {
-  const dispatch = useDispatch();
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   const navigate = useNavigate();
   const { registerMessageError } = useSelector((state) => state.auth.register);
   const {
@@ -17,13 +20,19 @@ export default function FormRegister() {
   } = useForm();
 
   const [email, setEmail] = useState("");
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useState(0);
   const [answer, setAnswer] = useState("");
 
   const handleClass = (name, baseClass = "form-control") =>
     `${baseClass} ${errors[name] ? "is-invalid" : ""}`;
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleClick = (data) => {
+    const fixData = { ...data, qid: Number(data.qid) };
+    getPassword(fixData).then((res) => {
+      setShow(true);
+      if (res.data == "Câu trả lời không đúng") {
+        setPassword("Your answer is not correct");
+      } else setPassword(`Mat khau cua ban la: ${res.data}`);
+    });
     // TODO: process this with some API
     // 1. Check the correct question
     // 2. Check the correct answer
@@ -39,7 +48,7 @@ export default function FormRegister() {
   // FE - done, BE - None
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(handleClick)}>
       <h3>Retake the private Q&A</h3>
       <div className="mb-3">
         <label>Email address</label>
@@ -67,14 +76,14 @@ export default function FormRegister() {
 
       <div className="mb-3">
         <label>Private Q&A</label>
-        <select {...register("question")} className={handleClass("question")}>
-          <option value="text" disabled selected hidden>
+        <select {...register("qid")} className={handleClass("qid")}>
+          <option value={0} disabled selected hidden>
             Choose a question
           </option>
           {mockup_questions?.map((item) => (
             <option
-              onChange={(e) => setQuestion(e.target.value)}
-              value={item["id"]}
+              onChange={(e) => setQuestion(Number(e.target.value))}
+              value={Number(item["id"])}
             >
               {item["content"]}
             </option>
@@ -111,7 +120,28 @@ export default function FormRegister() {
         <div className="text-danger">{registerMessageError}</div>
       )}
       <div className="d-grid">
-        <ModalForget />
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{password}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Go to page login
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </form>
   );
