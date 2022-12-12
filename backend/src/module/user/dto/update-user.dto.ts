@@ -5,10 +5,16 @@ export class UpdateUserDto {
   id: number;
   @ApiProperty()
   email: string;
+  
+  @ApiProperty()
+  username:string;
 
   @ApiProperty()
-  password: string;
+  phone:number;
 
   @ApiProperty()
-  phoneNumber:number;
+  birth_date:Date;
+
+  @ApiProperty()
+  avatar:string;
 }
