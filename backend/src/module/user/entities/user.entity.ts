@@ -25,5 +25,10 @@ export class User {
 
   @Column()
   phone:number;
+  
+  @Column()
+  qid:number;
 
+  @Column()
+  answer:string;
 }

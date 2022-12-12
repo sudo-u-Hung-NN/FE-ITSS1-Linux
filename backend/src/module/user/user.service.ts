@@ -6,6 +6,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { JwtPayload } from '../auth/payload.interface';
+import { ForgotPassword } from './dto/forgot-password.dto';
 
 @Injectable()
 export class UserService {
@@ -18,7 +19,7 @@ export class UserService {
     return this.userRepo.save(createUserDto);
   }
   async create(createUserDto: CreateUserDto) {
-    createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
+    // createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     return this.userRepo.save(createUserDto);
   }
 
@@ -44,6 +45,13 @@ export class UserService {
       return this.userRepo.save(updateUserDto);
     }
     return `Accout khong ton tai`;
+  }
+  async forgotpassword(forgotpassword:ForgotPassword ) {
+    const user=await this.userRepo.findOne({ where: { email: forgotpassword.email } }) 
+      if (user.qid===forgotpassword.qid && user.answer=== forgotpassword.answer)
+        {
+          return user.password;}
+    return `Câu trả lời không đúng`;
   }
 
   remove(id: number) {

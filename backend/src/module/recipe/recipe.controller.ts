@@ -39,6 +39,11 @@ export class RecipeController {
     return this.recipeService.findAll();
   }
   @Public()
+  @Get('getMaterial')
+  findAllRawMaterial() {
+    return this.recipeService.findAllRawMaterial();
+  }
+  @Public()
   @Get(':name')
   search(@Param('name') name: string) {
     return this.recipeService.search(name);
