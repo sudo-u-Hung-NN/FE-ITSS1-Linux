@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDish } from "../Api/dish.api";
+import { getDish, userVoted } from "../Api/dish.api";
 import "./dish.scss";
 import DishOption from "./DishOption/DishOption";
 import DishVote from "./DishVote/DishVote";
@@ -10,14 +10,20 @@ import Parser from "html-react-parser";
 export default function Dish() {
   const dispatch = useDispatch();
   const dishData = useSelector((state) => state.dish.dataDish.data);
-
+  const [voted, setVoted] = useState(0);
   const param = useParams();
   const [option, setOption] = useState(1);
 
   useEffect(() => {
     getDish(param.id, dispatch);
   }, [param, dispatch]);
-
+  useEffect(() => {
+    userVoted(param.id).then((res) => {
+      if (res.data.avg !== null) {
+        setVoted(res.data.avg);
+      } else setVoted(0);
+    });
+  }, [voted, setVoted]);
   return (
     <div className="dish">
       <div className="dish-title">
@@ -78,8 +84,18 @@ export default function Dish() {
             )}
           </Col>
         </Row>
+        <Row className="dish-container-row-3">
+          <Col className="dish-container-row-3-voted" md={5}>
+            <h2> {`Average rating: ${voted}`}</h2>
+          </Col>
+          <Col
+            className="dish-container-row-3-voting"
+            md={{ span: 5, offset: 1 }}
+          >
+            <DishVote />
+          </Col>
+        </Row>
       </Container>
-      <DishVote />
     </div>
   );
 }
