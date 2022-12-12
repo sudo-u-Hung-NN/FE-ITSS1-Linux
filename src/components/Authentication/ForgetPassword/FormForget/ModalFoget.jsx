@@ -10,7 +10,7 @@ function ModalForget() {
   return (
     <div>
       <Button variant="primary" type="submit" onClick={handleShow}>
-        Launch demo modal
+        Submit
       </Button>
 
       <Modal show={show} onHide={handleClose}>
