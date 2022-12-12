@@ -27,12 +27,17 @@ export default function FormRegister() {
     `${baseClass} ${errors[name] ? "is-invalid" : ""}`;
   const handleClick = (data) => {
     const fixData = { ...data, qid: Number(data.qid) };
-    getPassword(fixData).then((res) => {
-      setShow(true);
-      if (res.data == "Câu trả lời không đúng") {
-        setPassword("Your answer is not correct");
-      } else setPassword(`Mat khau cua ban la: ${res.data}`);
-    });
+    try {
+      getPassword(fixData, setPassword).then((res) => {
+        setShow(true);
+        if (res.data == "Câu trả lời không đúng") {
+          setPassword("Your answer is not correct");
+        } else setPassword(`Mat khau cua ban la: ${res.data}`);
+      });
+    } catch (err) {
+      console.log(err);
+      setPassword(err);
+    }
     // TODO: process this with some API
     // 1. Check the correct question
     // 2. Check the correct answer
