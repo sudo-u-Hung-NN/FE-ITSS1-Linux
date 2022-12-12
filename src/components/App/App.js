@@ -12,8 +12,8 @@ import FormForget from "../Authentication/ForgetPassword/Index";
 import Home from "../Dashboard/Home";
 import Dish from "../Dish/Dish";
 import ModalLogin from "../Dish/DishVote/ModalLogin";
+import ModalFoget from "../Authentication/ForgetPassword/FormForget/ModalFoget";
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<Navbar />}>
@@ -27,6 +27,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="dish/:id" element={<Dish />} />
         <Route path="button" element={<ModalLogin />} />
+        <Route path="forgetModal" element={<ModalFoget />} />
       </Route>
     </Routes>
   );
