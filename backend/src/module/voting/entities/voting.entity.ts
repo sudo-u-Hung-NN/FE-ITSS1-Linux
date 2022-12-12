@@ -1,5 +1,5 @@
-import { Recipe } from "src/module/recipe/entities/recipe.entity";
-import { User } from "src/module/user/entities/user.entity";
+import { Recipe } from '../../recipe/entities/recipe.entity';
+import { User } from "../../user/entities/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity({name:'voting'})
 export class Voting {

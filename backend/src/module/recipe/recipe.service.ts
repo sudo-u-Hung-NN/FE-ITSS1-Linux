@@ -82,6 +82,9 @@ async findOne(id: number) {
   findAll() {
     return this.recipeRepo.find();
   }
+  findAllRawMaterial() {
+    return this.rawMaterialRepo.find();
+  }
   update(id: number, updateRecipeDto: UpdateRecipeDto) {
     return `This action updates a #${id} recipe`;
   }

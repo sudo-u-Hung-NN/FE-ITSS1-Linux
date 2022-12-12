@@ -12,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/public.decorator';
+import { ForgotPassword } from './dto/forgot-password.dto';
 @ApiBearerAuth()
 @ApiTags('User')
 @Controller('user')
@@ -36,6 +37,11 @@ export class UserController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
+  }
+  @Public()
+  @Post('forgotpassword')
+  forgotpassword(@Body() forgotpassword: ForgotPassword) {
+    return this.userService.forgotpassword(forgotpassword);
   }
   @Public()
   @Patch(':id')

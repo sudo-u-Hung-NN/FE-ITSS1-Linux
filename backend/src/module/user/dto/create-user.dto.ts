@@ -13,12 +13,9 @@ export class CreateUserDto {
   @ApiProperty()
   password: string;
   
-  // @ApiProperty()
-  // gender: Gender;
+  @ApiProperty()
+  qid: number;
    
-  // @ApiProperty()
-  // birth_date:Date;
-
-  // @ApiProperty()
-  // phone:number;
+  @ApiProperty()
+  answer:string;
 }
