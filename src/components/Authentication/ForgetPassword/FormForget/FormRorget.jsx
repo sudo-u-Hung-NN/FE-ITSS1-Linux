@@ -19,13 +19,10 @@ export default function FormRegister() {
     formState: { errors },
   } = useForm();
 
-  const [email, setEmail] = useState("");
-  const [question, setQuestion] = useState(0);
-  const [answer, setAnswer] = useState("");
-
   const handleClass = (name, baseClass = "form-control") =>
     `${baseClass} ${errors[name] ? "is-invalid" : ""}`;
   const handleClick = (data) => {
+    console.log(data);
     const fixData = { ...data, qid: Number(data.qid) };
     try {
       getPassword(fixData, setPassword).then((res) => {
@@ -35,7 +32,6 @@ export default function FormRegister() {
         } else setPassword(`Mat khau cua ban la: ${res.data}`);
       });
     } catch (err) {
-      console.log(err);
       setPassword(err);
     }
     // TODO: process this with some API
@@ -69,11 +65,7 @@ export default function FormRegister() {
             },
           })}
           type="email"
-          value={email}
           className={handleClass("email")}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
           placeholder="Enter email"
         />
         <ErrorMessageAuth name="email" errors={errors} />
@@ -85,13 +77,8 @@ export default function FormRegister() {
           <option value={0} disabled selected hidden>
             Choose a question
           </option>
-          {mockup_questions?.map((item) => (
-            <option
-              onChange={(e) => setQuestion(Number(e.target.value))}
-              value={Number(item["id"])}
-            >
-              {item["content"]}
-            </option>
+          {mockup_questions?.map((item, index) => (
+            <option value={index + 1}>{item["content"]}</option>
           ))}
         </select>
       </div>
@@ -111,10 +98,6 @@ export default function FormRegister() {
             },
           })}
           type="text"
-          value={answer}
-          onChange={(e) => {
-            setAnswer(e.target.value);
-          }}
           className={handleClass("answer")}
           placeholder="Enter your answer"
         />

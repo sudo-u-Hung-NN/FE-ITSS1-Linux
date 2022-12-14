@@ -16,17 +16,14 @@ export default function FormRegister() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const handleClass = (name, baseClass = "form-control") =>
     `${baseClass} ${errors[name] ? "is-invalid" : ""}`;
   const onSubmit = (data) => {
     console.log(data);
-    // registerUser(data, dispatch, navigate);
+    const fixData = { ...data, qid: Number(data.question) };
+    registerUser(fixData, dispatch, navigate);
   };
 
-  const [question, set_Question] = useState("");
   const [answer, setAnswer] = useState("");
 
   const mockup_questions = [
@@ -56,10 +53,6 @@ export default function FormRegister() {
             },
           })}
           type="text"
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
           className={handleClass("username")}
           placeholder="User Name"
         />
@@ -80,11 +73,7 @@ export default function FormRegister() {
             },
           })}
           type="email"
-          value={email}
           className={handleClass("email")}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
           placeholder="Enter email"
         />
         <ErrorMessageAuth name="email" errors={errors} />
@@ -105,10 +94,6 @@ export default function FormRegister() {
             },
           })}
           type="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
           className={handleClass("password")}
           placeholder="Enter password"
         />
@@ -142,10 +127,6 @@ export default function FormRegister() {
             },
           })}
           type="answer"
-          value={answer}
-          onChange={(e) => {
-            setAnswer(e.target.value);
-          }}
           className={handleClass("answer")}
           placeholder="Enter your answer"
         />
