@@ -11,8 +11,12 @@ export class VotingService {
   @InjectRepository(Voting)
   private readonly votingRepo:Repository<Voting>,
   ){}
-  create(createVotingDto: CreateVotingDto) {
+  async create(createVotingDto: CreateVotingDto) {
+    const voting=await this.votingRepo.findOne({where:{recipe_id:createVotingDto.recipe_id,
+      user_id:createVotingDto.user_id}})
+    if(!voting)
     return this.votingRepo.save(createVotingDto)
+    return "người dùng đã vote";
   }
 
   async getStars(id:number) {

@@ -63,6 +63,16 @@ export class RecipeController {
   filter(@Param('id') id: number) {
     return this.recipeService.filter(+id);
   }
+  @Public()
+  @Get('getrecipe/:id')
+  getRecipe(@Param('id') id: number) {
+    return this.recipeService.getRecipe(+id);
+  }
+  @Public()
+  @Get('getrecipes/:id')
+  getRecipes(@Param('id') id: number) {
+    return this.recipeService.getRecipes(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
