@@ -6,12 +6,10 @@ import {
   getDishStart,
   getDishSuccess,
 } from "../../Redux/dish.slice";
-export const getDish = async (dishData, dispatch) => {
+export const getDish = async (dishId, dispatch) => {
   dispatch(getDishStart());
   try {
-    const res = await axios.get(
-      `https://api.spoonacular.com/recipes/${dishData}/information?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&includeNutrition=true`
-    );
+    const res = await axios.get(`http://localhost:3000/recipe/get/${dishId}`);
     dispatch(getDishSuccess(res));
   } catch (err) {
     if (err.response) {
@@ -29,5 +27,12 @@ export const userVote = async (data) => {
     toast.error("voting error!", {
       position: toast.POSITION.TOP_RIGHT,
     });
+  }
+};
+export const userVoted = async (data) => {
+  try {
+    return await axios.get(`http://localhost:3000/voting/${data}`);
+  } catch (err) {
+    console.log(err);
   }
 };
