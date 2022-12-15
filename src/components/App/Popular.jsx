@@ -3,47 +3,48 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { Link } from "react-router-dom";
+import { getPopular } from "../Api/dish.api";
+import { getRandomArrayNumber } from "../Utils/utils";
 function Popular(props) {
   const [popular, setPopular] = useState([]);
-
+  const [arr, setArr] = useState([]);
   useEffect(() => {
-    getPopular();
-  }, []);
-
-  const getPopular = async () => {
-    const api = await fetch(
-      `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&number=9`
-    );
-    const data = await api.json();
-    setPopular(data.recipes);
-  };
-
+    getPopular(setPopular);
+  }, [getPopular, setPopular]);
+  useEffect(() => {
+    const a = getRandomArrayNumber(popular.length, 6);
+    setArr(a);
+  }, [setArr, popular]);
   return (
     <div>
       <Wrapper>
         <h3>Popular Picks</h3>
         <Splide
           options={{
-            perPage: 4,
+            perPage: 5,
             arrows: false,
             pagination: false,
             drag: "free",
             gap: "4rem",
           }}
         >
-          {popular?.map((recipe) => {
-            return (
-              <SplideSlide key={recipe.id}>
-                <Link to={`dish/${recipe.id}`}>
-                  <Card>
-                    <p>{recipe.title}</p>
-                    <img src={recipe.image} alt={recipe.title} />
-                    <Gradient />
-                  </Card>
-                </Link>
-              </SplideSlide>
-            );
-          })}
+          {arr[0] &&
+            arr.map((recipeId) => {
+              return (
+                <SplideSlide key={recipeId}>
+                  <Link to={`dish/${recipeId}`}>
+                    <Card>
+                      <p>{popular[recipeId]?.name}</p>
+                      <img
+                        src={popular[recipeId]?.image}
+                        alt={popular[recipeId]?.name}
+                      />
+                      <Gradient />
+                    </Card>
+                  </Link>
+                </SplideSlide>
+              );
+            })}
         </Splide>
       </Wrapper>
     </div>

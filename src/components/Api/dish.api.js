@@ -36,3 +36,13 @@ export const userVoted = async (data) => {
     console.log(err);
   }
 };
+export const getPopular = async (setPopular) => {
+  const api = await axios.get(`http://localhost:3000/recipe`);
+  console.log(api);
+  setPopular(api.data);
+};
+export const getVeggie = async (setPopular) => {
+  const api = await axios.get(`http://localhost:3000/recipe`);
+  console.log(api);
+  setPopular(api.data);
+};

@@ -22,7 +22,7 @@ export default function FormRegister() {
   const handleClass = (name, baseClass = "form-control") =>
     `${baseClass} ${errors[name] ? "is-invalid" : ""}`;
   const handleClick = (data) => {
-    console.log(data);
+    // console.log(data);
     const fixData = { ...data, qid: Number(data.qid) };
     try {
       getPassword(fixData, setPassword).then((res) => {

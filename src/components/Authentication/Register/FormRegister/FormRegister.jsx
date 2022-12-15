@@ -19,7 +19,7 @@ export default function FormRegister() {
   const handleClass = (name, baseClass = "form-control") =>
     `${baseClass} ${errors[name] ? "is-invalid" : ""}`;
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const fixData = { ...data, qid: Number(data.question) };
     registerUser(fixData, dispatch, navigate);
   };
