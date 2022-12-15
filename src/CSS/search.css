@@ -23,7 +23,10 @@ input[type='text'] {
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.123);
     outline: none;
 }
-
+.ingredient-option{
+    height: 130px;
+    overflow: auto;
+}
 .form-select {
     margin-top: 50px;
     margin-left: 120px;

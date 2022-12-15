@@ -5,29 +5,20 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 import { Link } from "react-router-dom";
+import { getVeggie } from "../Api/dish.api";
+import { getRandomArrayNumber } from "../Utils/utils";
 
 const Veggie = () => {
   const [veggies, setVeggies] = useState([]);
-
-  const getVeggies = async () => {
-    const getData = localStorage.getItem("veggies");
-
-    if (getData && getData !== "undefined") {
-      setVeggies(JSON.parse(getData));
-    } else {
-      const resp = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&tags=vegetarian&number=10`
-      );
-      const data = await resp.json();
-      setVeggies(data.recipes);
-      localStorage.setItem("veggies", JSON.stringify(data.recipes));
-      // console.log(data.recipes);
-    }
-  };
+  const [arr, setArr] = useState([]);
 
   useEffect(() => {
-    getVeggies();
-  }, []);
+    getVeggie(setVeggies);
+  }, [getVeggie, setVeggies]);
+  useEffect(() => {
+    const a = getRandomArrayNumber(veggies.length, 6);
+    setArr(a);
+  }, [setArr, veggies]);
 
   return (
     <Wrapper>

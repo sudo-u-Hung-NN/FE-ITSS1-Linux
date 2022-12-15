@@ -1,66 +1,31 @@
 import React, { useState, useEffect } from "react";
 import "../../CSS/search.css";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { convertMatrix } from "../Utils/utils";
+import ro from "date-fns/esm/locale/ro/index.js";
+import { searchApi } from "../Api/search.api";
 
 function Search(props) {
   // const [query, setQuery] = useState("");
+  const [moreClicked, setMore] = useState(false);
+  const [checkedList, setCheckedList] = useState({});
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [rowIngredient, setRowIngredient] = useState([]);
 
-  const getSearchedRecipes = async (search) => {
-    const resp = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${search}`
-    );
-    const data = await resp.json();
-
-    return data.results;
-  };
-
-  const handleChangeSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const onClickToSearch = () => {
-    getSearchedRecipes(searchTerm).then((data) => {
-      setSearchedRecipes(data);
-    });
+  const onClickToSearch = async (name) => {
+    console.log(name);
+    const api = await searchApi(name);
+    setSearchedRecipes(api.data);
   };
 
   useEffect(() => {
-    getSearchedRecipes(searchTerm).then((data) => {
-      setSearchedRecipes(data);
+    axios.get("http://localhost:3000/recipe/getMaterial").then((res) => {
+      setRowIngredient(convertMatrix(res.data, 5));
     });
-  });
-
-  const mockup_ingredents = [
-    { id: 1, name: "Rice" },
-    { id: 2, name: "Chicken" },
-    { id: 3, name: "Spice" },
-    { id: 4, name: "Orange" },
-    { id: 5, name: "Cucumber" },
-    { id: 6, name: "Leaf" },
-    { id: 7, name: "Juice" },
-    { id: 8, name: "Beef" },
-    { id: 9, name: "Wine" },
-  ];
-
-  const convertMatrix = (one_dimensional_array, n) => {
-    let result = [];
-    while (one_dimensional_array.length)
-      result.push(one_dimensional_array.splice(0, n));
-    return result;
-  };
-
-  const mockup_converteds = convertMatrix(mockup_ingredents, 5);
-  const show_up_ingredents = mockup_converteds.slice(0, 2);
-  const hiddent_ingredents = mockup_converteds.slice(0, 9);
-
-  const [moreClicked, setMore] = useState(false);
-  const [checkedList, setCheckedList] = useState({});
-
+  }, []);
   const handlecheck = (isCheck, id) => {
     const checkedListClone = { ...checkedList };
     checkedListClone[id] = isCheck;
@@ -72,18 +37,9 @@ function Search(props) {
     console.log(filter_item_ids); // ['1', '2', '3', '4']
     // Receive and setSearchedRecipes here
     const converted_request = filter_item_ids.join("+");
+    console.log(converted_request);
 
     // TODO: Tùng xử lý ghép API ở đây, data truyền vào là converted_request
-    try {
-      const res = axios.post("http://localhost:3000/recipe", converted_request);
-      toast.success("Filter success!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } catch (err) {
-      toast.error("Filter error!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
   };
 
   return (
@@ -110,13 +66,14 @@ function Search(props) {
           type="text"
           placeholder="Search.."
           className="search"
-          onChange={(e) => handleChangeSearch(e)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
       <div className="form-check">
         <p>Ingredient</p>
-        <div>
-          {(moreClicked ? hiddent_ingredents : show_up_ingredents)?.map(
+
+        <div className="ingredient-option">
+          {(moreClicked ? rowIngredient : rowIngredient.slice(0, 2))?.map(
             (item) => (
               <div key={item.id}>
                 {item?.map((ingredent) => (
@@ -134,9 +91,12 @@ function Search(props) {
               </div>
             )
           )}
-
+        </div>
+        <div>
           {moreClicked ? (
-            <></>
+            <span className="hide" onClick={() => setMore(false)}>
+              Hide
+            </span>
           ) : (
             <span className="more" onClick={() => setMore(true)}>
               More...
@@ -145,7 +105,10 @@ function Search(props) {
         </div>
       </div>
       <div className="btn-search">
-        <button className="button-4" onClick={onClickToSearch}>
+        <button
+          className="button-4"
+          onClick={() => onClickToSearch(searchTerm)}
+        >
           Search
         </button>
         <button className="button-4">Clear</button>
@@ -154,7 +117,7 @@ function Search(props) {
         <Grid>
           {searchedRecipes?.map(({ title, id, image }) => (
             <Card key={id}>
-              <Link to={`/recipe/${id}`}>
+              <Link to={`/dish/${id}`}>
                 <img src={image} alt={title} />
                 <h5>{title}</h5>
               </Link>

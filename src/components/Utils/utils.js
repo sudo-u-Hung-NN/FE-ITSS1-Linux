@@ -5,3 +5,9 @@ export const getRandomArrayNumber = (maxValue, arrNum) => {
   }
   return arr;
 };
+export const convertMatrix = (one_dimensional_array, n) => {
+  let result = [];
+  while (one_dimensional_array.length)
+    result.push(one_dimensional_array.splice(0, n));
+  return result;
+};
