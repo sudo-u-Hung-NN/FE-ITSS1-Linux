@@ -6,26 +6,31 @@ import { Link } from 'react-router-dom';
 import { AiFillWarning } from 'react-icons/ai'
 import { RiAddCircleFill } from 'react-icons/ri';
 import { MdDelete } from 'react-icons/md';
+import { GrClose } from 'react-icons/gr';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import Select from 'react-select';
+import { getAllIngredients } from '../Api/ingredient.api';
 
 function Share(props) {
-
-    const [count, setCount] = useState(1);
-    const [inputList, setInputList] = useState([count]);
     const user = useSelector(state => state.auth.login.currentUser);
+    const creator = user?.id;
     const token = localStorage.getItem('access_token');
-
+    const [inputCounts, setInputCounts] = useState([]);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [formula, setFormula] = useState('');
     const [note, setNote] = useState('');
-    const creator = user?.id;
     const [price, setPrice] = useState(0);
     const [vote, setVote] = useState(0);
     const [views, setViews] = useState(0);
+    const [ingredient, setIngredient] = useState();
+    const [listIngreDropBox, setListIngreDropBox] = useState([]);
+    const [listIngreForAdd, setListIngreForAdd] = useState([]);
+
+
+    const mockup_ingredients = listIngreDropBox.map((item) => ({ value: item.id, label: item.name }));
     // const navigate = useNavigate();
 
     const recipe = {
@@ -39,6 +44,9 @@ function Share(props) {
         vote: vote,
         views: views
     }
+
+
+
 
     const handleCreateRecipe = () => {
         const baseUrl = 'http://localhost:3000/recipe';
@@ -83,20 +91,20 @@ function Share(props) {
         }
     };
 
-    // useEffect(() => {
-    //     const recipe = {
-    //         name: name, 
-    //         description: description, 
-    //         image: image?.preview, 
-    //         formula: formula, 
-    //         note: note, 
-    //         creator: creator, 
-    //         price: price, 
-    //         views: views
-    //     }
+    useEffect(() => {
+        const recipe = {
+            name: name,
+            description: description,
+            image: image?.preview,
+            formula: formula,
+            note: note,
+            creator: creator,
+            price: price,
+            views: views
+        }
 
-    //     console.log(recipe);
-    // });
+        console.log(recipe);
+    });
 
     // const handleCreateRecipeRawMaterial = (body) => {
     //     const baseUrl = 'http://localhost:3000/recipematerial';
@@ -109,24 +117,25 @@ function Share(props) {
     //         })
     // }
 
-
-    const addInput = () => {
-        const newCount = count + 1;
-        setCount(newCount);
-        const newInputList = [...inputList, newCount];
-        setInputList(newInputList);
-    }
-
     const deleteInput = (index) => {
-        const newInputList = inputList.filter((item, i) => i !== index);
-        setInputList(newInputList);
+        const newInputCounts = [...inputCounts]
+        for (var i = 0; i < newInputCounts.length; i++) {
+
+            if (newInputCounts[i] === index) {
+                newInputCounts.splice(i, 1);
+            }
+
+        }
+        setInputCounts(newInputCounts);
     }
 
-    const mockup_ingredents = [
-        {value: "1", label: "Rice"}, {value: "2", label: "Chicken"}, {value: "3", label: "Spice"},
-        {value: "4", label: "Orange"}, {value: "5", label: "Cucumber"}, {value: "6", label: "Leaf"},
-        {value: "7", label: "Juice"}, {value: "8", label: "Beef"}, {value: "9", label: "Wine"}
-    ]
+    console.log(ingredient)
+
+    useEffect(() => {
+        getAllIngredients()
+            .then(response => setListIngreDropBox(response.data))
+            .catch(err => { console.error(err) });
+    }, [])
 
     return (
 
@@ -190,27 +199,48 @@ function Share(props) {
                                             onChange={handleChangeForm}
                                         />
                                     </div>
+                                    <hr />
                                     <div className="ingredient-add">
                                         <p>Ingredient </p>
-                                        {inputList.map((item, index) => (
-                                            <div key={index} className="ingredient-add-item">
-                                                <div className='ingredient-add-item-name'>
-                                                    <label>Name:</label>
-                                                    <Select
-                                                        options={mockup_ingredents}
-                                                        onChange={(e) => console.log(e)} // Handle here
-                                                    />
-                                                </div>
+                                        <div className="ingredient-add-item">
+                                            <div className='ingredient-add-item-name'>
+                                                <label>Name:</label>
+                                                <Select
+                                                    placeholder='Search...'
+                                                    options={mockup_ingredients}
+                                                    onChange={(e) => { setIngredient({ id: e.value, name: e.label }) }} // Handle here
+                                                />
+                                                {/* <GrClose size={15} className='delete-item-ingredient-add-item' onClick={() => deleteInput(item)} /> */}
+                                            </div>
+                                            {
+                                                ingredient &&
                                                 <div className='ingredient-add-item-amount'>
                                                     <label>Amount:</label>
-                                                    <input type="number" />
+                                                    <input type="number" onChange={(e) => {
+                                                        setIngredient({ ...ingredient, amount: e.target.value })
+                                                    }} />
                                                 </div>
-                                                <MdDelete size={26} className='delete-item-ingredient-add-item' onClick={() => deleteInput(index)} />
-                                            </div>
-                                        ))}
+                                            }
+
+                                            <button className='btn-add'
+                                                onClick={() => setListIngreForAdd([...listIngreForAdd, ingredient])}
+                                            >
+                                                Add
+                                            </button>
+                                        </div>
+
                                         {/* <button type="button" onClick={addInput}> */}
-                                        <RiAddCircleFill size={26} className='btn-add-ingredient' onClick={addInput} />
+                                        <RiAddCircleFill size={26} className='btn-add-ingredient' />
                                         {/* </button> */}
+
+                                        <table className='list-ingre-for-add'>
+                                            {listIngreForAdd.map((ingredient, index) => 
+                                                <tr key={index}>
+                                                    <td>Name: {ingredient.name}</td>
+                                                    <td>Amount: {ingredient.amount}</td>
+                                                </tr>
+                                            )}
+                                        </table>
                                     </div>
                                 </div>
                             </div>

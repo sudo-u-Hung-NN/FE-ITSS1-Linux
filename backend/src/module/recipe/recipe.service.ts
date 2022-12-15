@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, QueryBuilder, Repository } from 'typeorm';
+import { In, QueryBuilder, Repository, Not } from 'typeorm';
 import { CreateRawMaterial } from './dto/create-raw-material';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
@@ -91,5 +91,11 @@ export class RecipeService {
 
   remove(id: number) {
     return `This action removes a #${id} recipe`;
+  }
+  getRecipe(id: number) {
+    return this.recipeRepo.find({ where: { creator: id } });
+  }
+  getRecipes(id: number) {
+    return this.recipeRepo.find({ where: { creator: Not(id) } });
   }
 }

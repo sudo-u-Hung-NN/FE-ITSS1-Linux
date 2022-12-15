@@ -176,11 +176,11 @@ body {
     }
 
     .navbar i {
-        display: block;
+        display: none;
     }
 
     .navbar #close-navbar-icon {
-        display: block;
+        display: none;
     }
 
 
@@ -213,6 +213,14 @@ body {
 
     .main {
         margin-right: 50px;
+    }
+
+    .navbar i {
+        display: block;
+    }
+
+    .navbar #close-navbar-icon {
+        display: block;
     }
 
     #menu-icon {

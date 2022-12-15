@@ -24,12 +24,12 @@ export class RecipeController {
     return this.recipeService.create(createRecipeDto);
   }
   @Public()
-  @Post('/rawmaterial')
+  @Post('/raw-material')
   createRawMaterial(@Body() createRecipeDto: CreateRawMaterial) {
     return this.recipeService.createRawMaterial(createRecipeDto);
   }
   @Public()
-  @Post('/recipematerial')
+  @Post('/recipe-raw-material')
   createRecipeMaterial(@Body() createRecipeDto: CreateRecipeRawDto[]) {
     return this.recipeService.createRecipeMaterial(createRecipeDto);
   }
@@ -39,17 +39,17 @@ export class RecipeController {
     return this.recipeService.findAll();
   }
   @Public()
-  @Get('getMaterial')
+  @Get('get-all-materials')
   findAllRawMaterial() {
     return this.recipeService.findAllRawMaterial();
   }
   @Public()
-  @Get(':name')
+  @Get('search/:name')
   search(@Param('name') name: string) {
     return this.recipeService.search(name);
   }
   @Public()
-  @Get('/get/:id')
+  @Get('/get-by-id/:id')
   findOne(@Param('id') id: number) {
     return this.recipeService.findOne(id);
   }
@@ -59,9 +59,19 @@ export class RecipeController {
     return this.recipeService.saveRecipe(id, userId);
   }
   @Public()
-  @Get('recipe/:id')
+  @Get('get-recipes-for-filter/:id')
   filter(@Param('id') id: number) {
     return this.recipeService.filter(+id);
+  }
+  @Public()
+  @Get('get-recipes-for-current-user/:id')
+  getRecipe(@Param('id') id: number) {
+    return this.recipeService.getRecipe(+id);
+  }
+  @Public()
+  @Get('get-recipes-for-other-users/:id')
+  getRecipes(@Param('id') id: number) {
+    return this.recipeService.getRecipes(+id);
   }
 
   // @Patch(':id')

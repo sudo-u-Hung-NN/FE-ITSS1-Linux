@@ -22,21 +22,21 @@
     position: absolute;
     right: -10px;
     top: -10px;
-    color:white;
+    color: white;
     cursor: pointer;
     transition: 0.5s all ease;
     border-radius: 50%;
 }
 
 .profile #icon-close-profile:hover {
-    color:white;
+    color: white;
     background: #434241;
     border-radius: 50%;
     padding: 3px;
 }
 
 .profile #icon-close-profile:active {
-    color:white;
+    color: white;
     background: #bba58f;
     border-radius: 50%;
 }
@@ -188,7 +188,7 @@ form.profile-content .name-profession {
     color: rgb(246, 248, 247);
 }
 
-.profile-content .content input[type = 'password']{
+.profile-content .content input[type='password'] {
     padding: 5px;
     border: 0;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.18);
@@ -225,7 +225,7 @@ form.profile-content .name-profession {
 }
 
 span {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     font-size: 0.8em;
     font-weight: 500;
     opacity: 0.6;
@@ -310,7 +310,8 @@ span.update-password {
     width: fit-content;
 }
 
-span:visited,span:hover{
+span:visited,
+span:hover {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transition: 0.5s all ease;
@@ -328,6 +329,3 @@ span.update-password:active {
     color: #000000;
     font-weight: 500;
 }
-
-
-

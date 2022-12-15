@@ -23,14 +23,21 @@ input {
     width: 90%;
 }
 
+.share-container input {
+    font-size: 15px;
+    outline: none;
+    color: #473f3f;
+}
+
 .share-container input[type='text'] {
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
+    ;
     border: 0;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.123);
 }
 
 .share-container input[type='number'] {
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
     border: 0;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.123);
 }
@@ -98,6 +105,10 @@ input[type="file"] {
     /*border-radius: 10px;*/
 }
 
+.add-text hr {
+    border-top: 3px solid #020100;
+}
+
 .add-text .recipe-name-add {
     /* margin-top: 20px; */
     margin-bottom: 10px;
@@ -129,6 +140,7 @@ input[type="file"] {
     border-radius: 6px;
     color: #ffffff;
     height: 25px;
+    width: 100%;
 }
 
 .ingredient-add {
@@ -174,14 +186,17 @@ input[type="file"] {
 
 .delete-item-ingredient-add-item {
     position: absolute;
-    right: -35px;
-    top: 55px;
+    top: 63px;
+    left: -35px;
     cursor: pointer;
+    transition: all 0.3s linear;
 }
 
 
 .delete-item-ingredient-add-item:hover {
-    color: #fd6929;
+    background: #f12121;
+    border-radius: 50%;
+    padding: 2px;
 }
 
 .delete-item-ingredient-add-item:active {

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {useForm} from "react-hook-form";
+import React from "react";
+import { useForm } from "react-hook-form";
 import ErrorMessageAuth from "../../ErrorMessage/ErrorMessageAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { registerUser } from "../../../Api/auth.api";
 import { clearRedux } from "../../../../Redux/auth.slice";
 
 export default function FormRegister() {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { registerMessageError } = useSelector((state) => state.auth.register);
@@ -15,24 +16,23 @@ export default function FormRegister() {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+
     const handleClass = (name, baseClass = "form-control") => `${baseClass} ${errors[name] ? "is-invalid" : ""}`;
+
     const onSubmit = (data) => {
         console.log(data)
-        registerUser(data, dispatch, navigate);
+        const fixData = { ...data, qid: Number(data.question) };
+        registerUser(fixData, dispatch, navigate);
     };
 
-    const [qid, set_Question] = useState("");
-    const [answer, setAnswer] = useState("");
+    const mockup_questions = [
+        { "id": 1, "content": "How many people are there in your family ?" },
+        { "id": 2, "content": "Where did you lived when you were 6 years old ?" },
+        { "id": 3, "content": "What is your primary school's name ?" }
+    ]
 
-    const mockup_questions = [{"id": 1, "content": "How many people are there in your family ?"},
-                                {"id": 2, "content": "Where did you lived when you were 6 years old ?"},
-                                {"id": 3, "content": "What is your primary school's name ?"},]
-    
     // TODO: FE - done, BE - none
-    
+
     return (
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <h3>Sign Up</h3>
@@ -52,10 +52,6 @@ export default function FormRegister() {
                         },
                     })}
                     type="text"
-                    value={username}
-                    onChange={(e) => {
-                        setUsername(e.target.value);
-                    }}
                     className={handleClass("username")}
                     placeholder="User Name"
                 />
@@ -76,11 +72,7 @@ export default function FormRegister() {
                         },
                     })}
                     type="email"
-                    value={email}
                     className={handleClass("email")}
-                    onChange={(e) => {
-                        setEmail(e.target.value);
-                    }}
                     placeholder="Enter email"
                 />
                 <ErrorMessageAuth name="email" errors={errors} />
@@ -101,10 +93,6 @@ export default function FormRegister() {
                         },
                     })}
                     type="password"
-                    value={password}
-                    onChange={(e) => {
-                        setPassword(e.target.value);
-                    }}
                     className={handleClass("password")}
                     placeholder="Enter password"
                 />
@@ -113,19 +101,13 @@ export default function FormRegister() {
 
             <div className="mb-3">
                 <label>Private Q&A</label>
-                <select {...register("qid")}
-                        className={handleClass("qid")}
-                        value={qid}
-                        onChange={(e) => {
-                            set_Question(e.target.value)
-                        }}
-                >
-                <option value="" disabled defaultValue="" hidden>Choose a question</option>
-                {
-                    mockup_questions?.map((item, index) => (
-                        <option value={item["id"]} key={index}>{item["content"]}</option>
-                    ))
-                }
+                <select {...register("question")} className={handleClass("question")}>
+                    <option value="" disabled selected hidden>
+                        Choose a question
+                    </option>
+                    {mockup_questions?.map((item) => (
+                        <option value={item["id"]}>{item["content"]}</option>
+                    ))}
                 </select>
             </div>
 
@@ -144,10 +126,6 @@ export default function FormRegister() {
                         },
                     })}
                     type="answer"
-                    value={answer}
-                    onChange={(e) => {
-                        setAnswer(e.target.value);
-                    }}
                     className={handleClass("answer")}
                     placeholder="Enter your answer"
                 />
