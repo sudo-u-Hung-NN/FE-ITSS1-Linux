@@ -85,31 +85,16 @@ function Share(props) {
         }
     };
 
-    // useEffect(() => {
-    //     const recipe = {
-    //         name: name, 
-    //         description: description, 
-    //         image: image?.preview, 
-    //         formula: formula, 
-    //         note: note, 
-    //         creator: creator, 
-    //         price: price, 
-    //         views: views
-    //     }
-
-    //     console.log(recipe);
-    // });
-
-    // const handleCreateRecipeRawMaterial = (body) => {
-    //     const baseUrl = 'http://localhost:3000/recipematerial';
-    //     axios.post(baseUrl, body)
-    //         .then(response => {
-    //             console.log(response.data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-    // }
+    const handleCreateRecipeRawMaterial = (body) => {
+        const baseUrl = 'http://localhost:3000/recipematerial';
+        axios.post(baseUrl, body)
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
 
     const addInput = () => {
@@ -128,11 +113,16 @@ function Share(props) {
     {value: "2", label: "Chicken"}, {value: "3", label: "Spice"}, {value: "4", label: "Orange"}, {value: "5", label: "Cucumber"}, {value: "6", label: "Leaf"}, 
     {value: "7", label: "Juice"}, {value: "8", label: "Beef"}, {value: "9", label: "Wine"}]
 
+    // API get all ingredients --> Get all materials
+    // API 1: Store Recipe => Recipe_id
+    // API 2: Store Ingredients --> Use Recipe_id to store ingredients
+    
+
     return (
 
         <>
             {
-                token ? <>
+                true ? <>
                     <form onSubmit={handleCreateRecipe} className='form-container-input'>
                         <h2><span>Share</span> Your Recipes 🍔</h2>
                         <div className="share-container">
