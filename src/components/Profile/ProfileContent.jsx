@@ -30,7 +30,7 @@ const ProfileContent = ({ setShow }) => {
         updateUser(
           user?.id,
           {
-            username: user?.name,
+            username: user?.username,
             phone: user?.phone,
             birth_date: user?.birth_date,
             avatar: res,
