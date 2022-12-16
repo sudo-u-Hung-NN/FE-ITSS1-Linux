@@ -1,43 +1,32 @@
-import React, { useState, useEffect } from "react";
-import "../../CSS/search.css";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { getAllIngredients } from "../Api/ingredient.api";
-import {
-  getRecipesForFilter,
-  getRecipesForSearchByName,
-} from "../Api/recipe.api";
+import React, {useState, useEffect} from 'react';
+import '../../CSS/search.css';
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import {getAllIngredients} from "../Api/ingredient.api";
+import {getAllRecipes, getRecipesForFilter, getRecipesForSearchByName} from "../Api/recipe.api";
+
 
 function Search(props) {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [listIngredient, setListIngredient] = useState([]);
 
-  const getSearchedRecipes = (search) => {
-    getRecipesForSearchByName(search)
-      .then((res) => {
-        setSearchedRecipes(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    const getSearchedRecipes = (search) => {
+        getRecipesForSearchByName(search).then(
+            res => {
+                setSearchedRecipes(res.data);
+            }
+        ).catch(
+            err => {
+                console.log(err);
+            }
+        )
+    }
 
-  console.log(searchedRecipes);
-
-  const handleChangeSearch = (event) => {
-    setSearchTerm(event.target.value);
-    console.log(searchTerm);
-  };
-
-  const onClickToSearch = () => {
-    getSearchedRecipes(searchTerm);
-  };
-
-  // useEffect(() => {
-  //     getSearchedRecipes(searchTerm);
-  //     console.log('search: ', searchTerm)
-  // }, []);
+    const handleChangeSearch = (event) => {
+        setSearchTerm(event.target.value);
+        console.log(searchTerm)
+    }
 
   const mockup_ingredents = [...listIngredient];
 
@@ -53,35 +42,52 @@ function Search(props) {
   const [moreClicked, setMore] = useState(false);
   const [checkedList, setCheckedList] = useState({});
 
-  const handleCheck = (isCheck, id) => {
-    const checkedListClone = { ...checkedList };
-    checkedListClone[id] = isCheck;
-    setCheckedList(checkedListClone);
-    // convert end call api here
-    const filter_item_ids = Object.keys(checkedListClone).filter(
-      (key) => checkedListClone[key] === true
-    );
-    const converted_request = filter_item_ids.join("+");
-    // Receive and setSearchedRecipes here
-    getRecipesForFilter(converted_request)
-      .then((res) => {
-        console.log(res.data);
-        setSearchedRecipes(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    const handleCheck = (isCheck, id) => {
+        const checkedListClone = {...checkedList}
+        checkedListClone[id] = isCheck
+        setCheckedList(checkedListClone)
+        // convert end call api here
+        const filter_item_ids = Object.keys(checkedListClone).filter(key => checkedListClone[key] === true)
+        const converted_request = filter_item_ids.join("+");
+        console.log('List ingredients: ', converted_request);
+        // Receive and setSearchedRecipes here
+        if(converted_request.length > 0){
+            getRecipesForFilter(converted_request).then(
+                res => {
+                    console.log(res.data);
+                    setSearchedRecipes(res.data);
+                }
+            ).catch(err => {
+                console.log(err);
+            });
+        } else {
+            setSearchedRecipes([]);
+        }
+    }
 
-  useEffect(() => {
-    getAllIngredients()
-      .then((res) => {
-        setListIngredient(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+
+    useEffect(() => {
+        getAllIngredients().then(res => {
+            setListIngredient(res.data)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
+
+    useEffect(()=> {
+        getSearchedRecipes(searchTerm)
+    }, [searchTerm])
+
+    useEffect(()=> {
+        if (searchTerm === "" || listIngredient === null) {
+            getAllRecipes().then(
+                res => {
+                    setSearchedRecipes(res.data)
+                }
+            )
+        }
+    }, [searchTerm, listIngredient]);
 
   return (
     <div className="search-container">
@@ -124,43 +130,29 @@ function Search(props) {
                     onChange={(event) =>
                       handleCheck(event.currentTarget.checked, item.id)
                     }
-                  />
-                  <span className="checkmark"></span>
-                </label>
-              </div>
-            )
-          )}
+                </div>
+                {
+                    moreClicked ?
+                        <span className="more" onClick={() => setMore(false)}>Hidden...</span>
+                        :
+                        <span className="more" onClick={() => setMore(true)}>More...</span>
+                }
+            </div>
+            <div className="recipes-card">
+                <Grid>
+                    {searchedRecipes?.map(({id, name, image}) => (
+                        <Card key={id}>
+                            <Link to={`/dish/${id}`}>
+                                <img src={image} alt={name}/>
+                                <h5>{name}</h5>
+                            </Link>
+                        </Card>
+                    ))}
+                </Grid>
+            </div>
+
         </div>
-        {moreClicked ? (
-          <span className="more" onClick={() => setMore(false)}>
-            Hidden...
-          </span>
-        ) : (
-          <span className="more" onClick={() => setMore(true)}>
-            More...
-          </span>
-        )}
-      </div>
-      <div className="btn-search">
-        <button className="button-4" onClick={onClickToSearch}>
-          Search
-        </button>
-        <button className="button-4">Clear</button>
-      </div>
-      <div className="recipes-card">
-        <Grid>
-          {searchedRecipes?.map(({ id, name, image }) => (
-            <Card key={id}>
-              <Link to={`/dish/${id}`}>
-                <img src={image} alt={name} />
-                <h5>{name}</h5>
-              </Link>
-            </Card>
-          ))}
-        </Grid>
-      </div>
-    </div>
-  );
+    );
 }
 
 const Grid = styled.div`

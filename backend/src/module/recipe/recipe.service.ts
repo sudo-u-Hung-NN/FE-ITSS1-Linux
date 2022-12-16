@@ -48,7 +48,6 @@ export class RecipeService {
     );
     queryBuilder.where(`recipe_raw_material.raw_material_id IN (:...id)`, { id: id });
     queryBuilder.groupBy('recipe_raw_material.recipe_id');
-    queryBuilder.where('')
     const data = await queryBuilder.getRawMany();
     const proposalReview = await this.findByIds(
       data.map((e) => e.recipe_raw_material_recipe_id),

@@ -1,29 +1,22 @@
 .dish-option{
     display: flex;
-    flex-direction: column; 
-    // width: 100%;
-    // border: solid 2px #222;
-    // width: 395px;
+    flex-direction: column;
     button{
-
         text-align: left;
         height: 60px;
+        width: 150px;
         padding-left: 20px;
         // font-weight:500 ;
         &:hover{
-            background-color: #bbb;
+            background-color: #FFE4C4;
             color: rgba(129, 73, 3, 1);
             transition-duration: 0.4s;
         }
-        width: 100%;
         border: none;
         border-bottom: solid 1px #eee;
         &:focus{
             outline: none;
             background-color: #ccc;
         }
-        
     }
-    
-
 }
