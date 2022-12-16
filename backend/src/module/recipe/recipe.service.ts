@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { count } from 'console';
 import { In, QueryBuilder, Repository ,Not} from 'typeorm';
 import { CreateRawMaterial } from './dto/create-raw-material';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
@@ -45,11 +46,14 @@ export class RecipeService {
   async filter(id: number[]) {
     const queryBuilder =
       this.recipeRawMaterialRepo.createQueryBuilder('recipe_raw_material');
+      queryBuilder.select('count(recipe_raw_material.recipe_id)','count')
+      queryBuilder.addSelect('recipe_raw_material.recipe_id','recipe_id')
       queryBuilder.where(`recipe_raw_material.raw_material_id IN (:...id)`, { id: id });
       queryBuilder.groupBy('recipe_raw_material.recipe_id')
+      queryBuilder.having('count>=:length',{length:id.length})
     const data = await queryBuilder.getRawMany();
     const proposalReview = await this.findByIds(
-      data.map((e) => e.recipe_raw_material_recipe_id),
+      data.map((e) => e.recipe_id),
     );
     return proposalReview;
   }
