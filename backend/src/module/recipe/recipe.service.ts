@@ -42,17 +42,14 @@ export class RecipeService {
     }
     return this.recipeRepo.save(recipe);
   }
-  async filter(id: number) {
+  async filter(id: number[]) {
     const queryBuilder =
-      this.rawMaterialRepo.createQueryBuilder('raw_material');
-    queryBuilder.leftJoinAndSelect(
-      `raw_material.listRecipe`,
-      `recipe_raw_material`,
-    );
-    queryBuilder.where(`raw_material.id = :id`, { id: id });
-    const data = await queryBuilder.getOne();
+      this.recipeRawMaterialRepo.createQueryBuilder('recipe_raw_material');
+      queryBuilder.where(`recipe_raw_material.raw_material_id IN (:...id)`, { id: id });
+      queryBuilder.groupBy('recipe_raw_material.recipe_id')
+    const data = await queryBuilder.getRawMany();
     const proposalReview = await this.findByIds(
-      data.listRecipe.map((e) => e.recipe_id),
+      data.map((e) => e.recipe_raw_material_recipe_id),
     );
     return proposalReview;
   }

@@ -60,8 +60,14 @@ export class RecipeController {
   }
   @Public()
   @Get('recipe/:id')
-  filter(@Param('id') id: number) {
-    return this.recipeService.filter(+id);
+  filter(@Param('id') id: string) {
+    
+    const numlist: number[]=[];
+    const abc=id.split('+')
+    for (var i = 0; i < abc.length; i++){
+      numlist.push(+abc[i]);
+  }
+    return this.recipeService.filter(numlist);
   }
   @Public()
   @Get('getrecipe/:id')
