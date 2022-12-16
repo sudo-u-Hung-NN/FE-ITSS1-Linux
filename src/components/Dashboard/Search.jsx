@@ -3,7 +3,7 @@ import '../../CSS/search.css';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import {getAllIngredients} from "../Api/ingredient.api";
-import { getRecipesForFilter, getRecipesForSearchByName } from "../Api/recipe.api";
+import {getAllRecipes, getRecipesForFilter, getRecipesForSearchByName} from "../Api/recipe.api";
 
 
 function Search(props) {
@@ -23,21 +23,10 @@ function Search(props) {
         )
     }
 
-    console.log(searchedRecipes);
-
     const handleChangeSearch = (event) => {
         setSearchTerm(event.target.value);
         console.log(searchTerm)
     }
-
-    const onClickToSearch = () => {
-        getSearchedRecipes(searchTerm);
-    }
-
-    // useEffect(() => {
-    //     getSearchedRecipes(searchTerm);
-    //     console.log('search: ', searchTerm)
-    // }, []);
 
     const mockup_ingredents = [...listIngredient]
 
@@ -60,15 +49,20 @@ function Search(props) {
         // convert end call api here
         const filter_item_ids = Object.keys(checkedListClone).filter(key => checkedListClone[key] === true)
         const converted_request = filter_item_ids.join("+");
+        console.log('List ingredients: ', converted_request);
         // Receive and setSearchedRecipes here
-        getRecipesForFilter(converted_request).then(
-            res => {
-                console.log(res.data);
-                setSearchedRecipes(res.data);
-            }
-        ).catch(err => {
-            console.log(err);
-        });
+        if(converted_request.length > 0){
+            getRecipesForFilter(converted_request).then(
+                res => {
+                    console.log(res.data);
+                    setSearchedRecipes(res.data);
+                }
+            ).catch(err => {
+                console.log(err);
+            });
+        } else {
+            setSearchedRecipes([]);
+        }
     }
 
 
@@ -80,6 +74,20 @@ function Search(props) {
             console.log(err);
         })
     }, [])
+
+    useEffect(()=> {
+        getSearchedRecipes(searchTerm)
+    }, [searchTerm])
+
+    useEffect(()=> {
+        if (searchTerm === "" || listIngredient === null) {
+            getAllRecipes().then(
+                res => {
+                    setSearchedRecipes(res.data)
+                }
+            )
+        }
+    }, [searchTerm, listIngredient]);
 
     return (
         <div className="search-container">
@@ -126,10 +134,6 @@ function Search(props) {
                         :
                         <span className="more" onClick={() => setMore(true)}>More...</span>
                 }
-            </div>
-            <div className="btn-search">
-                <button className="button-4" onClick={onClickToSearch}>Search</button>
-                <button className="button-4">Clear</button>
             </div>
             <div className="recipes-card">
                 <Grid>

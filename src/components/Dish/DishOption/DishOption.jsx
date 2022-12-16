@@ -6,7 +6,7 @@ export default function DishOption({ setOption }) {
       <button onClick={() => setOption(0)} className="dish-option-description">
         Description
       </button>
-      <button onClick={() => setOption(1)} className="dish-option-processing">
+      <button onClick={() => setOption(1)} className="dish-option-proccessing">
         Processing instructions
       </button>
       <button onClick={() => setOption(2)} className="dish-option-storage">

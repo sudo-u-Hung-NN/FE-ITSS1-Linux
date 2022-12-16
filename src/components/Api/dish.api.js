@@ -9,7 +9,7 @@ import {
 export const getDish = async (dishId, dispatch) => {
   dispatch(getDishStart());
   try {
-    const res = await axios.get(`http://localhost:3000/recipe/get/${dishId}`);
+    const res = await axios.get(`http://localhost:3000/recipe/get-by-id/${dishId}`);
     dispatch(getDishSuccess(res));
   } catch (err) {
     if (err.response) {
