@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './module/auth/jwt-auth.guard';
 import { VotingModule } from './module/voting/voting.module';
 import { RecipeModule } from './module/recipe/recipe.module';
+import { CloudinaryModule } from './module/cloudinary/cloudinary.module';
 import * as dotenv from 'dotenv';
 import { CloudinaryModule } from './module/cloudinary/cloudinary.module';
 dotenv.config();
