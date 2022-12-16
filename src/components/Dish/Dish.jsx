@@ -35,6 +35,7 @@ export default function Dish() {
             <img
               className="dis-container-row-1-img-main"
               src={
+                dishData?.data[0]?.image ||
                 "https://beptueu.vn/hinhanh/tintuc/top-15-hinh-anh-mon-an-ngon-viet-nam-khien-ban-khong-the-roi-mat-12.jpg"
               }
               alt=""

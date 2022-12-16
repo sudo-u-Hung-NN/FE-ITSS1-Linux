@@ -9,7 +9,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './module/auth/jwt-auth.guard';
 import { VotingModule } from './module/voting/voting.module';
 import { RecipeModule } from './module/recipe/recipe.module';
-import { CloudinaryModule } from './module/cloudinary/cloudinary.module';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -30,7 +29,6 @@ dotenv.config();
     AuthModule,
     VotingModule,
     RecipeModule,
-    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }],
