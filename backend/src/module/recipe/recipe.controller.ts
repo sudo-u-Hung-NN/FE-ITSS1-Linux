@@ -17,19 +17,19 @@ import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
 @ApiTags('Recipe')
 @Controller('recipe')
 export class RecipeController {
-  constructor(private readonly recipeService: RecipeService) { }
+  constructor(private readonly recipeService: RecipeService) {}
   @Public()
   @Post()
   create(@Body() createRecipeDto: CreateRecipeDto) {
     return this.recipeService.create(createRecipeDto);
   }
   @Public()
-  @Post('/rawmaterial')
+  @Post('/raw-material')
   createRawMaterial(@Body() createRecipeDto: CreateRawMaterial) {
     return this.recipeService.createRawMaterial(createRecipeDto);
   }
   @Public()
-  @Post('/recipematerial')
+  @Post('/recipe-raw-material')
   createRecipeMaterial(@Body() createRecipeDto: CreateRecipeRawDto[]) {
     return this.recipeService.createRecipeMaterial(createRecipeDto);
   }
@@ -39,17 +39,17 @@ export class RecipeController {
     return this.recipeService.findAll();
   }
   @Public()
-  @Get('getMaterial')
+  @Get('get-all-materials')
   findAllRawMaterial() {
     return this.recipeService.findAllRawMaterial();
   }
   @Public()
-  @Get(':name')
+  @Get('search/:name')
   search(@Param('name') name: string) {
     return this.recipeService.search(name);
   }
   @Public()
-  @Get('/get/:id')
+  @Get('/get-by-id/:id')
   findOne(@Param('id') id: number) {
     return this.recipeService.findOne(id);
   }
@@ -59,23 +59,22 @@ export class RecipeController {
     return this.recipeService.saveRecipe(id, userId);
   }
   @Public()
-  @Get('recipe/:id')
+  @Get('get-recipes-for-filter/:id')
   filter(@Param('id') id: string) {
-    
-    const numlist: number[]=[];
-    const abc=id.split('+')
-    for (var i = 0; i < abc.length; i++){
+    const numlist: number[] = [];
+    const abc = id.split('+');
+    for (let i = 0; i < abc.length; i++) {
       numlist.push(+abc[i]);
-  }
+    }
     return this.recipeService.filter(numlist);
   }
   @Public()
-  @Get('getrecipe/:id')
+  @Get('get-recipes-for-current-user/:id')
   getRecipe(@Param('id') id: number) {
     return this.recipeService.getRecipe(+id);
   }
   @Public()
-  @Get('getrecipes/:id')
+  @Get('get-recipes-for-other-users/:id')
   getRecipes(@Param('id') id: number) {
     return this.recipeService.getRecipes(+id);
   }

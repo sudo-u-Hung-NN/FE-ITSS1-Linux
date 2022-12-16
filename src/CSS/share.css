@@ -8,7 +8,7 @@ input {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background: #3533bb86;
+    background: #b7b5ff86;
     width: 85%;
     /* margin-left: 80px; */
     border-radius: 10px;
@@ -23,14 +23,21 @@ input {
     width: 90%;
 }
 
+.share-container input {
+    font-size: 15px;
+    outline: none;
+    color: #473f3f;
+}
+
 .share-container input[type='text'] {
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
+    ;
     border: 0;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.123);
 }
 
 .share-container input[type='number'] {
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
     border: 0;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.123);
 }
@@ -56,7 +63,7 @@ input {
 }
 
 .recipe-form-1 .add-image {
-    background: #dccaca;
+    background: #F1EDED;
     margin-right: 60px;
     display: flex;
     align-items: center;
@@ -98,6 +105,10 @@ input[type="file"] {
     /*border-radius: 10px;*/
 }
 
+.add-text hr {
+    border-top: 3px solid #020100;
+}
+
 .add-text .recipe-name-add {
     /* margin-top: 20px; */
     margin-bottom: 10px;
@@ -129,6 +140,7 @@ input[type="file"] {
     border-radius: 6px;
     color: #ffffff;
     height: 25px;
+    width: 100%;
 }
 
 .ingredient-add {
@@ -160,9 +172,8 @@ input[type="file"] {
     margin-right: 15px;
 }
 
-.ingredient-add .ingredient-add-item-amount input {
-    padding: 6px;
-    border-radius: 4px;
+.ingredient-add .ingredient-add-item-name .css-b62m3t-container {
+    width: 220px;
 }
 
 .ingredient-add .ingredient-add-item input {
@@ -176,14 +187,17 @@ input[type="file"] {
 
 .delete-item-ingredient-add-item {
     position: absolute;
-    right: -28px;
-    bottom: 5px;
+    top: 63px;
+    left: -35px;
     cursor: pointer;
+    transition: all 0.3s linear;
 }
 
 
 .delete-item-ingredient-add-item:hover {
-    color: #fd6929;
+    background: #f12121;
+    border-radius: 50%;
+    padding: 2px;
 }
 
 .delete-item-ingredient-add-item:active {
@@ -191,17 +205,9 @@ input[type="file"] {
 }
 
 .ingredient-add .btn-add-ingredient {
-    /*size: 30px;*/
-    /*width: 30px;*/
-    /*height: 25px;*/
-    text-align: center;
-    /* border-radius: 10px; */
-    color: rgba(191, 232, 129, 0.889);
-    /* background-color: greenyellow; */
-    /* border: 0.5px solid; */
+    color: rgba(79, 114, 30, 0.89);
     border: none;
     cursor: pointer;
-    /*margin-left: 10px;*/
     margin-top: 10px;
 }
 
@@ -218,7 +224,7 @@ input[type="file"] {
     /*height: 25px;*/
     text-align: center;
     /* border-radius: 10px; */
-    color: rgba(162, 223, 75, 0.5);
+    color: rgba(194, 229, 145, 0.5);
 }
 
 .div-input-text-add {

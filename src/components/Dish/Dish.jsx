@@ -24,6 +24,7 @@ export default function Dish() {
       } else setVoted(0);
     });
   }, [voted, setVoted]);
+
   return (
     <div className="dish">
       <div className="dish-title">

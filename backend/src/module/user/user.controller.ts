@@ -12,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/public.decorator';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 import { ForgotPassword } from './dto/forgot-password.dto';
 @ApiBearerAuth()
 @ApiTags('User')
@@ -53,4 +54,13 @@ export class UserController {
   // remove(@Param('id') id: string) {
   //   return this.userService.remove(+id);
   // }
+
+  @Public()
+  @Patch('/update-pass/:id')
+  updatePasswords(
+    @Param('id') id: string,
+    @Body() updatePasswordDto: UpdatePasswordDto,
+  ) {
+    return this.userService.updatePassword(+id, updatePasswordDto);
+  }
 }

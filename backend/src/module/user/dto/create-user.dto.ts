@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 enum Gender {
   FEMALE,
-  MALE ,
+  MALE,
 }
 export class CreateUserDto {
   @ApiProperty()
@@ -12,10 +12,10 @@ export class CreateUserDto {
 
   @ApiProperty()
   password: string;
-  
+
   @ApiProperty()
   qid: number;
-   
+
   @ApiProperty()
-  answer:string;
+  answer: string;
 }

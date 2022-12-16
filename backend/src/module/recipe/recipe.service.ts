@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, QueryBuilder, Repository ,Not} from 'typeorm';
+import { In, QueryBuilder, Repository, Not } from 'typeorm';
 import { CreateRawMaterial } from './dto/create-raw-material';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
@@ -30,7 +30,7 @@ export class RecipeService {
     return this.recipeRawMaterialRepo.save(createRecipeRawDto);
   }
   search(name: string) {
-    console.log('abc', name)
+    console.log('abc', name);
     console.log('search by name');
 
     return this.recipeRepo.find({ where: { name: name } });
@@ -43,10 +43,12 @@ export class RecipeService {
     return this.recipeRepo.save(recipe);
   }
   async filter(id: number[]) {
-    const queryBuilder =
-      this.recipeRawMaterialRepo.createQueryBuilder('recipe_raw_material');
-      queryBuilder.where(`recipe_raw_material.raw_material_id IN (:...id)`, { id: id });
-      queryBuilder.groupBy('recipe_raw_material.recipe_id')
+    const queryBuilder = this.recipeRawMaterialRepo.createQueryBuilder(
+      'recipe_raw_material',
+    );
+    queryBuilder.where(`recipe_raw_material.raw_material_id IN (:...id)`, { id: id });
+    queryBuilder.groupBy('recipe_raw_material.recipe_id');
+    queryBuilder.where('')
     const data = await queryBuilder.getRawMany();
     const proposalReview = await this.findByIds(
       data.map((e) => e.recipe_raw_material_recipe_id),
@@ -61,20 +63,26 @@ export class RecipeService {
       },
     });
   }
-async findOne(id: number) {
-    const recipe=await  this.recipeRepo.findOne({
+  async findOne(id: number) {
+    const recipe = await this.recipeRepo.findOne({
       where: {
         id: id,
       },
     });
-  const queryBuilder = this.recipeRawMaterialRepo.createQueryBuilder('recipe_raw_material');
-  queryBuilder.leftJoinAndSelect(`recipe_raw_material.rawmaterial`, `raw_material`);
-  queryBuilder.where(`recipe_raw_material.recipe_id = :id`, { id:recipe.id  });
-  const material=await queryBuilder.getRawMany();
-  console.log('a',queryBuilder.getQuery())
-  console.log('ahihi',material)
-  return [recipe,material];
-
+    const queryBuilder = this.recipeRawMaterialRepo.createQueryBuilder(
+      'recipe_raw_material',
+    );
+    queryBuilder.leftJoinAndSelect(
+      `recipe_raw_material.rawmaterial`,
+      `raw_material`,
+    );
+    queryBuilder.where(`recipe_raw_material.recipe_id = :id`, {
+      id: recipe.id,
+    });
+    const material = await queryBuilder.getRawMany();
+    console.log('a', queryBuilder.getQuery());
+    console.log('ahihi', material);
+    return [recipe, material];
   }
   findAll() {
     return this.recipeRepo.find();
@@ -90,9 +98,9 @@ async findOne(id: number) {
     return `This action removes a #${id} recipe`;
   }
   getRecipe(id: number) {
-   return this.recipeRepo.find({where:{creator:id}});
+    return this.recipeRepo.find({ where: { creator: id } });
   }
   getRecipes(id: number) {
-    return this.recipeRepo.find({where:{creator:Not(id)}});
+    return this.recipeRepo.find({ where: { creator: Not(id) } });
   }
 }

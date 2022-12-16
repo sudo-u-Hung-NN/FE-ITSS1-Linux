@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dropdown } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../Api/auth.api";
 
@@ -9,8 +9,6 @@ const DropDownNavbar = ({ userInfo, setShow, show }) => {
   const navigate = useNavigate();
   // const userInfo = useSelector((state) => state.auth.login.currentUser);
   // const userInfo = JSON.parse(localStorage.getItem('access_token'));
-
-  // console.log('Dropdown Navbar Props: ', userInfo);
 
   return (
     <Dropdown className="navbar-dropdown">
