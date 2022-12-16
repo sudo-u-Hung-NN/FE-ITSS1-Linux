@@ -11,8 +11,6 @@ A
 public/robots.txt,d\a\dac799070c2d0c2fa24462b02c1f2dcc3fb3a1e9
 D
 public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
-Q
-!src/components/Dashboard/Home.jsx,1\d\1d8d54a8c86efd2bed14f53b394f2eef5b6f4ad3
 ]
 -src/components/Authentication/Login/Index.jsx,3\e\3ee62084b850f8098e16c188ddaa36ca8dd0831a
 W
@@ -51,8 +49,6 @@ Z
 *backend/src/module/cloudinary/constants.ts,f\9\f969ab3e73a26ed9e9b9442d9bd25a74f8ef7932
 c
 3backend/src/module/cloudinary/cloudinary.service.ts,9\4\945006deabd36aafb9689760fcbe031440bc76b1
-R
-"src/components/Dashboard/Share.jsx,b\9\b9ae8a6e51a56e567e6aceb459eb5267e772af0e
 P
  src/components/Api/upload.api.js,d\1\d15b8c7e7081e4a187b4dea78a39a0a98e46da05
 f
@@ -67,3 +63,5 @@ D
 backend/package.json,2\d\2d67691333633e849af94af966942f0c1b3151c6
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+\
+,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c

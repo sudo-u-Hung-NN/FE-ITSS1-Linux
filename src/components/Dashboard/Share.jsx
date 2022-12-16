@@ -109,16 +109,16 @@ function Share(props) {
         console.log(recipe);
     });
 
-    // const handleCreateRecipeRawMaterial = (body) => {
-    //     const baseUrl = 'http://localhost:3000/recipematerial';
-    //     axios.post(baseUrl, body)
-    //         .then(response => {
-    //             console.log(response.data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-    // }
+    const handleCreateRecipeRawMaterial = (body) => {
+        const baseUrl = 'http://localhost:3000/recipematerial';
+        axios.post(baseUrl, body)
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     const deleteInput = (index) => {
         const newInputCounts = [...inputCounts]

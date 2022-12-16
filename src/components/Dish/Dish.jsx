@@ -16,7 +16,6 @@ export default function Dish() {
 
   useEffect(() => {
     getDish(param.id, dispatch);
-    console.log('dish data: ',dishData?.data);
   }, [param, dispatch]);
 
   useEffect(() => {
@@ -49,22 +48,26 @@ export default function Dish() {
           >
             <h4>Ingredient</h4>
             <table className='ingredient-table'>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Unit</th>
-              </tr>
-              {
-                dishData?.data[1].map((ing, index) => (
-                    <tr>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  dishData?.data[1].map((ing, index) => (
+                    <tr key={index}>
                       <td>{index + 1}</td>
                       <td>{ing.raw_material_name}</td>
                       <td>{ing.recipe_raw_material_amount}</td>
                       <td>{ing.raw_material_unit}</td>
                     </tr>
-                ))
-              }
+                  ))
+                }
+              </tbody>
             </table>
           </Col>
         </Row>
