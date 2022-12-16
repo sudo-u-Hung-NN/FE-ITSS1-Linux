@@ -1,79 +1,85 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import '../../CSS/search.css';
-import { useParams, Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {getAllIngredients} from "../Api/ingredient.api";
+import { getRecipesForFilter, getRecipesForSearchByName } from "../Api/recipe.api";
+
 
 function Search(props) {
-    // const [query, setQuery] = useState("");
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [listIngredient, setListIngredient] = useState([]);
 
-    const getSearchedRecipes = async (search) => {
-        const resp = await fetch(
-            `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${search}`
-        );
-        const data = await resp.json();
+    const getSearchedRecipes = (search) => {
+        getRecipesForSearchByName(search).then(
+            res => {
+                setSearchedRecipes(res.data);
+            }
+        ).catch(
+            err => {
+                console.log(err);
+            }
+        )
+    }
 
-        return data.results;
-    };
+    console.log(searchedRecipes);
 
     const handleChangeSearch = (event) => {
         setSearchTerm(event.target.value);
+        console.log(searchTerm)
     }
 
     const onClickToSearch = () => {
-        getSearchedRecipes(searchTerm).then((data) => {
-            setSearchedRecipes(data);
-        });
+        getSearchedRecipes(searchTerm);
     }
 
+    // useEffect(() => {
+    //     getSearchedRecipes(searchTerm);
+    //     console.log('search: ', searchTerm)
+    // }, []);
 
-    useEffect(() => {
-        getSearchedRecipes(searchTerm).then((data) => {
-            setSearchedRecipes(data);
-        });
-    });
-
-    const mockup_ingredents = [{id: 1, name: "Rice"}, 
-    {id: 2, name: "Chicken"}, {id: 3, name: "Spice"}, {id: 4, name: "Orange"}, {id: 5, name: "Cucumber"}, {id: 6, name: "Leaf"}, 
-    {id: 7, name: "Juice"}, {id: 8, name: "Beef"}, {id: 9, name: "Wine"}]
+    const mockup_ingredents = [...listIngredient]
 
     const convertMatrix = (one_dimensional_array, n) => {
-        let result = [];
-        while (one_dimensional_array.length) result.push(one_dimensional_array.splice(0, n));
-        return result;
+        while (one_dimensional_array.length) {
+            return [...one_dimensional_array.splice(0, n)]
+        }
     }
 
-
-    const mockup_converteds = convertMatrix(mockup_ingredents, 5)
-    const show_up_ingredents = mockup_converteds.slice(0, 2)
-    const hiddent_ingredents = mockup_converteds.slice(0, 9)
-
-    const [moreClicked, setMore] = useState(false) 
+    const mockup_converted = convertMatrix(mockup_ingredents,20);
+    const show_up_ingredents = mockup_converted?.slice(0, 2);
+    const hidden_ingredents = mockup_converted?.slice(0, 20);
+    const [moreClicked, setMore] = useState(false)
     const [checkedList, setCheckedList] = useState({});
 
-    const handlecheck = (isCheck, id) => {
+    const handleCheck = (isCheck, id) => {
         const checkedListClone = {...checkedList}
         checkedListClone[id] = isCheck
         setCheckedList(checkedListClone)
         // convert end call api here
         const filter_item_ids = Object.keys(checkedListClone).filter(key => checkedListClone[key] === true)
-        console.log(filter_item_ids); // ['1', '2', '3', '4']
+        const converted_request = filter_item_ids.join("+");
         // Receive and setSearchedRecipes here
-        const converted_request = filter_item_ids.join('+');
-
-        // TODO: Tùng xử lý ghép API ở đây, data truyền vào là converted_request
-        try {
-            const res = axios.post("http://localhost:3000/recipe", converted_request);
-            toast.success("Filter success!", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
-          } catch (err) {
-            toast.error("Filter error!", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
-          }
+        getRecipesForFilter(converted_request).then(
+            res => {
+                console.log(res.data);
+                setSearchedRecipes(res.data);
+            }
+        ).catch(err => {
+            console.log(err);
+        });
     }
+
+
+    useEffect(() => {
+        getAllIngredients().then(res => {
+            setListIngredient(res.data)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
 
     return (
         <div className="search-container">
@@ -95,30 +101,31 @@ function Search(props) {
                 </select>
                 <label htmlFor="pet-select">Search:</label>
                 {/* <FaSearch /> */}
-                <input type="text" placeholder="Search.." className="search" onChange={(e) => handleChangeSearch(e)} />
+                <input type="text" placeholder="Search.." className="search" onChange={(e) => handleChangeSearch(e)}/>
             </div>
             <div className="form-check">
                 <p>Ingredient</p>
-                <div>
-                {
-                    (moreClicked? hiddent_ingredents : show_up_ingredents)?.map(item => (
-                        <div key={item.id}>
-                            {item?.map((ingredent) => (
-
-                                <label key={ingredent.id} className="container-checkbox">{ingredent.name}
-                                    <input type="checkbox" onChange={(event) => handlecheck(event.currentTarget.checked, ingredent.id)} />
+                <div className="check-list-item">
+                    {
+                        (moreClicked ? hidden_ingredents : show_up_ingredents)?.map(item => (
+                            <div key={item.id} className="check-item">
+                                {/*{item?.map((ingredient) => (*/}
+                                <label key={item.id} className="container-checkbox">
+                                    <span>{item.name}</span>
+                                    <input type="checkbox"
+                                           onChange={(event) => handleCheck(event.currentTarget.checked, item.id)}/>
                                     <span className="checkmark"></span>
                                 </label>
-                            ))}
-                        </div>
-                    ))
-                }
-
-                {
-                    moreClicked? <></> : <span className="more" onClick={() => setMore(true)}>More...</span>
-                }
-                    
+                            </div>
+                        ))
+                    }
                 </div>
+                {
+                    moreClicked ?
+                        <span className="more" onClick={() => setMore(false)}>Hidden...</span>
+                        :
+                        <span className="more" onClick={() => setMore(true)}>More...</span>
+                }
             </div>
             <div className="btn-search">
                 <button className="button-4" onClick={onClickToSearch}>Search</button>
@@ -126,11 +133,11 @@ function Search(props) {
             </div>
             <div className="recipes-card">
                 <Grid>
-                    {searchedRecipes?.map(({ title, id, image }) => (
+                    {searchedRecipes?.map(({id, name, image}) => (
                         <Card key={id}>
-                            <Link to={`/recipe/${id}`}>
-                                <img src={image} alt={title} />
-                                <h5>{title}</h5>
+                            <Link to={`/dish/${id}`}>
+                                <img src={image} alt={name}/>
+                                <h5>{name}</h5>
                             </Link>
                         </Card>
                     ))}
@@ -153,14 +160,16 @@ const Card = styled.div`
     width: min(320px, 100%);
     border-radius: 2rem;
   }
+
   a {
     text-decoration: none;
   }
+
   h5 {
     text-align: center;
     padding: 1rem;
     color: #ec875b;
-    
+
   }
 `;
 

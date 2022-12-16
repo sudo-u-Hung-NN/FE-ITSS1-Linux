@@ -14,7 +14,7 @@ export class User1661402437884 implements MigrationInterface {
         email 			VARCHAR(50) 	NOT NULL 	UNIQUE,
         username 		VARCHAR(50) 	NOT NULL, 
         password	  VARCHAR(100) 	NOT NULL,
-        avatar			LONGBLOB 			NULL, 
+        avatar			LONGTEXT 			NULL, 
         phone 			VARCHAR(20) 	NULL, 
         birth_date 	DATE 					NULL, 
         gender 			ENUM('MALE','FEMALE') NULL,

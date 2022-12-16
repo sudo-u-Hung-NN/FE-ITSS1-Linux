@@ -176,11 +176,11 @@ body {
     }
 
     .navbar i {
-        display: block;
+        display: none;
     }
 
     .navbar #close-navbar-icon {
-        display: block;
+        display: none;
     }
 
 
@@ -213,6 +213,14 @@ body {
 
     .main {
         margin-right: 50px;
+    }
+
+    .navbar i {
+        display: block;
+    }
+
+    .navbar #close-navbar-icon {
+        display: block;
     }
 
     #menu-icon {
@@ -255,9 +263,9 @@ body {
 
     .nav-links {
         position: fixed;
-        width: 30%;
+        width: 250px;
         height: 100%;
-        background: #2d2d2d;
+        background: rgba(131, 130, 218, 0.566);
         backdrop-filter: blur(7px);
         top: 0;
         right: 0;
@@ -312,7 +320,7 @@ body {
         margin: 0;
         padding: 25px 55px;
         transition: all .50s ease;
-        width: 220px;
+        width: 250px;
     }
 
     .navbar a:hover {

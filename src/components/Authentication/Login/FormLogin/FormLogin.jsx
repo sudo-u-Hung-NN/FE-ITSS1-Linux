@@ -14,8 +14,6 @@ export default function FormLogin() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     setErrorMessage(currentUserError);
@@ -42,11 +40,7 @@ export default function FormLogin() {
             },
           })}
           type="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
           name="email"
-          value={email}
           className={handleClass("email")}
           placeholder="Enter email"
         />
@@ -69,16 +63,12 @@ export default function FormLogin() {
           })}
           type="password"
           name="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
           className={handleClass("password")}
           placeholder="Enter password"
         />
         <ErrorMessageAuth name="password" errors={errors} />
       </div>
-      
+
       {errorMessage && (
         <div className="text-danger" style={{ fontSize: "small" }}>
           {errorMessage}
@@ -105,7 +95,6 @@ export default function FormLogin() {
           Retake private Q&A.
         </Link>
       </p>
-
     </form>
   );
 }

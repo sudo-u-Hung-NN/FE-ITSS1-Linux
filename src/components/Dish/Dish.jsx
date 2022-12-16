@@ -8,6 +8,7 @@ import DishOption from "./DishOption/DishOption";
 import DishVote from "./DishVote/DishVote";
 import Parser from "html-react-parser";
 export default function Dish() {
+
   const dispatch = useDispatch();
   const dishData = useSelector((state) => state.dish.dataDish.data);
   const [voted, setVoted] = useState(0);
@@ -24,6 +25,8 @@ export default function Dish() {
       } else setVoted(0);
     });
   }, [voted, setVoted]);
+
+
   return (
     <div className="dish">
       <div className="dish-title">
@@ -48,9 +51,8 @@ export default function Dish() {
             <ul>
               {dishData?.data[1]?.map((_s, index) => {
                 return (
-                  <li>{`${index + 1} . ${_s?.raw_material_name} :${
-                    _s?.recipe_raw_material_amount
-                  } ${_s?.raw_material_unit}`}</li>
+                  <li>{`${index + 1} . ${_s?.raw_material_name} :${_s?.recipe_raw_material_amount
+                    } ${_s?.raw_material_unit}`}</li>
                 );
               })}
             </ul>
@@ -82,6 +84,28 @@ export default function Dish() {
                 {"Bao quan ban tu lanh"}
               </div>
             )}
+          </Col>
+        </Row>
+        <Row className="dish-container-row-3">
+          <Col className="dish-container-row-3-voted" md={5}>
+            <h2> {`Average rating: ${voted}`}</h2>
+          </Col>
+          <Col
+            className="dish-container-row-3-voting"
+            md={{ span: 5, offset: 1 }}
+          >
+            <DishVote />
+          </Col>
+        </Row>
+        <Row className="dish-container-row-3">
+          <Col className="dish-container-row-3-voted" md={5}>
+            <h2> {`Average rating: ${voted}`}</h2>
+          </Col>
+          <Col
+            className="dish-container-row-3-voting"
+            md={{ span: 5, offset: 1 }}
+          >
+            <DishVote />
           </Col>
         </Row>
         <Row className="dish-container-row-3">
