@@ -58,9 +58,21 @@ function Search(props) {
         setCheckedList(checkedListClone)
         // convert end call api here
         const filter_item_ids = Object.keys(checkedListClone).filter(key => checkedListClone[key] === true)
-        // console.log(filter_item_ids);
+        console.log(filter_item_ids); // ['1', '2', '3', '4']
         // Receive and setSearchedRecipes here
-        
+        const converted_request = filter_item_ids.join('+');
+
+        // TODO: Tùng xử lý ghép API ở đây, data truyền vào là converted_request
+        try {
+            const res = axios.post("http://localhost:3000/recipe", converted_request);
+            toast.success("Filter success!", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          } catch (err) {
+            toast.error("Filter error!", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          }
     }
 
     return (
