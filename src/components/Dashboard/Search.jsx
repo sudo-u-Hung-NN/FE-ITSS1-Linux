@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { convertMatrix } from "../Utils/utils";
 import ro from "date-fns/esm/locale/ro/index.js";
-import { searchApi } from "../Api/search.api";
+import { filterRecipeApi, searchApi } from "../Api/search.api";
 
 function Search(props) {
   // const [query, setQuery] = useState("");
@@ -37,9 +37,9 @@ function Search(props) {
     console.log(filter_item_ids); // ['1', '2', '3', '4']
     // Receive and setSearchedRecipes here
     const converted_request = filter_item_ids.join("+");
-    console.log(converted_request);
-
-    // TODO: Tùng xử lý ghép API ở đây, data truyền vào là converted_request
+    filterRecipeApi(converted_request).then((res) => {
+      setSearchedRecipes(res.data);
+    });
   };
 
   return (
