@@ -16,7 +16,7 @@ function Search(props) {
   const [rowIngredient, setRowIngredient] = useState([]);
 
   const onClickToSearch = async (name) => {
-    console.log(name);
+    // console.log(name);
     const api = await searchApi(name);
     setSearchedRecipes(api.data);
   };
@@ -26,6 +26,11 @@ function Search(props) {
       setRowIngredient(convertMatrix(res.data, 5));
     });
   }, []);
+  useEffect(() => {
+    axios.get("http://localhost:3000/recipe").then((res) => {
+      setSearchedRecipes(res.data);
+    });
+  });
   const handlecheck = (isCheck, id) => {
     const checkedListClone = { ...checkedList };
     checkedListClone[id] = isCheck;
@@ -34,7 +39,7 @@ function Search(props) {
     const filter_item_ids = Object.keys(checkedListClone).filter(
       (key) => checkedListClone[key] === true
     );
-    console.log(filter_item_ids); // ['1', '2', '3', '4']
+    // console.log(filter_item_ids); // ['1', '2', '3', '4']
     // Receive and setSearchedRecipes here
     const converted_request = filter_item_ids.join("+");
     filterRecipeApi(converted_request).then((res) => {
