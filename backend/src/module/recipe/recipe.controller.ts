@@ -17,7 +17,7 @@ import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
 @ApiTags('Recipe')
 @Controller('recipe')
 export class RecipeController {
-  constructor(private readonly recipeService: RecipeService) { }
+  constructor(private readonly recipeService: RecipeService) {}
   @Public()
   @Post()
   create(@Body() createRecipeDto: CreateRecipeDto) {
@@ -60,8 +60,13 @@ export class RecipeController {
   }
   @Public()
   @Get('get-recipes-for-filter/:id')
-  filter(@Param('id') id: number) {
-    return this.recipeService.filter(+id);
+  filter(@Param('id') id: string) {
+    const numlist: number[] = [];
+    const abc = id.split('+');
+    for (let i = 0; i < abc.length; i++) {
+      numlist.push(+abc[i]);
+    }
+    return this.recipeService.filter(numlist);
   }
   @Public()
   @Get('get-recipes-for-current-user/:id')

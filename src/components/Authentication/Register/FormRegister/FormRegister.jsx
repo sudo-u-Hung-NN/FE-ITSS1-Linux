@@ -132,20 +132,20 @@ export default function FormRegister() {
                 <ErrorMessageAuth name="answer" errors={errors} />
             </div>
 
-            {registerMessageError && (
-                <div className="text-danger">{registerMessageError}</div>
-            )}
-            <div className="d-grid">
-                <button type="submit" className="btn btn-primary">
-                    Sign Up
-                </button>
-            </div>
-            <p className="forgot-password text-right">
-                Already registered{" "}
-                <Link onClick={() => dispatch(clearRedux())} to="/login">
-                    sign in?
-                </Link>
-            </p>
-        </form>
-    );
+      {registerMessageError && (
+        <div className="text-danger">{registerMessageError}</div>
+      )}
+      <div className="d-grid">
+        <button type="submit" className="btn btn-primary">
+          Sign Up
+        </button>
+      </div>
+      <p className="forgot-password text-right">
+        Already registered{" "}
+        <Link onClick={() => dispatch(clearRedux())} to="/login">
+          sign in?
+        </Link>
+      </p>
+    </form>
+  );
 }

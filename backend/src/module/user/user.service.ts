@@ -14,12 +14,13 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
-  ) {}
+  ) { }
   async createAdmin(createUserDto: CreateUserDto) {
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     return this.userRepo.save(createUserDto);
   }
   async create(createUserDto: CreateUserDto) {
+    // createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     // createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     return this.userRepo.save(createUserDto);
   }

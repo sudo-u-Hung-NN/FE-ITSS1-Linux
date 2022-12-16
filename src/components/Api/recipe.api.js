@@ -16,3 +16,11 @@ export const getRecipesForOtherUser = async (id) => {
     return await axios.get(`${baseURL}/get-recipes-for-other-users/${id}`);
 }
 
+export const getRecipesForFilter = async (listIngredientsId) => {
+    return await axios.get(`${baseURL}/get-recipes-for-filter/${listIngredientsId}`);
+}
+
+export const getRecipesForSearchByName = async (name) => {
+    return await axios.get(`${baseURL}/search/${name}`);
+}
+

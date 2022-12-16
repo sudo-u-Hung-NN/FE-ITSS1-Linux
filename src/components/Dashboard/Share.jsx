@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import '../../CSS/share.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import Select from 'react-select';
 import { getAllIngredients } from '../Api/ingredient.api';
+import { uploadImageToCloudinary } from '../Api/upload.api';
 
 function Share(props) {
     const user = useSelector(state => state.auth.login.currentUser);
@@ -31,7 +32,6 @@ function Share(props) {
 
 
     const mockup_ingredients = listIngreDropBox.map((item) => ({ value: item.id, label: item.name }));
-    // const navigate = useNavigate();
 
     const recipe = {
         name: name,
@@ -61,11 +61,14 @@ function Share(props) {
     }
 
     const handleChangeImage = (e) => {
-        console.log('handleChangeImage');
-        const file = e.target.files[0];
-        file.preview = URL.createObjectURL(file);
-        console.log('image: ', file);
-        setImage(file);
+        const formData = new FormData();
+        formData.append("file", e.target.files[0]);
+        uploadImageToCloudinary(formData).then((res) => {
+            console.log('Res cloudinary image', res.data.url);
+            setImage(res.data.url);
+        }).catch(err => {
+            console.error('Err: ', err)
+        })
     };
 
 
@@ -95,7 +98,7 @@ function Share(props) {
         const recipe = {
             name: name,
             description: description,
-            image: image?.preview,
+            image: image,
             formula: formula,
             note: note,
             creator: creator,
@@ -119,7 +122,7 @@ function Share(props) {
 
     const deleteInput = (index) => {
         const newInputCounts = [...inputCounts]
-        for (var i = 0; i < newInputCounts.length; i++) {
+        for (let i = 0; i < newInputCounts.length; i++) {
 
             if (newInputCounts[i] === index) {
                 newInputCounts.splice(i, 1);
@@ -129,11 +132,11 @@ function Share(props) {
         setInputCounts(newInputCounts);
     }
 
-    console.log(ingredient)
-
     useEffect(() => {
         getAllIngredients()
-            .then(response => setListIngreDropBox(response.data))
+            .then(response => {
+                setListIngreDropBox(response.data);
+            })
             .catch(err => { console.error(err) });
     }, [])
 
@@ -141,7 +144,7 @@ function Share(props) {
 
         <>
             {
-                token ? <>
+                <>
                     <form onSubmit={handleCreateRecipe} className='form-container-input'>
                         <h2>Share Your Recipes 🍔</h2>
                         <div className="share-container">
@@ -150,17 +153,17 @@ function Share(props) {
                                     {
                                         image ?
                                             <>
-                                                <img src={image.preview} alt=""
-                                                    style={{
-                                                        width: '400px',
-                                                        height: '400px',
-                                                        borderRadius: '10px',
-                                                    }}
+                                                <img src={image} alt=""
+                                                     style={{
+                                                         width: '400px',
+                                                         height: '400px',
+                                                         borderRadius: '10px',
+                                                     }}
                                                 />
                                             </> :
                                             <>
                                                 <label htmlFor="image">
-                                                    <AddAPhotoIcon />
+                                                    <AddAPhotoIcon/>
                                                     Choose a Photo
                                                 </label>
                                                 <input
@@ -180,26 +183,26 @@ function Share(props) {
                                     <div className="recipe-name-add">
                                         <p className="recipe-name-add-item">Recipe name </p>
                                         <input type="text"
-                                            id="name"
-                                            name="name"
-                                            value={name}
-                                            className="recipe-name-add-input"
-                                            onChange={handleChangeForm}
-                                            placeholder="recipe name"
+                                               id="name"
+                                               name="name"
+                                               value={name}
+                                               className="recipe-name-add-input"
+                                               onChange={handleChangeForm}
+                                               placeholder="recipe name"
                                         />
                                     </div>
 
                                     <div className="recipe-name-add">
                                         <p className="recipe-name-add-item">Price </p>
                                         <input type="number"
-                                            id="price"
-                                            name="price"
-                                            value={price}
-                                            className="recipe-name-add-input"
-                                            onChange={handleChangeForm}
+                                               id="price"
+                                               name="price"
+                                               value={price}
+                                               className="recipe-name-add-input"
+                                               onChange={handleChangeForm}
                                         />
                                     </div>
-                                    <hr />
+                                    <hr/>
                                     <div className="ingredient-add">
                                         <p>Ingredient </p>
                                         <div className="ingredient-add-item">
@@ -208,7 +211,9 @@ function Share(props) {
                                                 <Select
                                                     placeholder='Search...'
                                                     options={mockup_ingredients}
-                                                    onChange={(e) => { setIngredient({ id: e.value, name: e.label }) }} // Handle here
+                                                    onChange={(e) => {
+                                                        setIngredient({id: e.value, name: e.label})
+                                                    }} // Handle here
                                                 />
                                                 {/* <GrClose size={15} className='delete-item-ingredient-add-item' onClick={() => deleteInput(item)} /> */}
                                             </div>
@@ -217,24 +222,24 @@ function Share(props) {
                                                 <div className='ingredient-add-item-amount'>
                                                     <label>Amount:</label>
                                                     <input type="number" onChange={(e) => {
-                                                        setIngredient({ ...ingredient, amount: e.target.value })
-                                                    }} />
+                                                        setIngredient({...ingredient, amount: e.target.value})
+                                                    }}/>
                                                 </div>
                                             }
 
                                             <button className='btn-add'
-                                                onClick={() => setListIngreForAdd([...listIngreForAdd, ingredient])}
+                                                    onClick={() => setListIngreForAdd([...listIngreForAdd, ingredient])}
                                             >
                                                 Add
                                             </button>
                                         </div>
 
                                         {/* <button type="button" onClick={addInput}> */}
-                                        <RiAddCircleFill size={26} className='btn-add-ingredient' />
+                                        <RiAddCircleFill size={26} className='btn-add-ingredient'/>
                                         {/* </button> */}
 
                                         <table className='list-ingre-for-add'>
-                                            {listIngreForAdd.map((ingredient, index) => 
+                                            {listIngreForAdd.map((ingredient, index) =>
                                                 <tr key={index}>
                                                     <td>Name: {ingredient.name}</td>
                                                     <td>Amount: {ingredient.amount}</td>
@@ -292,14 +297,6 @@ function Share(props) {
                         </div>
                     </form>
                 </>
-                    :
-                    <div className='login-after-share'>
-                        <AiFillWarning fontSize={"120px"} color="#FD6929" />
-                        <p>You must
-                            <span><i><Link to='/login'> Login </Link></i></span>
-                            before sharing your recipes
-                        </p>
-                    </div>
             }
         </>
     );

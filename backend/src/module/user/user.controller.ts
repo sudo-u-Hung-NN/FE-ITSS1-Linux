@@ -18,7 +18,7 @@ import { ForgotPassword } from './dto/forgot-password.dto';
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
   // @Public()
   // @Post('/admin')
   // createAdmin(@Body() createUserDto: CreateUserDto) {

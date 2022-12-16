@@ -2,56 +2,54 @@ import React, {useState, useEffect} from 'react';
 import '../../CSS/search.css';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {getAllIngredients} from "../Api/ingredient.api";
+import { getRecipesForFilter, getRecipesForSearchByName } from "../Api/recipe.api";
+
 
 function Search(props) {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [listIngredient, setListIngredient] = useState([]);
 
-    const getSearchedRecipes = async (search) => {
-        const resp = await fetch(
-            `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${search}`
-        );
-        const data = await resp.json();
+    const getSearchedRecipes = (search) => {
+        getRecipesForSearchByName(search).then(
+            res => {
+                setSearchedRecipes(res.data);
+            }
+        ).catch(
+            err => {
+                console.log(err);
+            }
+        )
+    }
 
-        return data.results;
-    };
+    console.log(searchedRecipes);
 
     const handleChangeSearch = (event) => {
         setSearchTerm(event.target.value);
+        console.log(searchTerm)
     }
 
     const onClickToSearch = () => {
-        getSearchedRecipes(searchTerm).then((data) => {
-            setSearchedRecipes(data);
-        });
+        getSearchedRecipes(searchTerm);
     }
 
+    // useEffect(() => {
+    //     getSearchedRecipes(searchTerm);
+    //     console.log('search: ', searchTerm)
+    // }, []);
 
-    useEffect(() => {
-        getSearchedRecipes(searchTerm).then((data) => {
-            setSearchedRecipes(data);
-        });
-    });
-
-    const mockup_ingredents = [
-        {id: 1, name: "Rice"}, {id: 2, name: "Chicken"}, {id: 3, name: "Spice"},
-        {id: 4, name: "Orange"}, {id: 5, name: "Cucumber"}, {id: 6, name: "Leaf"},
-        {id: 7, name: "Juice"}, {id: 8, name: "Beef"}, {id: 9, name: "Wine"}
-    ]
+    const mockup_ingredents = [...listIngredient]
 
     const convertMatrix = (one_dimensional_array, n) => {
-        let result = [];
         while (one_dimensional_array.length) {
-            result = [...one_dimensional_array.splice(0, n)]
+            return [...one_dimensional_array.splice(0, n)]
         }
-        return result;
     }
 
-
-    const mockup_converted = convertMatrix(mockup_ingredents, 9);
-    const show_up_ingredents = mockup_converted.slice(0, 2);
-    const hidden_ingredents = mockup_converted.slice(0, 9);
-
+    const mockup_converted = convertMatrix(mockup_ingredents,20);
+    const show_up_ingredents = mockup_converted?.slice(0, 2);
+    const hidden_ingredents = mockup_converted?.slice(0, 20);
     const [moreClicked, setMore] = useState(false)
     const [checkedList, setCheckedList] = useState({});
 
@@ -61,9 +59,27 @@ function Search(props) {
         setCheckedList(checkedListClone)
         // convert end call api here
         const filter_item_ids = Object.keys(checkedListClone).filter(key => checkedListClone[key] === true)
-        // console.log(filter_item_ids);
+        const converted_request = filter_item_ids.join("+");
         // Receive and setSearchedRecipes here
+        getRecipesForFilter(converted_request).then(
+            res => {
+                console.log(res.data);
+                setSearchedRecipes(res.data);
+            }
+        ).catch(err => {
+            console.log(err);
+        });
     }
+
+
+    useEffect(() => {
+        getAllIngredients().then(res => {
+            setListIngredient(res.data)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
 
     return (
         <div className="search-container">
@@ -117,11 +133,11 @@ function Search(props) {
             </div>
             <div className="recipes-card">
                 <Grid>
-                    {searchedRecipes?.map(({title, id, image}) => (
+                    {searchedRecipes?.map(({id, name, image}) => (
                         <Card key={id}>
                             <Link to={`/dish/${id}`}>
-                                <img src={image} alt={title}/>
-                                <h5>{title}</h5>
+                                <img src={image} alt={name}/>
+                                <h5>{name}</h5>
                             </Link>
                         </Card>
                     ))}

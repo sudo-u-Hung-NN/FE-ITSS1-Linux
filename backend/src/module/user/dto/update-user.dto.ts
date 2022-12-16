@@ -5,7 +5,7 @@ export class UpdateUserDto {
   id: number;
   @ApiProperty()
   email: string;
-
+  
   @ApiProperty()
   username: string;
 

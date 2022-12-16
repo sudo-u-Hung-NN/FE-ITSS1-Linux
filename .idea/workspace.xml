@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FE-ITSS1-Linux.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FE-ITSS1-Linux.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/7/1781e9052b343979a65109d11a21dc54b23f5a16" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/e/0e0456ef151500587d05f053b8624a4f4ddd30fb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/d/1d8d54a8c86efd2bed14f53b394f2eef5b6f4ad3" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/9/99e5505f0b136b60559d4a4a694092f81cbe1759" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/3599c373a78b794b8ed9af4209f2326429e192be" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/upload.api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/d/3d4f9b87dce3a3b2eec541b19b2435cf4e9c65e9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/e/3ee62084b850f8098e16c188ddaa36ca8dd0831a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/2/42e89cd2213b9d5dfae4f63522702c623170d792" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/5/45c57026d982e2e4ae5d8594300d28a21a495124" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/9/498651963c1b417ddc7091f6cc602dcb75249a3a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/2/52e1fb0f72236aa0598dfa6bdbfebbfa8cc51767" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/2/52e1fb0f72236aa0598dfa6bdbfebbfa8cc51767" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/3/53585a096fe3a3b96321113856ae62602995a33b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/599f7b08dba620ef8b923b4caac19613f25ce54c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/59ae2fca9c4af513ae59da9245eeb430236f93b3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/c/7cc624513c7ad449842e590c6ac532f9846bbd15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/f/8ff970b53957a6c5968716c50398b2eaa2a361c8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/0/a0aed0b635547ec7b84678e7ddb208f1962a99ac" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/1/a12853c5e06d592e466791cd9828be4d180f31bf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/1/a12853c5e06d592e466791cd9828be4d180f31bf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/3/a3f9ba9bde7a71920bec676ea986f2869abbd48a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/ab753535d7fc38f821f9b15afd8df1713e4b04a3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/9/b9ae8a6e51a56e567e6aceb459eb5267e772af0e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/d/cd9ea0f36c0023773695f3da36bb6111ce81ec2d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/a/da07f721d29980aa6debbb88f7beb56c777d1778" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/a/da07f721d29980aa6debbb88f7beb56c777d1778" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/a/dac799070c2d0c2fa24462b02c1f2dcc3fb3a1e9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/d/dddbdf97841c7dd08fc5985b0da2db4bdfe134cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/f/dfa22caa9ef114a83a1254b914d3d9a69143ffa0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/f/dfa22caa9ef114a83a1254b914d3d9a69143ffa0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/3/f30451335edfb80e231f658d0defc83bb7e4c3a7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/4/f43ecdf8d666ee908aacce037b4cd72159e4741b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/9/f900edc44cb929c2267a16100a32851f6d5b477d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/database/migrations/LinuxTeamDatabase.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/database/migrations/LinuxTeamDatabase.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.provider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.provider.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/cloudinary/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/cloudinary/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/user/dto/update-user.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/user/dto/update-user.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/user/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/user/user.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/user/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CSS/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSS/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CSS/share.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSS/share.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Api/dish.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/dish.api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Api/ingredient.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/ingredient.api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Api/recipe.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/recipe.api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/Popular.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/Popular.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Authentication/ForgetPassword/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Authentication/ForgetPassword/Index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Authentication/Register/FormRegister/FormRegister.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Authentication/Register/FormRegister/FormRegister.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Search.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Search.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dish/Dish.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dish/Dish.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dish/dish.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dish/dish.scss" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IiNoxC55AixQ9VLtvP5TRpKiqE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Git\\FE-ITSS1-Linux\\backend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="" />
+      <created>1670660626409</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670660626409</updated>
+      <workItem from="1670660630829" duration="1123000" />
+      <workItem from="1670682623518" duration="2658000" />
+      <workItem from="1670838852133" duration="9678000" />
+      <workItem from="1670860040700" duration="16141000" />
+      <workItem from="1671120921708" duration="3651000" />
+      <workItem from="1671174744444" duration="8321000" />
+    </task>
+    <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
+      <created>1670873829990</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670873829991</updated>
+    </task>
+    <task id="LOCAL-00002" summary="aresky-commit-7-update-backend-update-profile-update-search">
+      <created>1670875287963</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670875287963</updated>
+    </task>
+    <task id="LOCAL-00003" summary="aresky-commit-7-update-backend-update-profile-update-search">
+      <created>1670875426462</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670875426462</updated>
+    </task>
+    <task id="LOCAL-00004" summary="aresky-commit-7-update-backend-update-profile-update-search">
+      <created>1670875860258</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670875860258</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/apiSpoonlar" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="aresky-commit-7-update-backend-update-profile-update-search" />
+    <option name="LAST_COMMIT_MESSAGE" value="aresky-commit-7-update-backend-update-profile-update-search" />
+  </component>
+</project>

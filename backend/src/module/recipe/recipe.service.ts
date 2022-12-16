@@ -30,7 +30,7 @@ export class RecipeService {
     return this.recipeRawMaterialRepo.save(createRecipeRawDto);
   }
   search(name: string) {
-    console.log('abc', name)
+    console.log('abc', name);
     console.log('search by name');
 
     return this.recipeRepo.find({ where: { name: name } });
@@ -42,17 +42,16 @@ export class RecipeService {
     }
     return this.recipeRepo.save(recipe);
   }
-  async filter(id: number) {
-    const queryBuilder =
-      this.rawMaterialRepo.createQueryBuilder('raw_material');
-    queryBuilder.leftJoinAndSelect(
-      `raw_material.listRecipe`,
-      `recipe_raw_material`,
+  async filter(id: number[]) {
+    const queryBuilder = this.recipeRawMaterialRepo.createQueryBuilder(
+      'recipe_raw_material',
     );
-    queryBuilder.where(`raw_material.id = :id`, { id: id });
-    const data = await queryBuilder.getOne();
+    queryBuilder.where(`recipe_raw_material.raw_material_id IN (:...id)`, { id: id });
+    queryBuilder.groupBy('recipe_raw_material.recipe_id');
+    queryBuilder.where('')
+    const data = await queryBuilder.getRawMany();
     const proposalReview = await this.findByIds(
-      data.listRecipe.map((e) => e.recipe_id),
+      data.map((e) => e.recipe_raw_material_recipe_id),
     );
     return proposalReview;
   }
@@ -70,14 +69,20 @@ export class RecipeService {
         id: id,
       },
     });
-    const queryBuilder = this.recipeRawMaterialRepo.createQueryBuilder('recipe_raw_material');
-    queryBuilder.leftJoinAndSelect(`recipe_raw_material.rawmaterial`, `raw_material`);
-    queryBuilder.where(`recipe_raw_material.recipe_id = :id`, { id: recipe.id });
+    const queryBuilder = this.recipeRawMaterialRepo.createQueryBuilder(
+      'recipe_raw_material',
+    );
+    queryBuilder.leftJoinAndSelect(
+      `recipe_raw_material.rawmaterial`,
+      `raw_material`,
+    );
+    queryBuilder.where(`recipe_raw_material.recipe_id = :id`, {
+      id: recipe.id,
+    });
     const material = await queryBuilder.getRawMany();
-    console.log('a', queryBuilder.getQuery())
-    console.log('ahihi', material)
+    console.log('a', queryBuilder.getQuery());
+    console.log('ahihi', material);
     return [recipe, material];
-
   }
   findAll() {
     return this.recipeRepo.find();
