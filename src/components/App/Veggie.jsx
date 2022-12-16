@@ -15,12 +15,10 @@ const Veggie = () => {
     if (getData && getData !== "undefined") {
       setVeggies(JSON.parse(getData));
     } else {
-      const resp = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&tags=vegetarian&number=10`
-      );
+      const resp = await fetch(`http://localhost:3000/recipe`);
       const data = await resp.json();
-      setVeggies(data.recipes);
-      localStorage.setItem("veggies", JSON.stringify(data.recipes));
+      setVeggies(data);
+      // localStorage.setItem("veggies", JSON.stringify(data.recipes));
       // console.log(data.recipes);
     }
   };
