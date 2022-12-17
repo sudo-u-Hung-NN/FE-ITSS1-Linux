@@ -17,7 +17,7 @@ export const loginUser = async (user, dispatch, navigate) => {
         dispatch(loginSuccess(res.data.user));
         localStorage.setItem("access_token", JSON.stringify(res.data.access_token));
         localStorage.setItem("currentUserLoggedIn", JSON.stringify(res.data.user));
-        navigate(-1);
+        navigate('/');
     } catch (err) {
         if (err.response) {
             dispatch(loginError("* Email or password is incorrect"));
