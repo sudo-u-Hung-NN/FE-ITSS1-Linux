@@ -12,6 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Select from "react-select";
 import { getAllIngredients } from "../Api/ingredient.api";
 import { uploadImageToCloudinary } from "../Api/upload.api";
+import { createRawMaterialApi } from "../Api/recipe.api";
 
 function Share(props) {
   const user = useSelector((state) => state.auth.login.currentUser);
@@ -34,7 +35,6 @@ function Share(props) {
     value: item.id,
     label: item.name,
   }));
-
   const recipe = {
     name: name,
     description: description,
@@ -53,6 +53,13 @@ function Share(props) {
       .post(baseUrl, recipe)
       .then((response) => {
         console.log(response.data);
+        createRawMaterialApi(listIngreForAdd)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -106,20 +113,9 @@ function Share(props) {
       price: price,
       views: views,
     };
-
+    console.log(listIngreForAdd);
     console.log(recipe);
   });
-
-  // const handleCreateRecipeRawMaterial = (body) => {
-  //     const baseUrl = 'http://localhost:3000/recipematerial';
-  //     axios.post(baseUrl, body)
-  //         .then(response => {
-  //             console.log(response.data)
-  //         })
-  //         .catch(err => {
-  //             console.log(err)
-  //         })
-  // }
 
   const deleteInput = (index) => {
     const newInputCounts = [...inputCounts];
@@ -229,7 +225,7 @@ function Share(props) {
                             onChange={(e) => {
                               setIngredient({
                                 ...ingredient,
-                                amount: e.target.value,
+                                amount: Number(e.target.value),
                               });
                             }}
                           />

@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="aresky-update-author-search-share">
-      <change afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/199e5fa5d4d5d49f3bd8b592ad889ad041daf18b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/0/c0b271746d017759fbe9c4191428e4fab2d24086" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/d/cd4f6001fcafd8ad547fbc039eadea922b2cabb7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/b/eba0f68f8b1e96d6b1f1be0e0b2959227e806cd9" beforeDir="false" />
+    <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="aresky-commit-12/16-merge-2">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/9/b9ae8a6e51a56e567e6aceb459eb5267e772af0e" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/cloudinary/cloudinary.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Api/dish.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/dish.api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Search.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Search.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dish/Dish.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dish/Dish.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dish/DishOption/DishOption.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dish/DishOption/DishOption.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dish/DishOption/dishOption.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dish/DishOption/dishOption.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dish/dish.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dish/dish.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,20 +27,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Git\\FE-ITSS1-Linux\\backend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\Git\\FE-ITSS1-Linux\\backend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -115,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670875860258</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="aresky-commit-12/16-merge-2">
+      <created>1671192901033</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671192901033</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +144,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="aresky-commit-7-update-backend-update-profile-update-search" />
     <MESSAGE value="aresky-update-author-search-share" />
-    <option name="LAST_COMMIT_MESSAGE" value="aresky-update-author-search-share" />
+    <MESSAGE value="aresky-commit-12/16-ver2" />
+    <MESSAGE value="aresky-commit-12/16-merge-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="aresky-commit-12/16-merge-2" />
   </component>
 </project>
