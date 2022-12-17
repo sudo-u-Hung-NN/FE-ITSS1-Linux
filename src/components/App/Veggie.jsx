@@ -5,10 +5,11 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 import { Link } from "react-router-dom";
+import { getRandomArrayNumber } from "../Utils/utils";
 
 const Veggie = () => {
   const [veggies, setVeggies] = useState([]);
-
+  const [arr, setArr] = useState([]);
   const getVeggies = async () => {
     const getData = localStorage.getItem("veggies");
 
@@ -22,6 +23,10 @@ const Veggie = () => {
       // console.log(data.recipes);
     }
   };
+  useEffect(() => {
+    const a = getRandomArrayNumber(veggies.length, 6);
+    setArr(a);
+  }, [setArr, veggies]);
 
   useEffect(() => {
     getVeggies();
@@ -47,12 +52,12 @@ const Veggie = () => {
           },
         }}
       >
-        {veggies?.map(({ title, id, image }) => (
-          <SplideSlide key={id}>
+        {arr?.map((num, index) => (
+          <SplideSlide key={index}>
             <Card>
-              <Link to={`/dish/${id}`}>
-                <p>{title}</p>
-                <img src={image} alt={title} />
+              <Link to={`/dish/${num}`}>
+                <p>{veggies[num]?.title}</p>
+                <img src={veggies[num]?.image} alt={veggies[num]?.title} />
                 <Gradient />
               </Link>
             </Card>
