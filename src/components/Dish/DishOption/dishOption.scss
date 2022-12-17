@@ -1,14 +1,17 @@
 .dish-option{
     display: flex;
     flex-direction: column;
-    button{
+    a{
         text-align: left;
         height: 60px;
         width: 150px;
-        padding-left: 20px;
-        // font-weight:500 ;
+        //padding-left: 20px;
+        text-decoration: none;
+        color: #1A1A1A;
+         font-weight:500 ;
+        padding: 15px;
         &:hover{
-            background-color: #FFE4C4;
+            background-color: #ff8b5985;
             color: rgba(129, 73, 3, 1);
             transition-duration: 0.4s;
         }
@@ -16,7 +19,8 @@
         border-bottom: solid 1px #eee;
         &:focus{
             outline: none;
-            background-color: #ccc;
+            background-color: #ff8b5985;
+            color: #fff;
         }
     }
 }

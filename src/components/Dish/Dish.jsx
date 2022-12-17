@@ -7,6 +7,9 @@ import "./dish.scss";
 import DishOption from "./DishOption/DishOption";
 import DishVote from "./DishVote/DishVote";
 import Parser from "html-react-parser";
+import {Description} from "./DishOption/Description";
+import {Formula} from "./DishOption/Formula";
+import {Note} from "./DishOption/Note";
 export default function Dish() {
   const dispatch = useDispatch();
   const dishData = useSelector((state) => state.dish.dataDish.data);
@@ -25,6 +28,8 @@ export default function Dish() {
       } else setVoted(0);
     });
   }, [voted, setVoted]);
+
+  console.log(dishData)
   return (
     <div className="dish">
       <div className="dish-title">
@@ -80,22 +85,13 @@ export default function Dish() {
             md={{ span: 7, offset: 1 }}
           >
             {option === 0 && dishData && (
-              <div className="description-0">
-                <h3>Description</h3>
-                <p>{Parser(dishData?.data[0]?.description)}</p>
-              </div>
+              <Description dishData={dishData}/>
             )}
             {option === 1 && dishData && (
-              <div className="description-1">
-                <h3>Processing instruction</h3>
-                <p>{Parser(dishData?.data[0]?.formula)}</p>
-              </div>
+              <Formula dishData={dishData}/>
             )}
             {option === 2 && dishData && (
-              <div className="description-2">
-                <h3>Storage instruction</h3>
-                {"Bao quan ban tu lanh"}
-              </div>
+              <Note dishData={dishData}/>
             )}
           </div>
         </Row>

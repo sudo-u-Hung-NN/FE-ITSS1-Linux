@@ -3,8 +3,6 @@
 0src/components/Authentication/Register/Index.jsx,4\5\45c57026d982e2e4ae5d8594300d28a21a495124
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
-T
-$src/components/Dashboard/Profile.jsx,5\9\59ae2fca9c4af513ae59da9245eeb430236f93b3
 M
 src/components/App/Veggie.jsx,8\f\8ff970b53957a6c5968716c50398b2eaa2a361c8
 A
@@ -53,8 +51,6 @@ P
  src/components/Api/upload.api.js,d\1\d15b8c7e7081e4a187b4dea78a39a0a98e46da05
 f
 6backend/src/module/cloudinary/cloudinary.controller.ts,e\e\ee0d4240c53d3c65567005408258b7be567f335e
-A
-src/CSS/share.css,1\8\186fa09c4f672f0cde0fc2ab3b8e67b3ff38e49a
 I
 backend/src/app.module.ts,2\d\2defa81f7179ecb66a0bb68c763c0a3e8dadd028
 b
@@ -65,3 +61,7 @@ D
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 \
 ,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
+?
+src/CSS/app.css,d\c\dcc0a3f3b388c8b8125c68e1de8491250d905e78
+Q
+!src/components/Dashboard/Home.jsx,1\d\1d8d54a8c86efd2bed14f53b394f2eef5b6f4ad3

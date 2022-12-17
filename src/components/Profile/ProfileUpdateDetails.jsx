@@ -15,7 +15,7 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
             username: currentUser?.username,
             phone: currentUser?.phone,
             birth_date: currentUser?.birth_date,
-            avatar: "",
+            avatar: currentUser?.avatar,
             gender: currentUser?.gender,
         },
         onSubmit: values => {
