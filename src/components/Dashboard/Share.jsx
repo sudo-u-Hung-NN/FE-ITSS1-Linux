@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../CSS/share.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import {useSelector} from "react-redux";

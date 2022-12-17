@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="aresky-commit-12/17-merge-2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CSS/author.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSS/author.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Api/auth.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/auth.api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Author.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Author.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +73,7 @@
       <workItem from="1671184747316" duration="2071000" />
       <workItem from="1671186902326" duration="5009000" />
       <workItem from="1671226135291" duration="240000" />
-      <workItem from="1671258229806" duration="16852000" />
+      <workItem from="1671258229806" duration="17181000" />
     </task>
     <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
       <created>1670873829990</created>
@@ -127,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671273760571</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="aresky-commit-12/17-merge-2">
+      <created>1671276782098</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671276782098</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
