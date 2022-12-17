@@ -1,62 +1,67 @@
-import React, { useEffect, useState, Component } from 'react';
+import React, {useEffect, useState, Component} from 'react';
 import '../../CSS/share.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
-import { AiFillWarning } from 'react-icons/ai'
-import { RiAddCircleFill } from 'react-icons/ri';
-import { MdDelete } from 'react-icons/md';
-import { GrClose } from 'react-icons/gr';
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import {useSelector} from "react-redux";
+import {RiAddCircleFill} from 'react-icons/ri';
+import {GrClose} from 'react-icons/gr';
+import {toast, ToastContainer} from 'react-toastify';
 import Select from 'react-select';
-import { getAllIngredients } from '../Api/ingredient.api';
-import { uploadImageToCloudinary } from '../Api/upload.api';
+import {getAllIngredients} from '../Api/ingredient.api';
+import {uploadImageToCloudinary} from '../Api/upload.api';
+import {createRawMaterialApi, createRecipe} from "../Api/recipe.api";
+import {AiFillWarning} from "react-icons/ai";
+import {Link} from "react-router-dom";
 
 function Share(props) {
     const user = useSelector(state => state.auth.login.currentUser);
     const creator = user?.id;
-    const token = localStorage.getItem('access_token');
-    const [inputCounts, setInputCounts] = useState([]);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [formula, setFormula] = useState('');
     const [note, setNote] = useState('');
     const [price, setPrice] = useState(0);
-    const [vote, setVote] = useState(0);
-    const [views, setViews] = useState(0);
     const [ingredient, setIngredient] = useState();
     const [listIngreDropBox, setListIngreDropBox] = useState([]);
     const [listIngreForAdd, setListIngreForAdd] = useState([]);
+    const [amount, setAmount] = useState(0);
 
-
-    const mockup_ingredients = listIngreDropBox.map((item) => ({ value: item.id, label: item.name }));
-
-    const recipe = {
-        name: name,
-        description: description,
-        image: JSON.stringify(image),
-        formula: formula,
-        note: note,
-        creator: creator,
-        price: price,
-        vote: vote,
-        views: views
-    }
-
-
-
+    const mockup_ingredients = listIngreDropBox.map((item) => ({value: item.id, label: item.name}));
 
     const handleCreateRecipe = () => {
-        const baseUrl = 'http://localhost:3000/recipe';
-        axios.post(baseUrl, recipe)
+        createRecipe({
+            name: name,
+            description: description,
+            image: image,
+            formula: formula,
+            note: note,
+            creator: creator,
+            price: price,
+            views: 0
+        })
             .then(response => {
-                console.log(response.data);
+                console.log('New Recipe', response.data);
+                const listIngredientNew = listIngreForAdd.map(
+                    item => ({
+                        recipe_id: Number(response.data.id),
+                        raw_material_id: item.id,
+                        amount: Number(item.amount)
+                    })
+                )
+                console.log('recipe raw: ', listIngredientNew)
+                return listIngredientNew;
+            }).then(
+            res => {
+                createRawMaterialApi([...res]).then(
+                    response => {
+                        console.log(response.data);
+                        toast('✅ Share Recipe success!');
+                    }
+                )
             })
             .catch(err => {
                 console.log(err);
-                toast.error('Sharing failed');
+                toast.error('❌ Sharing failed');
             })
     }
 
@@ -64,13 +69,15 @@ function Share(props) {
         const formData = new FormData();
         formData.append("file", e.target.files[0]);
         uploadImageToCloudinary(formData).then((res) => {
-            console.log('Res cloudinary image', res.data.url);
-            setImage(res.data.url);
-        }).catch(err => {
+            return res.data.url
+        }).then(
+            res => {
+                setImage(res);
+            }
+        ).catch(err => {
             console.error('Err: ', err)
         })
     };
-
 
     const handleChangeForm = (e) => {
         switch (e.target.name) {
@@ -94,56 +101,55 @@ function Share(props) {
         }
     };
 
+    const deleteTagIngredient = (index) => {
+        let listIngreForAdd2 = listIngreForAdd.filter((item, i) => i !== index);
+        setListIngreForAdd(listIngreForAdd2);
+    }
+
+    const handleChangeAmount = (event) => {
+        setAmount(Number(event.target.value));
+    }
+
+    console.log('Recipe: ', {
+        name: name,
+        description: description,
+        image: JSON.stringify(image),
+        formula: formula,
+        note: note,
+        creator: creator,
+        price: price,
+        views: 0
+    })
+
+    const handleChangeIngredient = (event) => {
+        setIngredient({
+            id: event.value,
+            name: event.label,
+            amount: amount
+        })
+    }
+
     useEffect(() => {
-        const recipe = {
-            name: name,
-            description: description,
-            image: image,
-            formula: formula,
-            note: note,
-            creator: creator,
-            price: price,
-            views: views
-        }
-
-        console.log(recipe);
-    });
-
-    const handleCreateRecipeRawMaterial = (body) => {
-        const baseUrl = 'http://localhost:3000/recipematerial';
-        axios.post(baseUrl, body)
-            .then(response => {
-                console.log(response.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-
-    const deleteInput = (index) => {
-        const newInputCounts = [...inputCounts]
-        for (let i = 0; i < newInputCounts.length; i++) {
-
-            if (newInputCounts[i] === index) {
-                newInputCounts.splice(i, 1);
-            }
-
-        }
-        setInputCounts(newInputCounts);
-    }
+        setIngredient({
+            ...ingredient,
+            amount: amount
+        })
+    }, [setAmount, amount])
 
     useEffect(() => {
         getAllIngredients()
             .then(response => {
                 setListIngreDropBox(response.data);
             })
-            .catch(err => { console.error(err) });
+            .catch(err => {
+                console.error(err)
+            });
     }, [])
 
     return (
 
         <>
-            {
+            { user?
                 <>
                     <form onSubmit={handleCreateRecipe} className='form-container-input'>
                         <h2>Share Your Recipes 🍔</h2>
@@ -212,44 +218,50 @@ function Share(props) {
                                                     placeholder='Search...'
                                                     options={mockup_ingredients}
                                                     onChange={(e) => {
-                                                        setIngredient({id: e.value, name: e.label})
+                                                        handleChangeIngredient(e);
                                                     }} // Handle here
                                                 />
                                                 {/* <GrClose size={15} className='delete-item-ingredient-add-item' onClick={() => deleteInput(item)} /> */}
                                             </div>
-                                            {
-                                                ingredient &&
-                                                <div className='ingredient-add-item-amount'>
-                                                    <label>Amount:</label>
-                                                    <input type="number" onChange={(e) => {
-                                                        setIngredient({...ingredient, amount: e.target.value})
-                                                    }}/>
-                                                </div>
-                                            }
-
-                                            <button className='btn-add'
-                                                    onClick={() => setListIngreForAdd([...listIngreForAdd, ingredient])}
-                                            >
-                                                Add
-                                            </button>
+                                            <div className='ingredient-add-item-amount'>
+                                                <label>Amount:</label>
+                                                <input
+                                                    type="number"
+                                                    value={amount}
+                                                    onChange={(e) => {
+                                                        handleChangeAmount(e);
+                                                    }}
+                                                />
+                                            </div>
                                         </div>
-
-                                        {/* <button type="button" onClick={addInput}> */}
-                                        <RiAddCircleFill size={26} className='btn-add-ingredient'/>
-                                        {/* </button> */}
-
-                                        <table className='list-ingre-for-add'>
-                                            {listIngreForAdd.map((ingredient, index) =>
-                                                <tr key={index}>
-                                                    <td>Name: {ingredient.name}</td>
-                                                    <td>Amount: {ingredient.amount}</td>
-                                                </tr>
-                                            )}
-                                        </table>
+                                        <RiAddCircleFill
+                                            size={26}
+                                            className='btn-add-ingredient'
+                                            onClick={() => {
+                                                setListIngreForAdd([...listIngreForAdd, ingredient]);
+                                                setAmount(0);
+                                            }}
+                                        />
                                     </div>
                                 </div>
                             </div>
                             <div className='other-input'>
+                                <div>
+                                    <h5>List Ingredient:</h5>
+                                    <div className='list-ingredient-for-add'>
+                                        <ul>
+                                            {listIngreForAdd.map((ingredient, index) =>
+                                                <li key={index} className='ingredient-for-add-item'>
+                                                    <span
+                                                        className='index'>{index + 1}</span><span>{ingredient.name} : {ingredient.amount}</span>
+                                                    <GrClose className='btn-remove-tag'
+                                                             onClick={() => deleteTagIngredient(index)}
+                                                    />
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div className="styled-input wide">
                                     <textarea
                                         required
@@ -296,7 +308,16 @@ function Share(props) {
 
                         </div>
                     </form>
+                    <ToastContainer/>
                 </>
+                :
+                <div className='login-after-share'>
+                    <AiFillWarning fontSize={"120px"} color="#FD6929" />
+                    <p>You must
+                        <i><Link to='/login'> Login </Link></i>
+                        before sharing your recipes
+                    </p>
+                </div>
             }
         </>
     );

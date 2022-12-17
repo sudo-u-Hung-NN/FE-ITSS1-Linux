@@ -7,21 +7,74 @@ import { MdFileUpload } from 'react-icons/md';
 import ProfileUpdateDetails from './ProfileUpdateDetails';
 import ProfileDetails from './ProfileDetails';
 import ProfileUpdatePassword from './ProfileUpdatePassword';
+import { useDispatch, useSelector } from "react-redux";
+import { uploadImageToCloudinary } from "../Api/upload.api";
+import { updateUser } from "../Api/user.api";
+import { toast } from "react-toastify";
 
-const ProfileContent = ({setShow}) => {
+const ProfileContent = ({ setShow }) => {
+
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.login.currentUser);
+
     const [updateDetails, setUpdateDetails] = useState(false);
     const [updatePassword, setUpdatePassword] = useState(false);
+    const [image, setImage] = useState(user?.avatar);
+
+    const handleChangeImage = (e) => {
+        const formData = new FormData();
+        formData.append("file", e.target.files[0]);
+        uploadImageToCloudinary(formData)
+            .then((res) => {
+                return res.data.url;
+            })
+            .then((res) => {
+                setImage(res);
+                console.log('image', res)
+                updateUser(
+                    user?.id,
+                    {
+                        username: user?.username,
+                        phone: user?.phone,
+                        birth_date: user?.birth_date,
+                        avatar: res,
+                        gender: user?.gender,
+                    },
+                    dispatch,
+                    toast
+                );
+            })
+            .catch((err) => {
+                console.error("Err: ", err);
+            });
+    };
     return (
         <div className='profile'>
             <AiOutlineClose
                 fontSize={25}
                 id='icon-close-profile'
-                onClick={()=>setShow(false)}
+                onClick={() => setShow(false)}
             />
             <div className='profile-content'>
                 <div className='image'>
-                    <img src="https://cdnimg.vietnamplus.vn/uploaded/mzdic/2020_08_22/brunofernandes2208.jpg" alt="" />
-                    <MdFileUpload className='icon-upload-image' />
+                    <img
+                        src={
+                            image ||
+                            user?.avatar ||
+                            `https://cdn-icons-png.flaticon.com/512/149/149071.png`
+                        }
+                        alt=""
+                    />
+                    <label htmlFor="avt">
+                        <MdFileUpload className="icon-upload-image" />
+                    </label>
+                    <input
+                        type="file"
+                        name="avt"
+                        id="avt"
+                        className="profile-avt"
+                        onChange={handleChangeImage}
+                    />
                     {/* {currentUser.avatar} */}
                 </div>
                 <div className='media-icons'>

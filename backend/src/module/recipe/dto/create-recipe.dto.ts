@@ -23,8 +23,5 @@ export class CreateRecipeDto {
   price: number;
 
   @ApiProperty()
-  vote: number;
-
-  @ApiProperty()
   views: number;
 }
