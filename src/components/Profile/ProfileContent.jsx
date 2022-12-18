@@ -13,11 +13,13 @@ import { updateUser } from "../Api/user.api";
 import { toast } from "react-toastify";
 
 const ProfileContent = ({ setShow }) => {
-  const [updateDetails, setUpdateDetails] = useState(false);
-  const [updatePassword, setUpdatePassword] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
+
+  const [updateDetails, setUpdateDetails] = useState(false);
+  const [updatePassword, setUpdatePassword] = useState(false);
   const [image, setImage] = useState(user?.avatar);
+
   const handleChangeImage = (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
@@ -27,6 +29,7 @@ const ProfileContent = ({ setShow }) => {
       })
       .then((res) => {
         setImage(res);
+        console.log("image", res);
         updateUser(
           user?.id,
           {
@@ -71,7 +74,6 @@ const ProfileContent = ({ setShow }) => {
             className="profile-avt"
             onChange={handleChangeImage}
           />
-
           {/* {currentUser.avatar} */}
         </div>
         <div className="media-icons">
@@ -109,5 +111,4 @@ const ProfileContent = ({ setShow }) => {
     </div>
   );
 };
-
 export default ProfileContent;

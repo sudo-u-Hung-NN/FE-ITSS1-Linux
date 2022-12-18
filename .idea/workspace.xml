@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="aresky-commit-12/16-merge-2">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/9/b9ae8a6e51a56e567e6aceb459eb5267e772af0e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+    <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="aresky-commit-12/17-merge-2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" afterDir="false" />
     </list>
@@ -27,21 +24,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "D:\\Git\\FE-ITSS1-Linux\\backend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Git\\FE-ITSS1-Linux\\backend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -75,6 +72,8 @@
       <workItem from="1671174744444" duration="9208000" />
       <workItem from="1671184747316" duration="2071000" />
       <workItem from="1671186902326" duration="5009000" />
+      <workItem from="1671226135291" duration="240000" />
+      <workItem from="1671258229806" duration="17181000" />
     </task>
     <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
       <created>1670873829990</created>
@@ -111,7 +110,28 @@
       <option name="project" value="LOCAL" />
       <updated>1671192901033</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="aresky-commit-12/17-merge-1">
+      <created>1671226185810</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671226185810</updated>
+    </task>
+    <task id="LOCAL-00007" summary="aresky-commit-12/17-merge-2">
+      <created>1671273760571</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671273760571</updated>
+    </task>
+    <task id="LOCAL-00008" summary="aresky-commit-12/17-merge-2">
+      <created>1671276782098</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671276782098</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,7 +148,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/apiSpoonlar" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -146,6 +166,8 @@
     <MESSAGE value="aresky-update-author-search-share" />
     <MESSAGE value="aresky-commit-12/16-ver2" />
     <MESSAGE value="aresky-commit-12/16-merge-2" />
-    <option name="LAST_COMMIT_MESSAGE" value="aresky-commit-12/16-merge-2" />
+    <MESSAGE value="aresky-commit-12/17-merge-1" />
+    <MESSAGE value="aresky-commit-12/17-merge-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="aresky-commit-12/17-merge-2" />
   </component>
 </project>

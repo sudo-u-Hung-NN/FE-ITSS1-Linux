@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     email 			VARCHAR(50) 	NOT NULL 	UNIQUE,
     username 		VARCHAR(50) 	NOT NULL, 
     `password`		LONGTEXT 	NOT NULL,
-	avatar			LONGBLOB 		NULL, -- không bắt buộc
+	avatar			LONGTEXT 		NULL, -- không bắt buộc
     phone 			VARCHAR(20) 	NULL, -- -- không bắt buộc
     birth_date 		DATE 			NULL, -- không bắt buộc
     gender 			ENUM('MALE','FEMALE') NULL  -- không bắt buộc
@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `recipe` (
     `note`  		LONGTEXT 		NOT NULL,
     creator 		INT NOT NULL,
     `price` 		INT NOT NULL,
-	vote     		INT NOT NULL,
     views   		INT NOT NULL,
     FOREIGN KEY (creator) REFERENCES `user`(ID)
 );

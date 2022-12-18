@@ -123,10 +123,13 @@
                 min-height: 450px;
                 height: fit-content;
                 padding: 30px 10px 10px 20px;
+                background: #ff8b5985;
 
                 h3 {
                     width: fit-content;
-                    background: rgba(248, 184, 131, 0.5);
+                    //background: rgba(248, 184, 131, 0.5);
+                    background: #fff;
+                    padding: 3px 10px;
                     color: rgba(63, 62, 62, 0.56);
                     box-shadow: rgba(0, 0, 0, 0.7) 1.95px 1.95px 2.6px;
                 }

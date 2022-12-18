@@ -33,7 +33,6 @@ export class User1661402437884 implements MigrationInterface {
           note  				LONGTEXT      NOT NULL,
           creator 		  INT NOT NULL,
           price 				INT NOT NULL,
-          vote 					INT NOT NULL,
           views   			INT NOT NULL,
           CONSTRAINT FK_user_recipe FOREIGN KEY (creator) REFERENCES user(ID)  ON UPDATE CASCADE ON DELETE CASCADE
       )`,
