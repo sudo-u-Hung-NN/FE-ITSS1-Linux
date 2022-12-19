@@ -30,7 +30,6 @@ const ProfileContent = ({ setShow }) => {
       .then((res) => {
         setImage(res);
         console.log("image", res);
-        console.log("image", res);
         updateUser(
           user?.id,
           {
@@ -38,6 +37,7 @@ const ProfileContent = ({ setShow }) => {
             phone: user?.phone,
             birth_date: user?.birth_date,
             avatar: res,
+            email: user?.email,
             gender: user?.gender,
           },
           dispatch,
