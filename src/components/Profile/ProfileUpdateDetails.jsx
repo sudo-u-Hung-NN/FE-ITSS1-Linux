@@ -102,5 +102,4 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
     </>
   );
 };
-
 export default ProfileUpdateDetails;

@@ -30,6 +30,7 @@ const ProfileContent = ({ setShow }) => {
       .then((res) => {
         setImage(res);
         console.log("image", res);
+        console.log("image", res);
         updateUser(
           user?.id,
           {
