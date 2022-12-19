@@ -9,7 +9,8 @@ import { getUser } from "../Api/user.api";
 
 function Navbar(props) {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user.dataUser.data);
+  const userInfo = useSelector((state) => state.auth.login.currentUser);
+  const dataUser = useSelector((state) => state.user.dataUser.data);
   const [show, setShow] = useState(false);
   const [tablet, setTablet] = useState(false);
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ function Navbar(props) {
         }
         {userInfo ? (
           <div className="main">
-            <DropDownNavbar userInfo={userInfo} setShow={setShow} />
+            <DropDownNavbar userInfo={dataUser} setShow={setShow} />
             <div
               className="bx bx-menu"
               id="menu-icon"
