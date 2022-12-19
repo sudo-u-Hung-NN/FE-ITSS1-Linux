@@ -11,6 +11,7 @@ import { uploadImageToCloudinary } from "../Api/upload.api";
 import { createRawMaterialApi, createRecipe } from "../Api/recipe.api";
 import { AiFillWarning } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { set } from "date-fns";
 
 function Share(props) {
   const user = useSelector((state) => state.auth.login.currentUser);
@@ -20,12 +21,12 @@ function Share(props) {
   const [image, setImage] = useState("");
   const [formula, setFormula] = useState("");
   const [note, setNote] = useState("");
-  const [price, setPrice] = useState(0);
-  const [ingredient, setIngredient] = useState();
+  const [price, setPrice] = useState(1);
+  const [ingredient, setIngredient] = useState({ id: 0, name: "", amount: 0 });
   const [listIngreDropBox, setListIngreDropBox] = useState([]);
   const [listIngreForAdd, setListIngreForAdd] = useState([]);
-  const [amount, setAmount] = useState(0);
-
+  const [amount, setAmount] = useState(1);
+  const [unit, setUnit] = useState("");
   const mockup_ingredients = listIngreDropBox.map((item) => ({
     value: item.id,
     label: item.name,
@@ -100,7 +101,7 @@ function Share(props) {
         console.log("handleChange...");
     }
   };
-
+  console.log(listIngreDropBox);
   const deleteTagIngredient = (index) => {
     let listIngreForAdd2 = listIngreForAdd.filter((item, i) => i !== index);
     setListIngreForAdd(listIngreForAdd2);
@@ -145,7 +146,6 @@ function Share(props) {
         console.error(err);
       });
   }, []);
-
   return (
     <>
       {user ? (
@@ -190,6 +190,7 @@ function Share(props) {
                   <div className="recipe-name-add">
                     <p className="recipe-name-add-item">Recipe name </p>
                     <input
+                      required
                       type="text"
                       id="name"
                       name="name"
@@ -203,6 +204,8 @@ function Share(props) {
                   <div className="recipe-name-add">
                     <p className="recipe-name-add-item">Price </p>
                     <input
+                      required
+                      min={1}
                       type="number"
                       id="price"
                       name="price"
@@ -218,9 +221,17 @@ function Share(props) {
                       <div className="ingredient-add-item-name">
                         <label>Name:</label>
                         <Select
+                          required
                           placeholder="Search..."
                           options={mockup_ingredients}
                           onChange={(e) => {
+                            listIngreDropBox.find((i) => {
+                              if (i?.id === e.value) {
+                                setUnit(i?.unit);
+                                return;
+                              }
+                              return;
+                            });
                             handleChangeIngredient(e);
                           }} // Handle here
                         />
@@ -229,6 +240,7 @@ function Share(props) {
                       <div className="ingredient-add-item-amount">
                         <label>Amount:</label>
                         <input
+                          min={1}
                           type="number"
                           value={amount}
                           onChange={(e) => {
@@ -237,12 +249,16 @@ function Share(props) {
                         />
                       </div>
                     </div>
+                    <div className="ingredient-add-item-unit">unit: {unit}</div>
                     <RiAddCircleFill
                       size={26}
                       className="btn-add-ingredient"
                       onClick={() => {
-                        setListIngreForAdd([...listIngreForAdd, ingredient]);
-                        setAmount(0);
+                        if (ingredient.name !== "") {
+                          setListIngreForAdd([...listIngreForAdd, ingredient]);
+                          setAmount(1);
+                          setIngredient({ id: 0, name: "", amount: 0 });
+                        }
                       }}
                     />
                   </div>

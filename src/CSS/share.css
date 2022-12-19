@@ -166,7 +166,15 @@ input[type="file"] {
     width: 100%;
     text-align: left;
 }
-
+.ingredient-add .ingredient-add-item-unit {
+    background-color: #d7c870;
+    width: max-content;
+    display: flex;
+    align-self: center;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
 .ingredient-add .ingredient-add-item-name {
     /*margin-right: 25px;*/
     margin-right: 15px;
