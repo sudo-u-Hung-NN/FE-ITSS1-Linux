@@ -19,7 +19,8 @@ const DropDownNavbar = ({ userInfo, setShow, show }) => {
           className="navbar-dropdown-toggle-avatar"
           src={
             userInfo?.avatar ||
-            "https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"
+            "https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" ||
+            userInfo?.avatar
           }
           alt=""
         />

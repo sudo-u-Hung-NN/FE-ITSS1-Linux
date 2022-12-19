@@ -27,8 +27,5 @@ export class Recipe {
   price: number;
 
   @Column()
-  vote: number;
-
-  @Column()
   views: number;
 }

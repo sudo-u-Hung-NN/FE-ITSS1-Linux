@@ -371,6 +371,11 @@ input[type="file"] {
     width: 72%;
 }
 
+.other-input h5 {
+    text-align: left;
+    color: #9d6045;
+}
+
 
 input:focus~label,
 textarea:focus~label,
@@ -442,4 +447,92 @@ textarea:focus~span {
     width: 100%;
     min-height: 7em;
     border-radius: 10px;
+}
+
+.list-ingredient-for-add {
+    position: relative;
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.list-ingredient-for-add .ingredient-for-add-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 15px;
+    background: #d7d8df;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.list-ingredient-for-add .ingredient-for-add-item span {
+    /*padding: 5px;*/
+    height: fit-content;
+    color: #070707;
+    font-size: 16px;
+    opacity: 1;
+}
+
+.list-ingredient-for-add ul {
+    margin-top: 15px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.list-ingredient-for-add ul li {
+    list-style: none;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, .1);
+    transition: transform 0.5s;
+}
+
+.list-ingredient-for-add ul li:hover {
+    transform: scale(1.1);
+    z-index: 100;
+    background: #25bcff;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, .2);
+}
+
+.list-ingredient-for-add ul li:hover span {
+    color: #FFFFFF;
+}
+
+.list-ingredient-for-add .ingredient-for-add-item .btn-remove-tag {
+    position: absolute;
+    right: -15px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.list-ingredient-for-add ul li span {
+    width: fit-content;
+    text-align: center;
+}
+
+.list-ingredient-for-add ul li:hover span.index {
+    background: #FFFFFF;
+    color: #25bcff;
+}
+
+.list-ingredient-for-add ul li span.index {
+    text-align: center;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #25bcff;
+    display: block;
+    margin-right: 10px;
+    font-size: 13px;
+    font-weight: 500;
 }

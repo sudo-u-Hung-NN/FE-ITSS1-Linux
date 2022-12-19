@@ -6,6 +6,10 @@ export const getAllRecipes = async () => {
   return await axios.get(baseURL);
 };
 
+export const createRecipe = async (data) => {
+  return await axios.post(baseURL, data);
+};
+
 export const getRecipesForCurrentUser = async (id) => {
   return await axios.get(`${baseURL}/get-recipes-for-current-user/${id}`);
 };

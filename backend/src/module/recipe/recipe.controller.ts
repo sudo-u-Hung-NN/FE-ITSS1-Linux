@@ -61,12 +61,12 @@ export class RecipeController {
   @Public()
   @Get('get-recipes-for-filter/:id')
   filter(@Param('id') id: string) {
-    const numlist: number[] = [];
+    const num_list: number[] = [];
     const abc = id.split('+');
-    for (let i = 0; i < abc.length; i++) {
-      numlist.push(+abc[i]);
+    for (const element of abc) {
+      num_list.push(+element);
     }
-    return this.recipeService.filter(numlist);
+    return this.recipeService.filter(num_list);
   }
   @Public()
   @Get('get-recipes-for-current-user/:id')
