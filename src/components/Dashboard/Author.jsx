@@ -40,7 +40,7 @@ function Author(props) {
                 userInfo ?
                     <div className='div-author-container'>
                         <div className='div-item your-recipes'>
-                            <h3>Your Recipes</h3>
+                            <h3>Món ăn của bạn</h3>
                             <Splide
                                 options={{
                                     perPage: 4,
@@ -67,16 +67,16 @@ function Author(props) {
                             </Splide>
                         </div>
                         <div className='div-item people-recipes'>
-                            <h3>People Recipes</h3>
+                            <h3>Cộng đồng chia sẻ</h3>
                             <PaginateAuthor otherRecipes={otherRecipes}/>
                         </div>
                     </div>
                     :
                     <div className='login-after'>
                         <AiFillWarning fontSize={"120px"} color="#FD6929"/>
-                        <p>You must
-                            <i><Link to='/login'> Login </Link></i>
-                            before see your recipes
+                        <p>Bạn phải
+                            <i><Link to='/login'> đăng nhập </Link></i>
+                            để xem công thức cá nhân
                         </p>
                     </div>
             }

@@ -92,15 +92,15 @@ function Search(props) {
     return (
         <div className="search-container">
             <div className="form-select">
-                <label htmlFor="order-select">Order by:</label>
+                <label htmlFor="order-select">Sắp xếp theo:</label>
                 <select className="orderBy" id="orderBy-select">
                     <option value="none">--None--</option>
-                    <option value="name">Name</option>
-                    <option value="price">Price</option>
-                    <option value="vote">Vote</option>
-                    <option value="view">View</option>
+                    <option value="name">Tên</option>
+                    <option value="price">Giá</option>
+                    <option value="vote">Bình chọn</option>
+                    <option value="view">Lượt xem</option>
                 </select>
-                <label htmlFor="price-select">Price:</label>
+                <label htmlFor="price-select">Giá tiền:</label>
                 <select className="price" id="price-select">
                     <option value="default">--Default--</option>
                     <option value="">0 - $1.99</option>
@@ -112,7 +112,7 @@ function Search(props) {
                 <input type="text" placeholder="Search.." className="search" onChange={(e) => handleChangeSearch(e)}/>
             </div>
             <div className="form-check">
-                <p>Ingredient</p>
+                <p>Nguyên liệu</p>
                 <div className="check-list-item">
                     {
                         (moreClicked ? hidden_ingredents : show_up_ingredents)?.map(item => (
@@ -130,9 +130,9 @@ function Search(props) {
                 </div>
                 {
                     moreClicked ?
-                        <span className="more" onClick={() => setMore(false)}>Hidden...</span>
+                        <span className="more" onClick={() => setMore(false)}>Ẩn</span>
                         :
-                        <span className="more" onClick={() => setMore(true)}>More...</span>
+                        <span className="more" onClick={() => setMore(true)}>Thêm</span>
                 }
             </div>
             <div className="recipes-card">

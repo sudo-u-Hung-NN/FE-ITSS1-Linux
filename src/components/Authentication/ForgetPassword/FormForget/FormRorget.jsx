@@ -27,8 +27,8 @@ export default function FormRegister() {
             getPassword(fixData, setPassword).then((res) => {
                 setShow(true);
                 if (res.data == "Câu trả lời không đúng") {
-                    setPassword("Your answer is not correct");
-                } else setPassword(`Mat khau cua ban la: ${res.data}`);
+                    setPassword(res.data);
+                } else setPassword(`Mật khẩu của bạn là: ${res.data}`);
             });
         } catch (err) {
             setPassword(err);
@@ -40,27 +40,27 @@ export default function FormRegister() {
     };
 
     const mockup_questions = [
-        { id: 1, content: "How many people are there in your family ?" },
-        { id: 2, content: "Where did you lived when you were 6 years old ?" },
-        { id: 3, content: "What is your primary school's name ?" },
+        { id: 1, content: "Gia đình bạn có bao nhiêu người ?" },
+        { id: 2, content: "Bạn sống ở đâu lúc 6 tuổi ?" },
+        { id: 3, content: "Tên trường tiểu học của bạn là gì ?" },
     ];
 
     // FE - done, BE - None
 
     return (
         <form className="form" onSubmit={handleSubmit(handleClick)}>
-            <h3>Retake the private Q&A</h3>
+            <h3>Lấy lại mật khẩu</h3>
             <div className="mb-3">
-                <label>Email address</label>
+                <label>Email</label>
                 <input
                     {...register("email", {
-                        required: { value: true, message: "You must enter email" },
-                        maxLength: { value: 99, message: "email must shorter than 99" },
-                        minLength: { value: 10, message: "email must longer than 10" },
+                        required: { value: true, message: "Bạn phải điền email" },
+                        maxLength: { value: 99, message: "email phải ngắn hơn 99 ký tự" },
+                        minLength: { value: 10, message: "email phải dài hơn 10 ký tự" },
                         validate: {
                             email: (v) =>
                                 /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) ||
-                                "email is not valid",
+                                "email không hợp lệ",
                         },
                     })}
                     type="email"
@@ -71,10 +71,10 @@ export default function FormRegister() {
             </div>
 
             <div className="mb-3">
-                <label>Private Q&A</label>
+                <label>Câu hỏi bí mật</label>
                 <select {...register("qid")} className={handleClass("qid")}>
                     <option value={0} disabled selected hidden>
-                        Choose a question
+                        Chọn câu hỏi
                     </option>
                     {mockup_questions?.map((item, index)=>(
                         <option value={index + 1}>{item["content"]}</option>
@@ -83,22 +83,22 @@ export default function FormRegister() {
             </div>
 
             <div className="mb-3">
-                <label>Answer</label>
+                <label>Trả lời</label>
                 <input
                     {...register("answer", {
-                        required: { value: true, message: "You must enter your answer" },
+                        required: { value: true, message: "Bạn phải trả lời câu hỏi" },
                         minLength: {
                             value: 0,
-                            message: "Answer must be longer 5 character",
+                            message: "Câu trả lời phải nhiều hơn 0 ký tự",
                         },
                         maxLength: {
                             value: 99,
-                            message: "Answer must be shorter 99 character",
+                            message: "Câu trả lời phải ít hơn 99 ký tự",
                         },
                     })}
                     type="text"
                     className={handleClass("answer")}
-                    placeholder="Enter your answer"
+                    placeholder="Nhập câu trả lời"
                 />
                 <ErrorMessageAuth name="answer" errors={errors} />
             </div>
@@ -108,7 +108,7 @@ export default function FormRegister() {
             )}
             <div className="d-grid">
                 <Button variant="primary" type="submit">
-                    Submit
+                    Hoàn tất
                 </Button>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header>
@@ -117,7 +117,7 @@ export default function FormRegister() {
                     <Modal.Body>{password}</Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
-                            Close
+                            Đóng
                         </Button>
                         <Button
                             variant="primary"
@@ -125,7 +125,7 @@ export default function FormRegister() {
                                 navigate("/login");
                             }}
                         >
-                            Go to page login
+                            Trở lại trang đăng nhập
                         </Button>
                     </Modal.Footer>
                 </Modal>

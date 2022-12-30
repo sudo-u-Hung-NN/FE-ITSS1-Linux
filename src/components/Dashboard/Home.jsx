@@ -41,7 +41,7 @@ function Home(props) {
     return (
         <div className='home-page-container'>
             <div className='header'>
-                <h2>🧑‍🍳 Cooking recipe 🍽️</h2>
+                <h2>🧑‍🍳 Công thức nấu ăn 🍽️</h2>
                 Learn more than <b>1000 delicious recipes</b> and discover delicious regional dishes with detailed recipes!
             </div>
             <div className='body'>
@@ -55,7 +55,7 @@ function Home(props) {
                         </div>
                         <Link className='gradient' to={`/dish/${recipe.id}`}></Link>
                         <p>{recipe.name}</p>
-                        <Link to={`/dish/${recipe.id}`} className='learn-more'>Learn more</Link>
+                        <Link to={`/dish/${recipe.id}`} className='learn-more'>Chi tiết</Link>
                     </div>
                 ))}
             </div>
