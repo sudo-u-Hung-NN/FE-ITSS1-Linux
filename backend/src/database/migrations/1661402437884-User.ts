@@ -24,6 +24,12 @@ export class User1661402437884 implements MigrationInterface {
            )`,
     );
     await queryRunner.query(
+      `CREATE TABLE IF NOT EXISTS nation (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(50) NOT NULL
+    )`,
+  );  
+    await queryRunner.query(
       `CREATE TABLE IF NOT EXISTS recipe (
           id 						INT 					NOT NULL PRIMARY KEY AUTO_INCREMENT,
           name 					VARCHAR(50) 	NOT NULL UNIQUE,
@@ -31,11 +37,13 @@ export class User1661402437884 implements MigrationInterface {
           image 				LONGTEXT 	    NOT NULL,
           formula 			LONGTEXT      NOT NULL,
           note  				LONGTEXT      NOT NULL,
+          nation        INT NOT NULL,
           creator 		  INT NOT NULL,
           price 				INT NOT NULL,
           vote 					INT NOT NULL,
           views   			INT NOT NULL,
-          CONSTRAINT FK_user_recipe FOREIGN KEY (creator) REFERENCES user(ID)  ON UPDATE CASCADE ON DELETE CASCADE
+          CONSTRAINT FK_user_recipe FOREIGN KEY (creator) REFERENCES user(ID)  ON UPDATE CASCADE ON DELETE CASCADE,
+          CONSTRAINT FK_nation_recipe FOREIGN KEY (nation) REFERENCES nation(ID)  ON UPDATE CASCADE ON DELETE CASCADE
       )`,
     );
     await queryRunner.query(
@@ -45,6 +53,23 @@ export class User1661402437884 implements MigrationInterface {
           unit VARCHAR(30) NOT NULL
       )`,
     );
+    await queryRunner.query(
+    `CREATE TABLE IF NOT EXISTS smell (
+      id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      name VARCHAR(50) NOT NULL
+  )`,
+);  
+await queryRunner.query(
+  `CREATE TABLE IF NOT EXISTS recipe_smell (
+    id                  INT UNIQUE AUTO_INCREMENT,
+    recipe_id 			INT NOT NULL,
+    smell_id 	INT NOT NULL,
+    PRIMARY KEY (recipe_id,smell_id ),
+    CONSTRAINT FK_smell_recipe FOREIGN KEY (recipe_id) REFERENCES recipe(ID) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_recipe_smell FOREIGN KEY (smell_id)  REFERENCES smell(ID) ON UPDATE CASCADE ON DELETE CASCADE
+
+);`,
+);
     await queryRunner.query(
       `CREATE TABLE IF NOT EXISTS recipe_raw_material (
         id                  INT UNIQUE AUTO_INCREMENT,

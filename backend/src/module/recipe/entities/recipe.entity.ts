@@ -19,6 +19,9 @@ export class Recipe {
 
   @Column()
   note: string;
+ 
+  @Column()
+  nation: number;
 
   @Column()
   creator: number;

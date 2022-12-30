@@ -14,6 +14,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/public.decorator';
 import { CreateRawMaterial } from './dto/create-raw-material';
 import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
+import { CreateSmellDto } from './dto/create-smell.dto';
+import { CreateRecipeSmellDto } from './dto/create-recipe-smell.dto';
 @ApiTags('Recipe')
 @Controller('recipe')
 export class RecipeController {
@@ -32,6 +34,16 @@ export class RecipeController {
   @Post('/recipematerial')
   createRecipeMaterial(@Body() createRecipeDto: CreateRecipeRawDto[]) {
     return this.recipeService.createRecipeMaterial(createRecipeDto);
+  }
+  @Public()
+  @Post('/smell')
+  createSmell (@Body() createSmell: CreateSmellDto) {
+    return this.recipeService.createSmell(createSmell);
+  }
+  @Public()
+  @Post('/recipesmell')
+  createRecipeSmell(@Body() createRecipeSmellDto: CreateRecipeSmellDto) {
+    return this.recipeService.createRecipeSmell(createRecipeSmellDto);
   }
   @Public()
   @Get()
@@ -68,6 +80,17 @@ export class RecipeController {
       numlist.push(+abc[i]);
   }
     return this.recipeService.filter(numlist);
+  }
+  @Public()
+  @Get('getbysmell/:id')
+  filterSmell(@Param('id') id: string) {
+    
+    const numlist: number[]=[];
+    const abc=id.split('+')
+    for (var i = 0; i < abc.length; i++){
+      numlist.push(+abc[i]);
+  }
+    return this.recipeService.filterSmell(numlist);
   }
   @Public()
   @Get('getrecipe/:id')

@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { count } from 'console';
 import { In, QueryBuilder, Repository ,Not} from 'typeorm';
+import { CreateNationDto } from './dto/create-nation.dto';
 import { CreateRawMaterial } from './dto/create-raw-material';
+import { CreateRecipeSmellDto } from './dto/create-recipe-smell.dto';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
+import { CreateSmellDto } from './dto/create-smell.dto';
 import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Nation } from './entities/nation.entity';
 import { RawMaterial } from './entities/raw-material.entity';
 import { RecipeRawMaterial } from './entities/recipe-raw-material.entity';
 import { Recipe } from './entities/recipe.entity';
+import { RecipeSmell } from './entities/smell-recipe.entity';
+import { Smell } from './entities/smell.entity';
 
 @Injectable()
 export class RecipeService {
@@ -19,10 +24,26 @@ export class RecipeService {
     private readonly rawMaterialRepo: Repository<RawMaterial>,
     @InjectRepository(RecipeRawMaterial)
     private readonly recipeRawMaterialRepo: Repository<RecipeRawMaterial>,
+    @InjectRepository(Nation)
+    private readonly nationRepo: Repository<Nation>,
+    @InjectRepository(Smell)
+    private readonly smellRepo: Repository<Smell>,
+    @InjectRepository(RecipeSmell)
+    private readonly recipeSmellRepo: Repository<RecipeSmell>,
   ) { }
   create(createRecipeDto: CreateRecipeDto) {
     // const recipeImg = await fetch(createRecipeDto.image);
     return this.recipeRepo.save(createRecipeDto);
+  }
+  createNation(createNationDto: CreateNationDto) {
+    // const recipeImg = await fetch(createRecipeDto.image);
+    return this.nationRepo.save(createNationDto);
+  }
+  createSmell(createSmell: CreateSmellDto) {
+    return this.smellRepo.save(createSmell);
+  }
+  createRecipeSmell(createRecipeSmell: CreateRecipeSmellDto) {
+    return this.recipeSmellRepo.save(createRecipeSmell);
   }
   createRawMaterial(createRawMaterial: CreateRawMaterial) {
     return this.rawMaterialRepo.save(createRawMaterial);
@@ -50,6 +71,21 @@ export class RecipeService {
       queryBuilder.addSelect('recipe_raw_material.recipe_id','recipe_id')
       queryBuilder.where(`recipe_raw_material.raw_material_id IN (:...id)`, { id: id });
       queryBuilder.groupBy('recipe_raw_material.recipe_id')
+      queryBuilder.having('count>=:length',{length:id.length})
+    const data = await queryBuilder.getRawMany();
+    const proposalReview = await this.findByIds(
+      data.map((e) => e.recipe_id),
+    );
+    return proposalReview;
+  }
+  
+  async filterSmell(id: number[]) {
+    const queryBuilder =
+      this.recipeSmellRepo.createQueryBuilder('recipe_smell');
+      queryBuilder.select('count(recipe_smell.recipe_id)','count')
+      queryBuilder.addSelect('recipe_smell.recipe_id','recipe_id')
+      queryBuilder.where(`recipe_smell.smell_id IN (:...id)`, { id: id });
+      queryBuilder.groupBy('recipe_smell.recipe_id')
       queryBuilder.having('count>=:length',{length:id.length})
     const data = await queryBuilder.getRawMany();
     const proposalReview = await this.findByIds(

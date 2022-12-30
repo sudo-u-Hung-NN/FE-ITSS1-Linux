@@ -5,9 +5,12 @@ import { Recipe } from './entities/recipe.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RawMaterial } from './entities/raw-material.entity';
 import { RecipeRawMaterial } from './entities/recipe-raw-material.entity';
+import { Nation } from './entities/nation.entity';
+import { Smell } from './entities/smell.entity';
+import { RecipeSmell } from './entities/smell-recipe.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Recipe, RawMaterial, RecipeRawMaterial])],
+  imports: [TypeOrmModule.forFeature([Recipe, RawMaterial, RecipeRawMaterial,Nation,Smell,RecipeSmell])],
   controllers: [RecipeController],
   providers: [RecipeService],
   exports: [RecipeService],
