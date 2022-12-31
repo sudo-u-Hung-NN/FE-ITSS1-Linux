@@ -6,7 +6,7 @@ export const Note = ({dishData}) => {
     return (
         <div className="description-0">
             <h3>Chú ý</h3>
-            <p>{Parser(Convert(dishData?.data[0]?.note))}</p>
+            <p>{Parser(dishData?.data[0]?.note)}</p>
         </div>
     )
 }

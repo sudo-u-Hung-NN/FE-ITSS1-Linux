@@ -228,9 +228,7 @@ function Share(props) {
                             listIngreDropBox.find((i) => {
                               if (i?.id === e.value) {
                                 setUnit(i?.unit);
-                                return;
                               }
-                              return;
                             });
                             handleChangeIngredient(e);
                           }} // Handle here

@@ -6,7 +6,7 @@ export const Formula = ({dishData}) => {
     return (
         <div className="description-0">
             <h3>Công thức</h3>
-            <p>{Parser(Convert(dishData?.data[0].formula))}</p>
+            <p>{Parser(dishData?.data[0].formula)}</p>
         </div>
     )
 }
