@@ -27,7 +27,7 @@ export default function FormLogin() {
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
       <h3>Welcome to Soma Team</h3>
       <div className="mb-3">
-        <label>Email address</label>
+        <label>Email</label>
         <input
           {...register("email", {
             required: { value: true, message: "Bạn phải điền email" },
@@ -42,7 +42,7 @@ export default function FormLogin() {
           type="email"
           name="email"
           className={handleClass("email")}
-          placeholder="Enter email"
+          placeholder="Nhập email"
         />
         <ErrorMessageAuth name="email" errors={errors} />
       </div>

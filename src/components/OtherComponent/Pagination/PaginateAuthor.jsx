@@ -34,8 +34,8 @@ const PaginateAuthor = ({ otherRecipes }) => {
                                 <img src={recipe.image} alt={recipe.name} />
                             </div>
                             <div className='details'>
-                                <p>Name: {recipe.name}</p>
-                                <p>Author: {recipe.creator}</p>
+                                <p>Công thức: {recipe.name}</p>
+                                <p>Người tạo: {recipe.creator}</p>
                             </div>
                             <div className='gradient'></div>
                         </Link>

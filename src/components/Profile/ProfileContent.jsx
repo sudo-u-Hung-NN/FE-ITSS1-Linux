@@ -94,7 +94,7 @@ const ProfileContent = ({ setShow }) => {
             <div className="button">
               {!updateDetails && (
                 <button type="button" onClick={() => setUpdateDetails(true)}>
-                  Update Your Profile
+                  Cập nhật thông tin
                 </button>
               )}
             </div>
@@ -106,7 +106,7 @@ const ProfileContent = ({ setShow }) => {
           className="update-password"
           onClick={() => setUpdatePassword(true)}
         >
-          Update your password
+          Đặt lại mật khẩu
         </span>
       )}
     </div>

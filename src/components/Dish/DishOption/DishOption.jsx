@@ -8,19 +8,19 @@ export default function DishOption({ setOption }) {
           to='description'
           onClick={() => setOption(0)} className="dish-option-description"
       >
-        Description
+        Miêu tả
       </NavLink>
       <NavLink
           to='formula'
           onClick={() => setOption(1)} className="dish-option-proccessing"
       >
-        Formula
+        Công thức
       </NavLink>
       <NavLink
           to='note'
           onClick={() => setOption(2)} className="dish-option-storage"
       >
-        Note
+        Chú ý
       </NavLink>
     </div>
   );

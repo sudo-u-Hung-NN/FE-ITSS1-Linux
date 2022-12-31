@@ -32,7 +32,7 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
         <div className="details">
           👤
           <span>
-            Username:
+            Tên người dùng:
             <input
               type="text"
               id="username"
@@ -43,7 +43,7 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
             />
           </span>
           <span className="birth_date">
-            Birth day:
+            Ngày sinh:
             <input
               type="date"
               id="birth_date"
@@ -53,7 +53,7 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
             />
           </span>
           <span className="gender">
-            Gender:
+            Giới tính:
             <div>
               <div className="gender-item">
                 <input
@@ -63,7 +63,7 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
                   value="MALE"
                   onChange={formik.handleChange}
                 />
-                male
+                Nam
               </div>
               <div className="gender-item">
                 <input
@@ -73,12 +73,12 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
                   value="FEMALE"
                   onChange={formik.handleChange}
                 />
-                female
+                Nữ
               </div>
             </div>
           </span>
           <span className="phone">
-            Phone:
+            SĐT:
             <input
               type="text"
               placeholder="your phone"
@@ -92,10 +92,10 @@ const ProfileUpdateDetails = ({ setUpdateDetails }) => {
       </div>
       <div className="button">
         <button type="button" onClick={formik.handleSubmit}>
-          Update
+          Cập nhật
         </button>
         <button type="button" onClick={() => setUpdateDetails(false)}>
-          Cancel
+          Huỷ
         </button>
         <ToastContainer />
       </div>
