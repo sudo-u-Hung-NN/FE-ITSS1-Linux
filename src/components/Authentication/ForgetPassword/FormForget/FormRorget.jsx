@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ErrorMessageAuth from "../../ErrorMessage/ErrorMessageAuth";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { getPassword } from "../../../Api/auth.api";
 import { Button, Modal } from "react-bootstrap";
 
@@ -76,7 +76,7 @@ export default function FormRegister() {
                     <option value={0} disabled selected hidden>
                         Choose a question
                     </option>
-                    {mockup_questions?.map((item, index)=>(
+                    {mockup_questions?.map((item, index) => (
                         <option value={index + 1}>{item["content"]}</option>
                     ))}
                 </select>
