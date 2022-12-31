@@ -11,9 +11,10 @@ import FormForget from "../Authentication/ForgetPassword/Index";
 import Home from "../Dashboard/Home";
 import Dish from "../Dish/Dish";
 import ModalLogin from "../Dish/DishVote/ModalLogin";
-import {Description} from "../Dish/DishOption/Description";
-import {Formula} from "../Dish/DishOption/Formula";
-import {Note} from "../Dish/DishOption/Note";
+import { Description } from "../Dish/DishOption/Description";
+import { Formula } from "../Dish/DishOption/Formula";
+import { Note } from "../Dish/DishOption/Note";
+import VideoTutorial from "../Dish/DishOption/VideoTutorial";
 function App() {
   return (
     <Routes>
@@ -25,10 +26,11 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="forget" element={<FormForget />} />
         <Route path="login" element={<Login />} />
-        <Route path="dish/:id" element={<Dish />} >
-          <Route path='description' element={<Description/>}/>
-          <Route path='formula' element={<Formula/>}/>
-          <Route path='note' element={<Note/>}/>
+        <Route path="dish/:id" element={<Dish />}>
+          <Route path="description" element={<Description />} />
+          <Route path="formula" element={<Formula />} />
+          <Route path="note" element={<Note />} />
+          <Route path="video" element={<VideoTutorial />} />
         </Route>
         <Route path="button" element={<ModalLogin />} />
       </Route>

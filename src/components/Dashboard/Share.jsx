@@ -27,6 +27,9 @@ function Share(props) {
   const [listIngreForAdd, setListIngreForAdd] = useState([]);
   const [amount, setAmount] = useState(1);
   const [unit, setUnit] = useState("");
+  const [ytbUrl, setUtbUrl] = useState("");
+  const [nation, setNation] = useState("");
+  const [taste, setTaste] = useState("");
   const mockup_ingredients = listIngreDropBox.map((item) => ({
     value: item.id,
     label: item.name,
@@ -97,6 +100,15 @@ function Share(props) {
       case "price":
         setPrice(e.target.value);
         break;
+      case "ytb-url":
+        setUtbUrl(e.target.value);
+        break;
+      case "nation":
+        setNation(e.target.value);
+        break;
+      case "taste":
+        setTaste(e.target.value);
+        break;
       default:
         console.log("handleChange...");
     }
@@ -113,6 +125,9 @@ function Share(props) {
 
   console.log("Recipe: ", {
     name: name,
+    ytbUrl: ytbUrl,
+    nation: nation,
+    taste: taste,
     description: description,
     image: JSON.stringify(image),
     formula: formula,
@@ -200,7 +215,32 @@ function Share(props) {
                       placeholder="recipe name"
                     />
                   </div>
-
+                  <div className="recipe-name-add">
+                    <p className="recipe-name-add-item">Recipe nation </p>
+                    <input
+                      required
+                      type="text"
+                      id="nation"
+                      name="nation"
+                      value={nation}
+                      className="recipe-name-add-input"
+                      onChange={handleChangeForm}
+                      placeholder="recipe nation"
+                    />
+                  </div>
+                  <div className="recipe-name-add">
+                    <p className="recipe-name-add-item">Recipe taste</p>
+                    <input
+                      required
+                      type="text"
+                      id="taste"
+                      name="taste"
+                      value={taste}
+                      className="recipe-name-add-input"
+                      onChange={handleChangeForm}
+                      placeholder="recipe taste"
+                    />
+                  </div>
                   <div className="recipe-name-add">
                     <p className="recipe-name-add-item">Price </p>
                     <input
@@ -283,6 +323,19 @@ function Share(props) {
                       ))}
                     </ul>
                   </div>
+                </div>
+                <div className="styled-input wide">
+                  <input
+                    type="text"
+                    required
+                    className="ytb-url"
+                    id="ytb-url"
+                    name="ytb-url"
+                    value={ytbUrl}
+                    onChange={handleChangeForm}
+                  ></input>
+                  <label className="label-link-url">Link Url</label>
+                  <span></span>
                 </div>
                 <div className="styled-input wide">
                   <textarea
