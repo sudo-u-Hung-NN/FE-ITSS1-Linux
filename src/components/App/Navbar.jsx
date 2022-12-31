@@ -47,13 +47,13 @@ function Navbar(props) {
                 }}
               ></i>
               <li className="navbar-item" onClick={closeNavbar}>
-                <NavLink to="search">Search</NavLink>
+                <NavLink to="search">Tìm kiếm</NavLink>
               </li>
               <li className="navbar-item" onClick={closeNavbar}>
-                <NavLink to="share">Share</NavLink>
+                <NavLink to="share">Chia sẻ</NavLink>
               </li>
               <li className="navbar-item" onClick={closeNavbar}>
-                <NavLink to="author">Author</NavLink>
+                <NavLink to="author">Cộng đồng</NavLink>
               </li>
             </ul>
           </div>
@@ -74,10 +74,10 @@ function Navbar(props) {
               to="login"
               className="user-login-link"
             >
-              <i className="ri-user-fill"></i>Sign In
+              <i className="ri-user-fill"></i>Đăng nhập
             </Link>
             <Link onClick={() => dispatch(clearRedux())} to="register">
-              Register
+              Đăng ký
             </Link>
             <div
               className="bx bx-menu"

@@ -11,9 +11,9 @@ const ProfileUpdatePassword = ({setUpdatePassword}) => {
     const user = useSelector((state) => state.user.dataUser.data);
 
     const validationPassword = yup.object({
-        currentPassword: yup.string().required("Password can't blank"),
-        newPassword: yup.string().min(8, 'Must be greater than or equal 8 characters').required("Password can't blank"),
-        confirmPassword: yup.string().required("Password can't blank").oneOf([yup.ref("newPassword"), null], "Password must match"),
+        currentPassword: yup.string().required("Mật khẩu không được để trống"),
+        newPassword: yup.string().min(8, 'Mật khẩu phải dài hơn 8 ký tự').required("Mật khẩu không được để trống"),
+        confirmPassword: yup.string().required("Mật khẩu không được để trống").oneOf([yup.ref("newPassword"), null], "Mật khẩu không trùng"),
     })
 
     const formik = useFormik({
@@ -36,10 +36,10 @@ const ProfileUpdatePassword = ({setUpdatePassword}) => {
                 console.log("Current password is valid");
             })
             .catch(err => {
-                toast('❌ Your current password is incorrect');
+                toast('❌ Mật khẩu hiện tại không chính xác');
             })
             .finally(() => {
-            console.log('You are updated password!');
+            console.log('Đặt lại mật khẩu thành công!');
             })
         }
     });
@@ -48,9 +48,9 @@ const ProfileUpdatePassword = ({setUpdatePassword}) => {
         <>
             <div className='content'>
                 <div className='details'>
-                    <h2>Update password</h2>
+                    <h2>Đặt lại mật khẩu</h2>
                     <span>
-            Current password:
+            Mật khẩu hiện tại:
             <input
                 type="password"
                 id='currentPassword'
@@ -64,7 +64,7 @@ const ProfileUpdatePassword = ({setUpdatePassword}) => {
                         <p className='err'>{formik.errors.currentPassword}</p>
                     }
                     <span>
-            New password:
+            Mật khẩu mới:
             <input
                 type="password"
                 id='newPassword'
@@ -78,7 +78,7 @@ const ProfileUpdatePassword = ({setUpdatePassword}) => {
                         <p className='err'>{formik.errors.newPassword}</p>
                     }
                     <span>
-            Confirm password:
+            Nhập lại mật khẩu mới:
             <input
                 type="password"
                 id='confirmPassword'
@@ -103,11 +103,11 @@ const ProfileUpdatePassword = ({setUpdatePassword}) => {
             <div className='button'>
 
                 <button type='submit' onClick={formik.handleSubmit}>
-                    Update
+                    Cập nhật
                 </button>
 
                 <button type='button' onClick={() => setUpdatePassword(false)}>
-                    Cancel
+                    Huỷ
                 </button>
             </div>
             <ToastContainer/>

@@ -31,16 +31,16 @@ export default function FormLoginModal({ hide }) {
   return (
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
-        <label>Email address</label>
+        <label>Email</label>
         <input
           {...register("email", {
-            required: { value: true, message: "You must enter email" },
-            maxLength: { value: 99, message: "email must shorter than 99" },
-            minLength: { value: 10, message: "email must longer than 10" },
+            required: { value: true, message: "Bạn phải điền email" },
+            maxLength: { value: 99, message: "email phải ngắn hơn 99 ký tự" },
+            minLength: { value: 10, message: "email phải dài hơn 10 ký tự" },
             validate: {
               email: (v) =>
                 /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) ||
-                "email is not valid",
+                "email không hợp lệ",
             },
           })}
           type="email"
@@ -56,17 +56,17 @@ export default function FormLoginModal({ hide }) {
       </div>
 
       <div className="mb-3">
-        <label>Password</label>
+        <label>Mật khẩu</label>
         <input
           {...register("password", {
-            required: { value: true, message: "You must enter password" },
+            required: { value: true, message: "Bạn phải nhập mật khẩu" },
             minLength: {
               value: 6,
-              message: "Password must longer 6 character",
+              message: "Mật khẩu phải dài hơn 6 ký tự",
             },
             maxLength: {
               value: 99,
-              message: "Password must shorter 99 character",
+              message: "Mật khẩu phải ngắn hơn 99 ký tự",
             },
           })}
           type="password"
@@ -76,7 +76,7 @@ export default function FormLoginModal({ hide }) {
             setPassword(e.target.value);
           }}
           className={handleClass("password")}
-          placeholder="Enter password"
+          placeholder="Nhập mật khẩu"
         />
         <ErrorMessageAuth name="password" errors={errors} />
       </div>
@@ -87,7 +87,7 @@ export default function FormLoginModal({ hide }) {
       )}
       <div className="d-grid">
         <button type="submit" className="btn btn-primary modal-login-button">
-          Login
+          Đăng nhập
         </button>
         <button
           type="button"
@@ -95,7 +95,7 @@ export default function FormLoginModal({ hide }) {
           style={{ backgroundColor: "rgba(218, 30, 81, 0.8)" }}
           onClick={hide}
         >
-          Cancel
+          Huỷ
         </button>
       </div>
     </form>

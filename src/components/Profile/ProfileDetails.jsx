@@ -11,12 +11,12 @@ const ProfileDetails = () => {
                     👤{currentUser.username}
                 </h2>
 
-                <span className='birth_date'>Birth day:
+                <span className='birth_date'>Ngày sinh:
                     <p>{currentUser.birth_date}</p>
                 </span>
 
                 <span className='gender'>
-                    Gender:
+                    Giới tính:
                     <p>{currentUser.gender}</p>
                 </span>
 
@@ -25,7 +25,7 @@ const ProfileDetails = () => {
                 </span>
 
                 <span className='phone'>
-                    Phone:
+                    SĐT:
                     <p>{currentUser.phone}</p>
                 </span>
             </div>

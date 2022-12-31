@@ -32,14 +32,14 @@ const DropDownNavbar = ({ userInfo, setShow, show }) => {
           style={({ width: "100%" }, { marginLeft: "0" })}
           href="#/action-1"
         >
-          Setting
+          Cài đặt
         </Dropdown.Item>
         <Dropdown.Item
           style={({ width: "250px" }, { marginLeft: "0" })}
           href="#/action-2"
           onClick={() => setShow(true)}
         >
-          Profile
+          Thông tin cá nhân
         </Dropdown.Item>
         <Dropdown.Item
           style={{ width: "250px", marginLeft: "0" }}
@@ -48,7 +48,7 @@ const DropDownNavbar = ({ userInfo, setShow, show }) => {
             logoutUser(dispatch, navigate);
           }}
         >
-          Logout
+          Đăng xuất
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

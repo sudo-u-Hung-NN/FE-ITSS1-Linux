@@ -51,14 +51,14 @@ export default function Dish() {
             className="ingredient"
             md={{ span: 5, offset: 1 }}
           >
-            <h4>Ingredient</h4>
+            <h4>Công thức</h4>
             <table className='ingredient-table'>
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Unit</th>
+                  <th>Nguyên liệu</th>
+                  <th>Số lượng</th>
+                  <th>Đơn vị</th>
                 </tr>
               </thead>
               <tbody>
@@ -97,7 +97,7 @@ export default function Dish() {
         </Row>
         <Row className="row-3">
           <Col className="dish-container-row-3-voted" md={5}>
-            <h2> {`Average rating: ${voted}`}</h2>
+            <h2> {`Bình chọn trung bình: ${voted}`}</h2>
           </Col>
           <Col
             className="dish-container-row-3-voting"

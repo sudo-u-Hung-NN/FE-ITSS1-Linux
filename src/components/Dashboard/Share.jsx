@@ -56,12 +56,12 @@ function Share(props) {
       .then((res) => {
         createRawMaterialApi([...res]).then((response) => {
           console.log(response.data);
-          toast("✅ Share Recipe success!");
+          toast("✅ Chia sẻ thành công!");
         });
       })
       .catch((err) => {
         console.log(err);
-        toast.error("❌ Sharing failed");
+        toast.error("❌ Chia sẻ thất bại");
       });
   };
 
@@ -151,7 +151,7 @@ function Share(props) {
       {user ? (
         <>
           <form onSubmit={handleCreateRecipe} className="form-container-input">
-            <h2>Share Your Recipes 🍔</h2>
+            <h2>Chia sẻ công thức 🍔</h2>
             <div className="share-container">
               <div className="recipe-form-1">
                 <div className="add-image">
@@ -171,7 +171,7 @@ function Share(props) {
                     <>
                       <label htmlFor="image">
                         <AddAPhotoIcon />
-                        Choose a Photo
+                        Chọn ảnh món ăn
                       </label>
                       <input
                         type="file"
@@ -188,7 +188,7 @@ function Share(props) {
                 </div>
                 <div className="add-text">
                   <div className="recipe-name-add">
-                    <p className="recipe-name-add-item">Recipe name </p>
+                    <p className="recipe-name-add-item">Tên công thức </p>
                     <input
                       required
                       type="text"
@@ -202,7 +202,7 @@ function Share(props) {
                   </div>
 
                   <div className="recipe-name-add">
-                    <p className="recipe-name-add-item">Price </p>
+                    <p className="recipe-name-add-item">Giá tiền </p>
                     <input
                       required
                       min={1}
@@ -216,10 +216,10 @@ function Share(props) {
                   </div>
                   <hr />
                   <div className="ingredient-add">
-                    <p>Ingredient </p>
+                    <p>Nguyên liệu </p>
                     <div className="ingredient-add-item">
                       <div className="ingredient-add-item-name">
-                        <label>Name:</label>
+                        <label>Tên:</label>
                         <Select
                           required
                           placeholder="Search..."
@@ -236,7 +236,7 @@ function Share(props) {
                         {/* <GrClose size={15} className='delete-item-ingredient-add-item' onClick={() => deleteInput(item)} /> */}
                       </div>
                       <div className="ingredient-add-item-amount">
-                        <label>Amount:</label>
+                        <label>Số lượng:</label>
                         <input
                           min={1}
                           type="number"
@@ -247,7 +247,7 @@ function Share(props) {
                         />
                       </div>
                     </div>
-                    <div className="ingredient-add-item-unit">unit: {unit}</div>
+                    <div className="ingredient-add-item-unit">Đơn vị: {unit}</div>
                     <RiAddCircleFill
                       size={26}
                       className="btn-add-ingredient"
@@ -264,7 +264,7 @@ function Share(props) {
               </div>
               <div className="other-input">
                 <div>
-                  <h5>List Ingredient:</h5>
+                  <h5>Danh sách nguyên liệu:</h5>
                   <div className="list-ingredient-for-add">
                     <ul>
                       {listIngreForAdd.map((ingredient, index) => (
@@ -291,7 +291,7 @@ function Share(props) {
                     value={description}
                     onChange={handleChangeForm}
                   ></textarea>
-                  <label>Description</label>
+                  <label>Miêu tả chi tiết</label>
                   <span></span>
                 </div>
                 <div className="styled-input wide">
@@ -303,7 +303,7 @@ function Share(props) {
                     value={formula}
                     onChange={handleChangeForm}
                   ></textarea>
-                  <label>Formula</label>
+                  <label>Công thức</label>
                   <span></span>
                 </div>
                 <div className="styled-input wide">
@@ -315,12 +315,12 @@ function Share(props) {
                     value={note}
                     onChange={handleChangeForm}
                   ></textarea>
-                  <label>Note</label>
+                  <label>Chú ý</label>
                 </div>
               </div>
 
               <button type="submit" className="button-27">
-                Share
+                Chia sẻ
               </button>
             </div>
           </form>
@@ -330,11 +330,11 @@ function Share(props) {
         <div className="login-after-share">
           <AiFillWarning fontSize={"120px"} color="#FD6929" />
           <p>
-            You must
+            Bạn phải
             <i>
-              <Link to="/login"> Login </Link>
+              <Link to="/login"> đăng nhập </Link>
             </i>
-            before sharing your recipes
+            để chia sẻ công thức
           </p>
         </div>
       )}

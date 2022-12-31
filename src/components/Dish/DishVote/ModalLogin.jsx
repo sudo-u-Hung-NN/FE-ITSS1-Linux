@@ -27,12 +27,12 @@ export default function ModalLogin({ handleClick }) {
         variant="primary"
         onClick={handleClickButton}
       >
-        Vote
+        Bình chọn
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>You must Login</Modal.Title>
+          <Modal.Title>Bạn phải đăng nhập</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormLoginModal hide={handleClose} />
