@@ -31,3 +31,7 @@ export const getRecipesForSearchByName = async (name) => {
 export const createRawMaterialApi = async (data) => {
   return await axios.post(`${baseURL}/recipe-raw-material`, data);
 };
+
+export const getRecipesByTaste = async (taste) => {
+  return await axios.get(`${baseURL}/get-recipes-by-taste/${taste}`);
+}

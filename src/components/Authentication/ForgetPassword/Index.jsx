@@ -4,14 +4,14 @@ import "./forget.scss";
 
 export default function Forget() {
   return (
-    <div className="register">
-      <div className="register-image">
+    <div className="forget">
+      <div className="forget-image">
         <img
           src="https://6f3ebe2ff971707.cmccloud.com.vn/tour/wp-content/uploads/2021/12/banh-trang-cuon-thit-heo.jpg"
-          alt="photo"
+          alt=""
         />
       </div>
-      <div className="register-wrapper">
+      <div className="forget-wrapper">
         <FormForget />
       </div>
     </div>

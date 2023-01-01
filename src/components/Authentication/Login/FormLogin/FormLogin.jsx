@@ -27,44 +27,44 @@ export default function FormLogin() {
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
       <h3>Welcome to Soma Team</h3>
       <div className="mb-3">
-        <label>Email address</label>
+        <label>Email</label>
         <input
           {...register("email", {
-            required: { value: true, message: "You must enter email" },
-            maxLength: { value: 99, message: "email must shorter than 99" },
-            minLength: { value: 10, message: "email must longer than 10" },
+            required: { value: true, message: "Bạn phải điền email" },
+            maxLength: { value: 99, message: "email phải ngắn hơn 99 ký tự" },
+            minLength: { value: 10, message: "email phải dài hơn 10 ký tự" },
             validate: {
               email: (v) =>
                 /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) ||
-                "email is not valid",
+                "email không hợp lệ",
             },
           })}
           type="email"
           name="email"
           className={handleClass("email")}
-          placeholder="Enter email"
+          placeholder="Nhập email"
         />
         <ErrorMessageAuth name="email" errors={errors} />
       </div>
 
       <div className="mb-3">
-        <label>Password</label>
+        <label>Mật khẩu</label>
         <input
           {...register("password", {
-            required: { value: true, message: "You must enter password" },
+            required: { value: true, message: "Bạn phải nhập mật khẩu" },
             minLength: {
               value: 6,
-              message: "Password must longer 6 character",
+              message: "Mật khẩu phải dài hơn 6 ký tự",
             },
             maxLength: {
               value: 99,
-              message: "Password must shorter 99 character",
+              message: "Mật khẩu phải ngắn hơn 99 ký tự",
             },
           })}
           type="password"
           name="password"
           className={handleClass("password")}
-          placeholder="Enter password"
+          placeholder="Nhập mật khẩu"
         />
         <ErrorMessageAuth name="password" errors={errors} />
       </div>
@@ -84,15 +84,15 @@ export default function FormLogin() {
         </button>
       </div>
       <p className="form-login-signup text-right">
-        Don't have account ?{" "}
+        Chưa có tài khoản ?{" "}
         <Link to="/register" onClick={() => dispatch(clearRedux())}>
-          Sign up.
+          Đăng ký
         </Link>
       </p>
       <p className="form-login-signup text-right">
-        Forget your password ?{" "}
+        Quên mật khẩu ?{" "}
         <Link to="/forget" onClick={() => dispatch(clearRedux())}>
-          Retake private Q&A.
+          Lấy lại mật khẩu
         </Link>
       </p>
     </form>

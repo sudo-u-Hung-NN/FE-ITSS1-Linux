@@ -26,84 +26,84 @@ export default function FormRegister() {
     };
 
     const mockup_questions = [
-        { "id": 1, "content": "How many people are there in your family ?" },
-        { "id": 2, "content": "Where did you lived when you were 6 years old ?" },
-        { "id": 3, "content": "What is your primary school's name ?" }
-    ]
+        { "id": 1, "content": "Gia đình bạn có bao nhiêu người ?" },
+        { "id": 2, "content": "Bạn sống ở đâu lúc 6 tuổi ?" },
+        { "id": 3, "content": "Tên trường tiểu học của bạn là gì ?" },
+    ];
 
     // TODO: FE - done, BE - none
 
     return (
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <h3>Sign Up</h3>
+            <h3>Đăng ký</h3>
             <div className="mb-3">
-                <label>User Name</label>
+                <label>Tên người dùng</label>
                 <input
                     name="username"
                     {...register("username", {
-                        required: { value: true, message: "You must enter your username" },
+                        required: { value: true, message: "Bạn phải điền tên người dùng" },
                         maxLength: {
                             value: 20,
-                            message: "Username must be less than 20 characters",
+                            message: "Tên người dùng phải ngắn hơn 20 ký tự",
                         },
                         minLength: {
                             value: 4,
-                            message: "Username must be longer than 4 characters",
+                            message: "Tên người dùng phải dài hơn 20 ký tự",
                         },
                     })}
                     type="text"
                     className={handleClass("username")}
-                    placeholder="User Name"
+                    placeholder="Tên người dùng"
                 />
                 <ErrorMessageAuth name="name" errors={errors} />
             </div>
 
             <div className="mb-3">
-                <label>Email address</label>
+                <label>Email</label>
                 <input
                     {...register("email", {
-                        required: { value: true, message: "You must enter email" },
-                        maxLength: { value: 99, message: "email must shorter than 99" },
-                        minLength: { value: 10, message: "email must longer than 10" },
+                        required: { value: true, message: "Bạn phải điền email" },
+                        maxLength: { value: 99, message: "email phải ngắn hơn 99 ký tự" },
+                        minLength: { value: 10, message: "email phải dài hơn 10 ký tự" },
                         validate: {
-                            email: (v) =>
-                                /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) ||
-                                "email is not valid",
+                        email: (v) =>
+                            /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) ||
+                            "email không hợp lệ",
                         },
                     })}
                     type="email"
                     className={handleClass("email")}
-                    placeholder="Enter email"
+                    placeholder="Điền email"
                 />
                 <ErrorMessageAuth name="email" errors={errors} />
             </div>
 
             <div className="mb-3">
-                <label>Password</label>
+                <label>Mật khẩu</label>
                 <input
-                    {...register("password", {
-                        required: { value: true, message: "You must enter password" },
-                        minLength: {
-                            value: 6,
-                            message: "Password must longer 6 character",
-                        },
-                        maxLength: {
-                            value: 99,
-                            message: "Password must shorter 99 character",
-                        },
-                    })}
-                    type="password"
-                    className={handleClass("password")}
-                    placeholder="Enter password"
+                {...register("password", {
+                    required: { value: true, message: "Bạn phải nhập mật khẩu" },
+                    minLength: {
+                    value: 6,
+                    message: "Mật khẩu phải dài hơn 6 ký tự",
+                    },
+                    maxLength: {
+                    value: 99,
+                    message: "Mật khẩu phải ngắn hơn 99 ký tự",
+                    },
+                })}
+                type="password"
+                className={handleClass("password")}
+                placeholder="Nhập mật khẩu"
                 />
                 <ErrorMessageAuth name="password" errors={errors} />
             </div>
 
             <div className="mb-3">
-                <label>Private Q&A</label>
+                <label>Câu hỏi bí mật</label>
                 <select {...register("question")} className={handleClass("question")}>
                     <option value="" disabled selected hidden>
-                        Choose a question
+                    Chọn câu hỏi
                     </option>
                     {mockup_questions?.map((item) => (
                         <option value={item["id"]}>{item["content"]}</option>
@@ -112,22 +112,22 @@ export default function FormRegister() {
             </div>
 
             <div className="mb-3">
-                <label>Answer</label>
+                <label>Trả lời</label>
                 <input
                     {...register("answer", {
-                        required: { value: true, message: "You must enter your answer" },
+                        required: { value: true, message: "Bạn phải trả lời câu hỏi" },
                         minLength: {
                             value: 0,
-                            message: "Answer must be longer 5 character",
+                            message: "Câu trả lời phải nhiều hơn 0 ký tự",
                         },
                         maxLength: {
                             value: 99,
-                            message: "Answer must be shorter 99 character",
+                            message: "Câu trả lời phải ít hơn 99 ký tự",
                         },
                     })}
-                    type="answer"
+                    type="text"
                     className={handleClass("answer")}
-                    placeholder="Enter your answer"
+                    placeholder="Nhập câu trả lời"
                 />
                 <ErrorMessageAuth name="answer" errors={errors} />
             </div>
@@ -137,13 +137,13 @@ export default function FormRegister() {
       )}
       <div className="d-grid">
         <button type="submit" className="btn btn-primary">
-          Sign Up
+          Đăng ký
         </button>
       </div>
       <p className="forgot-password text-right">
-        Already registered{" "}
+        Đã có tài khoản ?{" "}
         <Link onClick={() => dispatch(clearRedux())} to="/login">
-          sign in?
+          Đăng nhập
         </Link>
       </p>
     </form>

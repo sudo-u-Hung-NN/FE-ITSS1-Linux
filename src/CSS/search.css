@@ -1,8 +1,14 @@
+.search-filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 34px;  
+}
+
 label {
     /*font-family: sans-serif;*/
     font-size: 1rem;
     padding-right: 10px;
-    margin-top: 20px;
 }
 
 select {
@@ -11,6 +17,7 @@ select {
     border: none;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.123);
     outline: none;
+    height: 34px;
 }
 
 select option {
@@ -24,46 +31,59 @@ input[type='text'] {
     outline: none;
 }
 
+.search-icon {
+    box-sizing: content-box;
+    background-color: #24292E;
+    position: relative;
+    height: fit-content;
+}
+
+#search-svg-icon {
+    position: absolute;
+    background-color: #d4d5d7;
+    box-sizing: border-box;
+    height: 100%;
+    width: 34px;
+    padding: 5px;
+}
+
 .form-select {
-    margin-top: 50px;
-    margin-left: 120px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
+}
+
+.form-select div select{
+    width: 160px;
+    margin-left: 15px;
 }
 
 .form-select .orderBy {
-    margin-right: 100px;
     cursor: pointer;
 }
 
 .form-select .price {
     cursor: pointer;
-    margin-right: 100px;
 }
-
-/*.form-select select {*/
-/*    width:200px;*/
-/*}*/
 
 /*=========================================================form-check=====================================================*/
 
 .form-check {
     background: white;
     box-sizing: border-box;
-    min-height: 200px;
-    margin: 35px 30px 50px 50px;
     min-width: 50%;
     text-align: left;
     padding: 20px;
     border-radius: 10px;
+    margin-top: 50px;
 }
 
 .form-check .check-list-item {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
 }
 
 .form-check .check-list-item .container-checkbox {
@@ -77,12 +97,16 @@ input[type='text'] {
     -ms-user-select: none;
     user-select: none;
     width: 200px;
+    height: 27px;
+    line-height: 27px;
+    display: block;
 }
 
 .form-check .check-list-item .check-item {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 /* Hide the browser's default checkbox */
@@ -90,17 +114,17 @@ input[type='text'] {
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    height: 0;
+    height: 27px;
     width: 0;
 }
 
 /* Create a custom checkbox */
 .checkmark {
     position: absolute;
-    top: -5px;
+    top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
+    height: 27px;
+    width: 27px;
     background-color: #ccc;
 }
 
@@ -242,25 +266,53 @@ input[type='text'] {
 
 
 .recipes-card {
-    width: 90%;
-    margin-left: 100px;
+    width: 100%;
     margin-top: 100px;
 }
 
 
 @media screen and (max-width: 1170px) {
-    .form-select {
+
+    .search-filter-container {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        text-align: left;
-        margin: 30px;
-        padding-left: 20px;
+        box-sizing: border-box;
+        min-height: 100px;
+        justify-content: space-between;
+        align-items: flex-end;
+
     }
 
-    .form-select input,
-    select {
+    .search-icon {
+        background: #F1EDED;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .form-select {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90%;
+        position: relative;
+    }
+
+    .form-select #filter-icon{
+        position: absolute;
+        left: -70px;
+        color: #928680;
+    }
+
+    .form-select div {
+        display: flex;
+        box-sizing: content-box;
+    }
+
+    .form-select div select {
         width: 100%;
+        margin: 0;
+        border-radius: 3px;
     }
 
 }
