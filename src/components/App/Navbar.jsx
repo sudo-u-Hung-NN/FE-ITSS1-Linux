@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DropDownNavbar from "../OtherComponent/IsLogined/DropDownNavbar";
@@ -9,21 +9,39 @@ import { getUser } from "../Api/user.api";
 
 function Navbar(props) {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.auth.login.currentUser);
+  const currentUser = useSelector((state) => state.auth.login.currentUser);
   const dataUser = useSelector((state) => state.user.dataUser.data);
   const [show, setShow] = useState(false);
   const [tablet, setTablet] = useState(false);
   const navigate = useNavigate();
 
+  let dropdownRef = useRef();
+
+  const closeDropdown = () => {
+    setTablet(false);
+  }
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!dropdownRef.current.contains(e.target)) {
+        closeDropdown()
+      }
+    }
+    document.addEventListener("mousedown", handler, tablet === true)
+    return document.removeEventListener("mousedown", handler, tablet === false);
+  })
+
   const closeNavbar = () => {
     setTablet(false);
   };
 
+
+
   useEffect(() => {
-    if (userInfo) {
-      getUser(userInfo?.id, dispatch);
+    if (currentUser) {
+      getUser(currentUser?.id, dispatch);
     }
-  }, [userInfo, dispatch]);
+  }, [currentUser, dispatch]);
 
   return (
     <>
@@ -58,8 +76,17 @@ function Navbar(props) {
             </ul>
           </div>
         }
-        {userInfo ? (
-          <div className="main">
+        {currentUser ? (
+          // <div ref={dropdownRef}>
+          //   <img src='http://res.cloudinary.com/tuantea/image/upload/v1671462670/o8xxmzxjbnnof24atjft.jpg'
+          //     alt=''
+          //     className='user-pic'
+          //     aria-expanded={height !== 0}
+          //     onClick={() => setHeight(height === 0 ? "auto" : 0)}
+          //   />
+          //   <DropdownNavbar2 height={height} currentUser={currentUser} closeDropdown={closeDropdown} />
+          // </div>
+          <div className="main" ref={dropdownRef}>
             <DropDownNavbar userInfo={dataUser} setShow={setShow} />
             <div
               className="bx bx-menu"
