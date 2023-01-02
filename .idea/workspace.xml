@@ -2,7 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="aresky-commit-12/17-update-readme">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/module/Comment/comment.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/module/Comment/comment.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/module/Comment/comment.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/module/Comment/dto/create-comment.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/module/Comment/dto/update-comment.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/module/Comment/entities/comment.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2defa81f7179ecb66a0bb68c763c0a3e8dadd028" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/9/99e5505f0b136b60559d4a4a694092f81cbe1759" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/c/dc476c51279fc885ec9597370e37a1ac32db9431" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/database/migrations/1661402437884-User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/database/migrations/1661402437884-User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/dto/create-recipe-smell.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/dto/create-recipe.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/dto/create-recipe.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/dto/create-smell.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/entities/nation.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/entities/nation.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/entities/recipe.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/entities/recipe.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/entities/smell-recipe.entity.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/entities/smell.entity.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +56,15 @@
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Git\\FE-ITSS1-Linux\\backend\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Git\\FE-ITSS2-clone\\backend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Git\FE-ITSS2-clone\backend\src\module\Comment\entities" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -74,6 +101,8 @@
       <workItem from="1671226135291" duration="240000" />
       <workItem from="1671258229806" duration="17181000" />
       <workItem from="1671284478920" duration="2454000" />
+      <workItem from="1672651362351" duration="1723000" />
+      <workItem from="1672653117539" duration="6401000" />
     </task>
     <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
       <created>1670873829990</created>

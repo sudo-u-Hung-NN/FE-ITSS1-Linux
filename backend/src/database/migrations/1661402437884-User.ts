@@ -5,7 +5,7 @@ export class User1661402437884 implements MigrationInterface {
     await queryRunner.query(
       `CREATE TABLE IF NOT EXISTS  privatequestions (
         id 			INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-       content VARCHAR(1000)
+        content VARCHAR(1000)
     )`,
     );
     await queryRunner.query(
@@ -41,6 +41,7 @@ export class User1661402437884 implements MigrationInterface {
           creator 		  INT NOT NULL,
           price 				INT NOT NULL,
           views   			INT NOT NULL,
+          videoUrl      LONGTEXT NOT NULL,
           CONSTRAINT FK_user_recipe FOREIGN KEY (creator) REFERENCES user(ID)  ON UPDATE CASCADE ON DELETE CASCADE,
           CONSTRAINT FK_nation_recipe FOREIGN KEY (nation) REFERENCES nation(ID)  ON UPDATE CASCADE ON DELETE CASCADE
       )`,
@@ -53,22 +54,21 @@ export class User1661402437884 implements MigrationInterface {
       )`,
     );
     await queryRunner.query(
-    `CREATE TABLE IF NOT EXISTS smell (
+    `CREATE TABLE IF NOT EXISTS taste (
       id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
       name VARCHAR(50) NOT NULL
   )`,
-);  
-await queryRunner.query(
-  `CREATE TABLE IF NOT EXISTS recipe_smell (
-    id                  INT UNIQUE AUTO_INCREMENT,
-    recipe_id 			INT NOT NULL,
-    smell_id 	INT NOT NULL,
-    PRIMARY KEY (recipe_id,smell_id ),
-    CONSTRAINT FK_smell_recipe FOREIGN KEY (recipe_id) REFERENCES recipe(ID) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT FK_recipe_smell FOREIGN KEY (smell_id)  REFERENCES smell(ID) ON UPDATE CASCADE ON DELETE CASCADE
-
-);`,
-);
+    );
+    await queryRunner.query(
+      `CREATE TABLE IF NOT EXISTS recipe_taste (
+        id                  INT UNIQUE AUTO_INCREMENT,
+        recipe_id 			INT NOT NULL,
+        taste_id 	INT NOT NULL,
+        PRIMARY KEY (recipe_id, taste_id ),
+        CONSTRAINT FK_taste_recipe FOREIGN KEY (recipe_id) REFERENCES recipe(ID) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT FK_recipe_taste FOREIGN KEY (taste_id)  REFERENCES taste(ID) ON UPDATE CASCADE ON DELETE CASCADE
+    );`,
+    );
     await queryRunner.query(
       `CREATE TABLE IF NOT EXISTS recipe_raw_material (
         id                  INT UNIQUE AUTO_INCREMENT,
@@ -91,13 +91,28 @@ await queryRunner.query(
         CONSTRAINT FK_user FOREIGN KEY (user_id) 	REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE
     )`,
     );
+    await queryRunner.query(
+      `CREATE TABLE IF NOT EXISTS comment (
+        id    INT NOT NULL UNIQUE AUTO_INCREMENT,
+        recipe_id INT NOT NULL,
+        user_id     INT NOT NULL,
+        content LONGTEXT NOT NULL,
+        date_comment DATE NOT NULL,
+        PRIMARY KEY (recipe_id, user_id),
+        FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE
+    ) `,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`DROP TABLE user;`);
     await queryRunner.query(`DROP TABLE voting;`);
     await queryRunner.query(`DROP TABLE recipe_raw_material;`);
     await queryRunner.query(`DROP TABLE raw_material;`);
     await queryRunner.query(`DROP TABLE recipe;`);
-    await queryRunner.query(`DROP TABLE user;`);
+    await queryRunner.query(`DROP TABLE taste;`);
+    await queryRunner.query(`DROP TABLE nation;`);
+    await queryRunner.query(`DROP TABLE comment;`);
   }
 }

@@ -31,4 +31,7 @@ export class Recipe {
 
   @Column()
   views: number;
+
+  @Column()
+  videoUrl: string;
 }
