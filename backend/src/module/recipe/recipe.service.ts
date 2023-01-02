@@ -31,6 +31,9 @@ export class RecipeService {
     @InjectRepository(RecipeTaste)
     private readonly recipeTasteRepo: Repository<RecipeTaste>,
   ) { }
+  /* *
+  * Thêm mới công thức vào bảng công thức
+  * */
   create(createRecipeDto: CreateRecipeDto) {
     return this.recipeRepo.save(createRecipeDto);
   }
@@ -66,24 +69,40 @@ export class RecipeService {
     return this.tasteRepo.find();
   }
 
+  /* *
+   * Insert data to recipe-taste table
+   * */
   createRecipeTaste(createRecipeTaste: CreateRecipeTasteDto) {
     return this.recipeTasteRepo.save(createRecipeTaste);
   }
 
+  /* *
+   * Insert data to raw-material table
+   * */
   createRawMaterial(createRawMaterial: CreateRawMaterial) {
     return this.rawMaterialRepo.save(createRawMaterial);
   }
 
+  /* *
+   * Thêm dữ liệu vào bảng Recipe-Raw-Material
+   * */
   createRecipeMaterial(createRecipeRawDto: CreateRecipeRawDto[]) {
     return this.recipeRawMaterialRepo.save(createRecipeRawDto);
   }
 
+  /* *
+  * Lấy công thức có tên giống chuỗi đã nhập vào
+  * */
   search(name: string) {
     console.log('abc', name);
     console.log('search by name');
 
     return this.recipeRepo.find({ where: { name: Like(`%${name}%`) } });
   }
+
+  /* *
+  * Thêm mới công thức vào bảng công thức
+  * */
   async saveRecipe(id: number, userId: number) {
     const recipe = await this.recipeRepo.findOne({ where: { id: id } });
     if (recipe.creator === 1) {
@@ -91,6 +110,10 @@ export class RecipeService {
     }
     return this.recipeRepo.save(recipe);
   }
+
+  /* *
+   * Lọc công thức theo id của nguyên liệu
+   * */
   async filter(id: number[]) {
     const queryBuilder = this.recipeRawMaterialRepo.createQueryBuilder(
       'recipe_raw_material',
@@ -105,6 +128,9 @@ export class RecipeService {
     );
   }
 
+  /* *
+  * Lọc công thức theo id của hương vị
+  * */
   async filterTaste(id: number[]) {
     const queryBuilder =
       this.recipeTasteRepo.createQueryBuilder('recipe_taste');
@@ -120,6 +146,11 @@ export class RecipeService {
     return proposalReview;
   }
 
+  /* *
+  * Lấy danh sách công thức theo các id của công thức.
+  * Function này sử dụng cho chức năng Filter được gọi bởi các function khác
+  * @Param id của các công thức
+  * */
   async findByIds(id: number[]) {
     return await this.recipeRepo.find({
       where: {
@@ -127,6 +158,10 @@ export class RecipeService {
       },
     });
   }
+
+  /* *
+   * Lọc công thức theo id của nguyên liệu
+   * */
   async findOne(id: number) {
     const recipe = await this.recipeRepo.findOne({
       where: {
@@ -148,22 +183,46 @@ export class RecipeService {
     console.log('ahihi', material);
     return [recipe, material];
   }
+
+  /* *
+   * Lấy ra tất cả công thức
+   * */
   findAll() {
     return this.recipeRepo.find();
   }
+
+  /* *
+   * Lấy ra tất cả các nguyên liệu
+   * */
   findAllRawMaterial() {
     return this.rawMaterialRepo.find();
   }
+
+  /* *
+   * Sửa công thức
+   * */
   update(id: number, updateRecipeDto: UpdateRecipeDto) {
     return `This action updates a #${id} recipe`;
   }
 
+  /* *
+   * Xóa Công thức
+   * */
   remove(id: number) {
     return `This action removes a #${id} recipe`;
   }
+
+  /* *
+   * Lấy tất cả công thức cho người dùng hiện tại
+   * @Param id của người dùng hiện tại
+   * */
   getRecipe(id: number) {
     return this.recipeRepo.find({ where: { creator: id } });
   }
+
+  /* *
+   * Lấy tất cả các công thức của người dùng khác trừ người dùng hiện tại
+   * */
   getRecipes(id: number) {
     return this.recipeRepo.find({ where: { creator: Not(id) } });
   }
