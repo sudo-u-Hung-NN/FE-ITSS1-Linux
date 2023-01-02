@@ -37,7 +37,7 @@ export class RecipeController {
     return this.recipeService.createRecipeMaterial(createRecipeDto);
   }
   @Public()
-  @Post('/taste')
+  @Post('/create-taste')
   createTaste(@Body() createTaste: CreateTasteDto) {
     return this.recipeService.createTaste(createTaste);
   }
@@ -56,6 +56,14 @@ export class RecipeController {
   findAllRawMaterial() {
     return this.recipeService.findAllRawMaterial();
   }
+  //---------------------------------GET ALL Taste-------------------------------
+  @Public()
+  @Get('get-all-tastes')
+  findAllTastes() {
+    return this.recipeService.getAllTastes();
+  }
+
+  //----------------------------------------------------------------
   @Public()
   @Get('search/:name')
   search(@Param('name') name: string) {

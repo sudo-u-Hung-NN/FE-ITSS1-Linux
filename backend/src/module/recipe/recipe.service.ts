@@ -59,6 +59,12 @@ export class RecipeService {
   createTaste(createTaste: CreateTasteDto) {
     return this.tasteRepo.save(createTaste);
   }
+  /*
+  * Lấy ra tất cả các hương vị
+  * */
+  getAllTastes () {
+    return this.tasteRepo.find();
+  }
 
   createRecipeTaste(createRecipeTaste: CreateRecipeTasteDto) {
     return this.recipeTasteRepo.save(createRecipeTaste);
