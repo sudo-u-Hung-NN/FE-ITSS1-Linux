@@ -34,6 +34,9 @@ export class RecipeService {
   create(createRecipeDto: CreateRecipeDto) {
     return this.recipeRepo.save(createRecipeDto);
   }
+  /*
+  * Thêm mới quốc gia
+  * */
   async createNation(nationName: string) {
     const nationObj = await this.nationRepo.findOne({where: {name: nationName}});
     if (!nationObj) {
@@ -42,21 +45,33 @@ export class RecipeService {
     } else {
       return "Quốc gia này đã tồn tại"
     }
-    // const recipeImg = await fetch(createRecipeDto.image);
     return "Thêm mới quốc gia thành công"
   }
+  /* *
+   * Lấy ra tất cả các quốc gia
+   * */
+  findAllNations () {
+    return this.nationRepo.find();
+  }
+  /**
+   * Thêm mới hương vị
+   * */
   createTaste(createTaste: CreateTasteDto) {
     return this.tasteRepo.save(createTaste);
   }
+
   createRecipeTaste(createRecipeTaste: CreateRecipeTasteDto) {
     return this.recipeTasteRepo.save(createRecipeTaste);
   }
+
   createRawMaterial(createRawMaterial: CreateRawMaterial) {
     return this.rawMaterialRepo.save(createRawMaterial);
   }
+
   createRecipeMaterial(createRecipeRawDto: CreateRecipeRawDto[]) {
     return this.recipeRawMaterialRepo.save(createRecipeRawDto);
   }
+
   search(name: string) {
     console.log('abc', name);
     console.log('search by name');

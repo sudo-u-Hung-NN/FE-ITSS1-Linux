@@ -21,28 +21,17 @@ export class CommentService {
         });
         if (!comment) {
             return this.commentRepository.save(createCommentDto)
+        } {
+            return "Đã comment rồi, comment gì nữa!"
         }
         return "người dùng đã comment";
     }
 
-    // async getComment(id: number) {
-    //     const playlist = this.commentRepository.createQueryBuilder("comment")
-    //     playlist.where("comment.recipe_id = :id", { id })
-    //     playlist.select("AVG(voting.amount_star)", 'avg')
-    //     const data = await playlist.getRawOne()
-    //     return data;
-    //     // return this.votingRepo.findOne({where:{id:id}});
-    // }
-
-    // findOne(id: number) {
-    //     return `This action returns a #${id} voting`;
-    // }
-    //
-    // update(id: number, updateVotingDto: UpdateVotingDto) {
-    //     return `This action updates a #${id} voting`;
-    // }
-    //
-    // remove(id: number) {
-    //     return `This action removes a #${id} voting`;
-    // }
+    async getCommentsByRecipeID(recipe_id: number) {
+        const comments = this.commentRepository.findBy({recipe_id: recipe_id});
+        if (!comments) {
+            return "Chưa có comment, vui lòng để lại comment!"
+        }
+        return comments;
+    }
 }

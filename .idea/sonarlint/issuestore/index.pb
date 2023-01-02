@@ -85,8 +85,6 @@ M
 src/components/App/Navbar.jsx,a\0\a0aed0b635547ec7b84678e7ddb208f1962a99ac
 C
 src/CSS/author.scss,0\0\0078c293e99b5ec1f365acae2512a70f1fa74f3b
-P
- src/components/Api/recipe.api.js,2\f\2fbe1d1b6549235b53128565e5d6e2192cbeea23
 A
 src/CSS/share.css,1\8\186fa09c4f672f0cde0fc2ab3b8e67b3ff38e49a
 R
