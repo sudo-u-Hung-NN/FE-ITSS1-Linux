@@ -80,7 +80,7 @@ export default function Dish() {
             {option === 0 && dishData && <Description dishData={dishData} />}
             {option === 1 && dishData && <Formula dishData={dishData} />}
             {option === 2 && dishData && <Note dishData={dishData} />}
-            {option === 3 && dishData && <VideoTutorial />}
+            {option === 3 && dishData && <VideoTutorial dishData={dishData} />}
           </div>
         </Row>
         <Row className="row-3">
