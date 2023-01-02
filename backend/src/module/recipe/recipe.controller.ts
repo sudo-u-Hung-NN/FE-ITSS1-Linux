@@ -14,6 +14,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/public.decorator';
 import { CreateRawMaterial } from './dto/create-raw-material';
 import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
+import { CreateSmellDto } from './dto/create-smell.dto';
+import { CreateRecipeSmellDto } from './dto/create-recipe-smell.dto';
 @ApiTags('Recipe')
 @Controller('recipe')
 export class RecipeController {
@@ -32,6 +34,16 @@ export class RecipeController {
   @Post('/recipe-raw-material')
   createRecipeMaterial(@Body() createRecipeDto: CreateRecipeRawDto[]) {
     return this.recipeService.createRecipeMaterial(createRecipeDto);
+  }
+  @Public()
+  @Post('/smell')
+  createSmell (@Body() createSmell: CreateSmellDto) {
+    return this.recipeService.createSmell(createSmell);
+  }
+  @Public()
+  @Post('/recipesmell')
+  createRecipeSmell(@Body() createRecipeSmellDto: CreateRecipeSmellDto) {
+    return this.recipeService.createRecipeSmell(createRecipeSmellDto);
   }
   @Public()
   @Get()
@@ -61,15 +73,27 @@ export class RecipeController {
   @Public()
   @Get('get-recipes-for-filter/:id')
   filter(@Param('id') id: string) {
-    const num_list: number[] = [];
-    const abc = id.split('+');
-    for (const element of abc) {
-      num_list.push(+element);
-    }
-    return this.recipeService.filter(num_list);
+    
+    const numlist: number[]=[];
+    const abc=id.split('+')
+    for (var i = 0; i < abc.length; i++){
+      numlist.push(+abc[i]);
+  }
+    return this.recipeService.filter(numlist);
   }
   @Public()
-  @Get('get-recipes-for-current-user/:id')
+  @Get('getbysmell/:id')
+  filterSmell(@Param('id') id: string) {
+    
+    const numlist: number[]=[];
+    const abc=id.split('+')
+    for (var i = 0; i < abc.length; i++){
+      numlist.push(+abc[i]);
+  }
+    return this.recipeService.filterSmell(numlist);
+  }
+  @Public()
+  @Get('getrecipe/:id')
   getRecipe(@Param('id') id: number) {
     return this.recipeService.getRecipe(+id);
   }

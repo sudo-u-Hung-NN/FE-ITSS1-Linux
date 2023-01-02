@@ -15,6 +15,9 @@ export class CreateRecipeDto {
 
   @ApiProperty()
   note: string;
+  
+  @ApiProperty()
+  nation: number;
 
   @ApiProperty()
   creator: number;
