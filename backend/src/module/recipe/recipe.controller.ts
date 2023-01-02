@@ -110,6 +110,12 @@ export class RecipeController {
     return this.recipeService.createNation(nation)
   }
 
+  @Public()
+  @Get('get-all-nations')
+  getAllNations() {
+    return this.recipeService.findAllNations();
+  }
+
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
   //   return this.recipeService.update(+id, updateRecipeDto);

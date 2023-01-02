@@ -14,11 +14,11 @@ export class CommentController {
     create(@Body() createCommentDto: CreateCommentDto) {
         return this.commentService.createComment(createCommentDto);
     }
-    // @Public()
-    // @Get(':id')
-    // getStars(@Param('id') id:number) {
-    //     return this.votingService.getStars(id);
-    // }
+    @Public()
+    @Get('/get-by-recipe_id/:id')
+    getStars(@Param('id') id:number) {
+        return this.commentService.getCommentsByRecipeID(id);
+    }
 
     // @Get(':id')
     // findOne(@Param('id') id: string) {

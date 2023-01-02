@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="aresky-commit-12/17-update-readme">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+    <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Api/recipe.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/recipe.api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/Comment/comment.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/Comment/comment.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/Comment/comment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/Comment/comment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +84,7 @@
       <workItem from="1671258229806" duration="17181000" />
       <workItem from="1671284478920" duration="2454000" />
       <workItem from="1672651362351" duration="1723000" />
-      <workItem from="1672653117539" duration="6984000" />
+      <workItem from="1672653117539" duration="9371000" />
     </task>
     <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
       <created>1670873829990</created>
@@ -154,7 +156,21 @@
       <option name="project" value="LOCAL" />
       <updated>1671286158031</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update 2/1/2023 backend lan 1">
+      <created>1672660208182</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1672660208182</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1672660317590</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1672660317590</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +209,8 @@
     <MESSAGE value="aresky-commit-12/17-merge-2" />
     <MESSAGE value="aresky-commit-12/17-merge-3" />
     <MESSAGE value="aresky-commit-12/17-update-readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="aresky-commit-12/17-update-readme" />
+    <MESSAGE value="update 2/1/2023 backend lan 1" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
   </component>
 </project>
