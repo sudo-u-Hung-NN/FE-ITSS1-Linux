@@ -29,7 +29,12 @@ function Share(props) {
   const [unit, setUnit] = useState("");
   const [ytbUrl, setUtbUrl] = useState("");
   const [nation, setNation] = useState("");
-  const [taste, setTaste] = useState("");
+  const [taste, setTaste] = useState([]);
+  const [nations, setNations] = useState([
+    { id: 1, name: "Việt Nam" },
+    { id: 2, name: "Trung Quốc" },
+    { id: 3, name: "Nhật Bản" },
+  ]);
   const mockup_ingredients = listIngreDropBox.map((item) => ({
     value: item.id,
     label: item.name,
@@ -39,6 +44,7 @@ function Share(props) {
     createRecipe({
       name: name,
       description: description,
+      nation: nation,
       image: image,
       formula: formula,
       note: note,
@@ -125,9 +131,7 @@ function Share(props) {
 
   console.log("Recipe: ", {
     name: name,
-    ytbUrl: ytbUrl,
     nation: nation,
-    taste: taste,
     description: description,
     image: JSON.stringify(image),
     formula: formula,
@@ -215,18 +219,8 @@ function Share(props) {
                       placeholder="recipe name"
                     />
                   </div>
-                  <div className="recipe-name-add">
-                    <p className="recipe-name-add-item">Recipe nation </p>
-                    <input
-                      required
-                      type="text"
-                      id="nation"
-                      name="nation"
-                      value={nation}
-                      className="recipe-name-add-input"
-                      onChange={handleChangeForm}
-                      placeholder="recipe nation"
-                    />
+                  <div className="nation-add">
+                    <p className="nation-name-add-item">Nation</p>
                   </div>
                   <div className="recipe-name-add">
                     <p className="recipe-name-add-item">Recipe taste</p>
@@ -287,7 +281,9 @@ function Share(props) {
                         />
                       </div>
                     </div>
-                    <div className="ingredient-add-item-unit">Đơn vị: {unit}</div>
+                    <div className="ingredient-add-item-unit">
+                      Đơn vị: {unit}
+                    </div>
                     <RiAddCircleFill
                       size={26}
                       className="btn-add-ingredient"

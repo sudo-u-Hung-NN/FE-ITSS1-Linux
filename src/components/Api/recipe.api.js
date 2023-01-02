@@ -34,4 +34,4 @@ export const createRawMaterialApi = async (data) => {
 
 export const getRecipesByTaste = async (taste) => {
   return await axios.get(`${baseURL}/get-recipes-by-taste/${taste}`);
-}
+};
