@@ -12,6 +12,8 @@ import { createRawMaterialApi, createRecipe } from "../Api/recipe.api";
 import { AiFillWarning } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { set } from "date-fns";
+import { getAllTastesApi } from "./../Api/taste.api";
+import { getAllNations } from "./../Api/nation.api";
 
 function Share(props) {
   const user = useSelector((state) => state.auth.login.currentUser);
@@ -30,11 +32,11 @@ function Share(props) {
   const [videoUrl, setVideoUrl] = useState("");
   const [nation, setNation] = useState("");
   const [taste, setTaste] = useState([]);
-  const [nations, setNations] = useState([
-    { value: 1, label: "Việt Nam" },
-    { value: 2, label: "Trung Quốc" },
-    { value: 3, label: "Nhật Bản" },
-  ]);
+  const [listTasteForAdd, setListTasteForAdd] = useState([]);
+
+  const [nations, setNations] = useState([]);
+  const [listTaste, setListTaste] = useState([]);
+  const [allTastes, setAllTastes] = useState([]);
   const mockup_ingredients = listIngreDropBox.map((item) => ({
     value: item.id,
     label: item.name,
@@ -124,7 +126,10 @@ function Share(props) {
     let listIngreForAdd2 = listIngreForAdd.filter((item, i) => i !== index);
     setListIngreForAdd(listIngreForAdd2);
   };
-
+  const deleteTagTaste = (index) => {
+    let listTasteForAdd2 = listTasteForAdd.filter((item, i) => i !== index);
+    setListTasteForAdd(listTasteForAdd2);
+  };
   const handleChangeAmount = (event) => {
     setAmount(Number(event.target.value));
   };
@@ -149,14 +154,42 @@ function Share(props) {
       amount: amount,
     });
   };
-
+  const handleChangeTaste = (event) => {
+    setTaste({
+      id: event.value,
+      name: event.label,
+    });
+  };
   useEffect(() => {
     setIngredient({
       ...ingredient,
       amount: amount,
     });
   }, [setAmount, amount]);
-
+  useEffect(() => {
+    getAllTastesApi()
+      .then((res) => {
+        return res.data.map((item) => ({ value: item.id, label: item.name }));
+      })
+      .then((res) => {
+        setAllTastes(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  useEffect(() => {
+    getAllNations()
+      .then((res) => {
+        return res.data.map((item) => ({ value: item.id, label: item.name }));
+      })
+      .then((res) => {
+        setNations(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   useEffect(() => {
     getAllIngredients()
       .then((response) => {
@@ -166,6 +199,7 @@ function Share(props) {
         console.error(err);
       });
   }, []);
+  console.log("listaste", listTasteForAdd);
   return (
     <>
       {user ? (
@@ -233,19 +267,6 @@ function Share(props) {
                     />
                   </div>
                   <div className="recipe-name-add">
-                    <p className="recipe-name-add-item">Recipe taste</p>
-                    <input
-                      required
-                      type="text"
-                      id="taste"
-                      name="taste"
-                      value={taste}
-                      className="recipe-name-add-input"
-                      onChange={handleChangeForm}
-                      placeholder="recipe taste"
-                    />
-                  </div>
-                  <div className="recipe-name-add">
                     <p className="recipe-name-add-item">Giá tiền </p>
                     <input
                       required
@@ -259,6 +280,7 @@ function Share(props) {
                     />
                   </div>
                   <hr />
+
                   <div className="ingredient-add">
                     <p>Nguyên liệu </p>
                     <div className="ingredient-add-item">
@@ -306,10 +328,52 @@ function Share(props) {
                       }}
                     />
                   </div>
+                  <div className="ingredient-add">
+                    <p>Hương vị món ăn </p>
+                    <div className="ingredient-add-item">
+                      <div className="ingredient-add-item-name">
+                        <label>Tên:</label>
+                        <Select
+                          required
+                          placeholder="Search..."
+                          options={allTastes}
+                          onChange={(e) => {
+                            handleChangeTaste(e);
+                          }} // Handle here
+                        />
+                        {/* <GrClose size={15} className='delete-item-ingredient-add-item' onClick={() => deleteInput(item)} /> */}
+                      </div>
+                    </div>
+                    <RiAddCircleFill
+                      size={26}
+                      className="btn-add-ingredient"
+                      onClick={() => {
+                        if (taste.name !== "") {
+                          setListTasteForAdd([...listTasteForAdd, taste]);
+                          setTaste({ id: 0, name: "" });
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="other-input">
                 <div>
+                  <h5>Danh sách hương vị:</h5>
+                  <div className="list-ingredient-for-add">
+                    <ul>
+                      {listTasteForAdd.map((taste, index) => (
+                        <li key={index} className="ingredient-for-add-item">
+                          <span className="index">{index + 1}</span>
+                          <span>{taste.name}</span>
+                          <GrClose
+                            className="btn-remove-tag"
+                            onClick={() => deleteTagTaste(index)}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   <h5>Danh sách nguyên liệu:</h5>
                   <div className="list-ingredient-for-add">
                     <ul>
