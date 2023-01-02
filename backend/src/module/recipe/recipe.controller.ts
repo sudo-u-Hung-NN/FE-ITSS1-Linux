@@ -19,7 +19,7 @@ import { CreateRecipeSmellDto } from './dto/create-recipe-smell.dto';
 @ApiTags('Recipe')
 @Controller('recipe')
 export class RecipeController {
-  constructor(private readonly recipeService: RecipeService) {}
+  constructor(private readonly recipeService: RecipeService) { }
   @Public()
   @Post()
   create(@Body() createRecipeDto: CreateRecipeDto) {
@@ -37,7 +37,7 @@ export class RecipeController {
   }
   @Public()
   @Post('/smell')
-  createSmell (@Body() createSmell: CreateSmellDto) {
+  createSmell(@Body() createSmell: CreateSmellDto) {
     return this.recipeService.createSmell(createSmell);
   }
   @Public()
@@ -73,27 +73,27 @@ export class RecipeController {
   @Public()
   @Get('get-recipes-for-filter/:id')
   filter(@Param('id') id: string) {
-    
-    const numlist: number[]=[];
-    const abc=id.split('+')
-    for (var i = 0; i < abc.length; i++){
+
+    const numlist: number[] = [];
+    const abc = id.split('+')
+    for (var i = 0; i < abc.length; i++) {
       numlist.push(+abc[i]);
-  }
+    }
     return this.recipeService.filter(numlist);
   }
   @Public()
   @Get('getbysmell/:id')
   filterSmell(@Param('id') id: string) {
-    
-    const numlist: number[]=[];
-    const abc=id.split('+')
-    for (var i = 0; i < abc.length; i++){
+
+    const numlist: number[] = [];
+    const abc = id.split('+')
+    for (var i = 0; i < abc.length; i++) {
       numlist.push(+abc[i]);
-  }
+    }
     return this.recipeService.filterSmell(numlist);
   }
   @Public()
-  @Get('getrecipe/:id')
+  @Get('get-recipes-for-current-user/:id')
   getRecipe(@Param('id') id: number) {
     return this.recipeService.getRecipe(+id);
   }
