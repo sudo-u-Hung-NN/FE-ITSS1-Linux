@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +81,8 @@
       <workItem from="1671258229806" duration="17181000" />
       <workItem from="1671284478920" duration="2454000" />
       <workItem from="1672651362351" duration="1723000" />
-      <workItem from="1672653117539" duration="12058000" />
+      <workItem from="1672653117539" duration="12329000" />
+      <workItem from="1672676016863" duration="697000" />
     </task>
     <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
       <created>1670873829990</created>
