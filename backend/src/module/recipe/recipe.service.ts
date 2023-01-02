@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, QueryBuilder, Repository ,Not, Like} from 'typeorm';
+import { In, QueryBuilder, Repository, Not, Like } from 'typeorm';
 import { CreateNationDto } from './dto/create-nation.dto';
 import { CreateRawMaterial } from './dto/create-raw-material';
-import { CreateRecipeSmellDto } from './dto/create-recipe-smell.dto';
+import { CreateRecipeTasteDto } from './dto/create-recipe-taste.dto';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
-import { CreateSmellDto } from './dto/create-smell.dto';
+import { CreateTasteDto } from './dto/create-taste.dto';
 import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Nation } from './entities/nation.entity';
 import { RawMaterial } from './entities/raw-material.entity';
 import { RecipeRawMaterial } from './entities/recipe-raw-material.entity';
 import { Recipe } from './entities/recipe.entity';
-import { RecipeSmell } from './entities/smell-recipe.entity';
-import { Smell } from './entities/smell.entity';
+import { RecipeTaste } from './entities/taste-recipe.entity';
+import { Taste } from './entities/taste.entity';
 
 @Injectable()
 export class RecipeService {
@@ -26,23 +26,30 @@ export class RecipeService {
     private readonly recipeRawMaterialRepo: Repository<RecipeRawMaterial>,
     @InjectRepository(Nation)
     private readonly nationRepo: Repository<Nation>,
-    @InjectRepository(Smell)
-    private readonly smellRepo: Repository<Smell>,
-    @InjectRepository(RecipeSmell)
-    private readonly recipeSmellRepo: Repository<RecipeSmell>,
+    @InjectRepository(Taste)
+    private readonly tasteRepo: Repository<Taste>,
+    @InjectRepository(RecipeTaste)
+    private readonly recipeTasteRepo: Repository<RecipeTaste>,
   ) { }
   create(createRecipeDto: CreateRecipeDto) {
     return this.recipeRepo.save(createRecipeDto);
   }
-  createNation(createNationDto: CreateNationDto) {
+  async createNation(nationName: string) {
+    const nationObj = await this.nationRepo.findOne({where: {name: nationName}});
+    if (!nationObj) {
+      const createNationDTO: CreateNationDto = {name: nationName}
+      return this.nationRepo.save(createNationDTO);
+    } else {
+      return "Quốc gia này đã tồn tại"
+    }
     // const recipeImg = await fetch(createRecipeDto.image);
-    return this.nationRepo.save(createNationDto);
+    return "Thêm mới quốc gia thành công"
   }
-  createSmell(createSmell: CreateSmellDto) {
-    return this.smellRepo.save(createSmell);
+  createTaste(createTaste: CreateTasteDto) {
+    return this.tasteRepo.save(createTaste);
   }
-  createRecipeSmell(createRecipeSmell: CreateRecipeSmellDto) {
-    return this.recipeSmellRepo.save(createRecipeSmell);
+  createRecipeTaste(createRecipeTaste: CreateRecipeTasteDto) {
+    return this.recipeTasteRepo.save(createRecipeTaste);
   }
   createRawMaterial(createRawMaterial: CreateRawMaterial) {
     return this.rawMaterialRepo.save(createRawMaterial);
@@ -76,15 +83,15 @@ export class RecipeService {
       data.map((e) => e.recipe_raw_material_recipe_id),
     );
   }
-  
-  async filterSmell(id: number[]) {
+
+  async filterTaste(id: number[]) {
     const queryBuilder =
-      this.recipeSmellRepo.createQueryBuilder('recipe_smell');
-      queryBuilder.select('count(recipe_smell.recipe_id)','count')
-      queryBuilder.addSelect('recipe_smell.recipe_id','recipe_id')
-      queryBuilder.where(`recipe_smell.smell_id IN (:...id)`, { id: id });
-      queryBuilder.groupBy('recipe_smell.recipe_id')
-      queryBuilder.having('count>=:length',{length:id.length})
+      this.recipeTasteRepo.createQueryBuilder('recipe_taste');
+    queryBuilder.select('count(recipe_taste.recipe_id)', 'count')
+    queryBuilder.addSelect('recipe_taste.recipe_id', 'recipe_id')
+    queryBuilder.where(`recipe_taste.taste_id IN (:...id)`, { id: id });
+    queryBuilder.groupBy('recipe_taste.recipe_id')
+    queryBuilder.having('count>=:length', { length: id.length })
     const data = await queryBuilder.getRawMany();
     const proposalReview = await this.findByIds(
       data.map((e) => e.recipe_id),

@@ -14,12 +14,13 @@ import { ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/public.decorator';
 import { CreateRawMaterial } from './dto/create-raw-material';
 import { CreateRecipeRawDto } from './dto/recipe-raw-material.dto';
-import { CreateSmellDto } from './dto/create-smell.dto';
-import { CreateRecipeSmellDto } from './dto/create-recipe-smell.dto';
+import { CreateTasteDto } from './dto/create-taste.dto';
+import { CreateRecipeTasteDto } from './dto/create-recipe-taste.dto';
+import {CreateNationDto} from "./dto/create-nation.dto";
 @ApiTags('Recipe')
 @Controller('recipe')
 export class RecipeController {
-  constructor(private readonly recipeService: RecipeService) {}
+  constructor(private readonly recipeService: RecipeService) { }
   @Public()
   @Post()
   create(@Body() createRecipeDto: CreateRecipeDto) {
@@ -36,17 +37,17 @@ export class RecipeController {
     return this.recipeService.createRecipeMaterial(createRecipeDto);
   }
   @Public()
-  @Post('/smell')
-  createSmell (@Body() createSmell: CreateSmellDto) {
-    return this.recipeService.createSmell(createSmell);
+  @Post('/taste')
+  createTaste(@Body() createTaste: CreateTasteDto) {
+    return this.recipeService.createTaste(createTaste);
   }
   @Public()
-  @Post('/recipesmell')
-  createRecipeSmell(@Body() createRecipeSmellDto: CreateRecipeSmellDto) {
-    return this.recipeService.createRecipeSmell(createRecipeSmellDto);
+  @Post('/create-recipe-taste')
+  createRecipeTaste(@Body() createRecipeTasteDto: CreateRecipeTasteDto) {
+    return this.recipeService.createRecipeTaste(createRecipeTasteDto);
   }
   @Public()
-  @Get()
+  @Get('get-all')
   findAll() {
     return this.recipeService.findAll();
   }
@@ -73,27 +74,27 @@ export class RecipeController {
   @Public()
   @Get('get-recipes-for-filter/:id')
   filter(@Param('id') id: string) {
-    
-    const numlist: number[]=[];
-    const abc=id.split('+')
-    for (var i = 0; i < abc.length; i++){
+
+    const numlist: number[] = [];
+    const abc = id.split('+')
+    for (var i = 0; i < abc.length; i++) {
       numlist.push(+abc[i]);
-  }
+    }
     return this.recipeService.filter(numlist);
   }
   @Public()
-  @Get('getbysmell/:id')
-  filterSmell(@Param('id') id: string) {
-    
-    const numlist: number[]=[];
-    const abc=id.split('+')
-    for (var i = 0; i < abc.length; i++){
+  @Get('get-by-taste/:id')
+  filterTaste(@Param('id') id: string) {
+
+    const numlist: number[] = [];
+    const abc = id.split('+')
+    for (var i = 0; i < abc.length; i++) {
       numlist.push(+abc[i]);
-  }
-    return this.recipeService.filterSmell(numlist);
+    }
+    return this.recipeService.filterTaste(numlist);
   }
   @Public()
-  @Get('getrecipe/:id')
+  @Get('get-recipes-for-current-user/:id')
   getRecipe(@Param('id') id: number) {
     return this.recipeService.getRecipe(+id);
   }
@@ -101,6 +102,12 @@ export class RecipeController {
   @Get('get-recipes-for-other-users/:id')
   getRecipes(@Param('id') id: number) {
     return this.recipeService.getRecipes(+id);
+  }
+
+  @Public()
+  @Post('create-nation/:nation')
+  createNation(@Param('nation') nation: string) {
+    return this.recipeService.createNation(nation)
   }
 
   // @Patch(':id')

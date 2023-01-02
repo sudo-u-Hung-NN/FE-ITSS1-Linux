@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateRecipeSmellDto {
+export class CreateRecipeTasteDto {
   @ApiProperty()
   recipe_id: number;
 
   @ApiProperty()
-  smell_id: number;
+  taste_id: number;
 }

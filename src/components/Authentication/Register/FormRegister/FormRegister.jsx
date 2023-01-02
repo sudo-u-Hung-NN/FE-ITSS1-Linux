@@ -66,9 +66,9 @@ export default function FormRegister() {
                         maxLength: { value: 99, message: "email phải ngắn hơn 99 ký tự" },
                         minLength: { value: 10, message: "email phải dài hơn 10 ký tự" },
                         validate: {
-                        email: (v) =>
-                            /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) ||
-                            "email không hợp lệ",
+                            email: (v) =>
+                                /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) ||
+                                "email không hợp lệ",
                         },
                     })}
                     type="email"
@@ -81,20 +81,20 @@ export default function FormRegister() {
             <div className="mb-3">
                 <label>Mật khẩu</label>
                 <input
-                {...register("password", {
-                    required: { value: true, message: "Bạn phải nhập mật khẩu" },
-                    minLength: {
-                    value: 6,
-                    message: "Mật khẩu phải dài hơn 6 ký tự",
-                    },
-                    maxLength: {
-                    value: 99,
-                    message: "Mật khẩu phải ngắn hơn 99 ký tự",
-                    },
-                })}
-                type="password"
-                className={handleClass("password")}
-                placeholder="Nhập mật khẩu"
+                    {...register("password", {
+                        required: { value: true, message: "Bạn phải nhập mật khẩu" },
+                        minLength: {
+                            value: 6,
+                            message: "Mật khẩu phải dài hơn 6 ký tự",
+                        },
+                        maxLength: {
+                            value: 99,
+                            message: "Mật khẩu phải ngắn hơn 99 ký tự",
+                        },
+                    })}
+                    type="password"
+                    className={handleClass("password")}
+                    placeholder="Nhập mật khẩu"
                 />
                 <ErrorMessageAuth name="password" errors={errors} />
             </div>
@@ -102,11 +102,11 @@ export default function FormRegister() {
             <div className="mb-3">
                 <label>Câu hỏi bí mật</label>
                 <select {...register("question")} className={handleClass("question")}>
-                    <option value="" disabled selected hidden>
-                    Chọn câu hỏi
+                    <option value="" disabled hidden>
+                        Chọn câu hỏi
                     </option>
                     {mockup_questions?.map((item) => (
-                        <option value={item["id"]}>{item["content"]}</option>
+                        <option value={item["id"]} key={item.id}>{item["content"]}</option>
                     ))}
                 </select>
             </div>
@@ -132,20 +132,20 @@ export default function FormRegister() {
                 <ErrorMessageAuth name="answer" errors={errors} />
             </div>
 
-      {registerMessageError && (
-        <div className="text-danger">{registerMessageError}</div>
-      )}
-      <div className="d-grid">
-        <button type="submit" className="btn btn-primary">
-          Đăng ký
-        </button>
-      </div>
-      <p className="forgot-password text-right">
-        Đã có tài khoản ?{" "}
-        <Link onClick={() => dispatch(clearRedux())} to="/login">
-          Đăng nhập
-        </Link>
-      </p>
-    </form>
-  );
+            {registerMessageError && (
+                <div className="text-danger">{registerMessageError}</div>
+            )}
+            <div className="d-grid">
+                <button type="submit" className="btn btn-primary">
+                    Đăng ký
+                </button>
+            </div>
+            <p className="forgot-password text-right">
+                Đã có tài khoản ?{" "}
+                <Link onClick={() => dispatch(clearRedux())} to="/login">
+                    Đăng nhập
+                </Link>
+            </p>
+        </form>
+    );
 }

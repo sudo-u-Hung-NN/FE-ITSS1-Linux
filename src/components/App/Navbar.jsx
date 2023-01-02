@@ -23,7 +23,7 @@ function Navbar(props) {
 
   useEffect(() => {
     let handler = (e) => {
-      if (!dropdownRef.current.contains(e.target)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         closeDropdown()
       }
     }
