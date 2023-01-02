@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/module/Comment/comment.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/Comment/comment.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/module/Comment/comment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/Comment/comment.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/module/recipe/recipe.service.ts" afterDir="false" />
     </list>
@@ -84,7 +82,7 @@
       <workItem from="1671258229806" duration="17181000" />
       <workItem from="1671284478920" duration="2454000" />
       <workItem from="1672651362351" duration="1723000" />
-      <workItem from="1672653117539" duration="9371000" />
+      <workItem from="1672653117539" duration="10113000" />
     </task>
     <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
       <created>1670873829990</created>
