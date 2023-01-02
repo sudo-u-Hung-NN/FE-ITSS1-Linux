@@ -30,7 +30,7 @@ export class CommentService {
     async getCommentsByRecipeID(recipe_id: number) {
         const comments = this.commentRepository.findBy({recipe_id: recipe_id});
         if (!comments) {
-            return "Chưa có comment, vui lòng để lại comment!"
+      return 'Chưa có comment, vui lòng để lại comment!';
         }
         return comments;
     }
