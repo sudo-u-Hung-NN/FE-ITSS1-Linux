@@ -27,4 +27,7 @@ export class CreateRecipeDto {
 
   @ApiProperty()
   views: number;
+
+  @ApiProperty()
+  videoUrl: string;
 }
