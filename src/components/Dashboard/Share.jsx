@@ -27,22 +27,22 @@ function Share(props) {
   const [listIngreForAdd, setListIngreForAdd] = useState([]);
   const [amount, setAmount] = useState(1);
   const [unit, setUnit] = useState("");
-  const [ytbUrl, setUtbUrl] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
   const [nation, setNation] = useState("");
   const [taste, setTaste] = useState([]);
   const [nations, setNations] = useState([
-    { id: 1, name: "Việt Nam" },
-    { id: 2, name: "Trung Quốc" },
-    { id: 3, name: "Nhật Bản" },
+    { value: 1, label: "Việt Nam" },
+    { value: 2, label: "Trung Quốc" },
+    { value: 3, label: "Nhật Bản" },
   ]);
   const mockup_ingredients = listIngreDropBox.map((item) => ({
     value: item.id,
     label: item.name,
   }));
-
   const handleCreateRecipe = () => {
     createRecipe({
       name: name,
+      videoUrl: videoUrl,
       description: description,
       nation: nation,
       image: image,
@@ -106,8 +106,8 @@ function Share(props) {
       case "price":
         setPrice(e.target.value);
         break;
-      case "ytb-url":
-        setUtbUrl(e.target.value);
+      case "video-url":
+        setVideoUrl(e.target.value);
         break;
       case "nation":
         setNation(e.target.value);
@@ -128,7 +128,7 @@ function Share(props) {
   const handleChangeAmount = (event) => {
     setAmount(Number(event.target.value));
   };
-
+  useEffect(() => {});
   console.log("Recipe: ", {
     name: name,
     nation: nation,
@@ -139,6 +139,7 @@ function Share(props) {
     creator: creator,
     price: price,
     views: 0,
+    videoUrl,
   });
 
   const handleChangeIngredient = (event) => {
@@ -219,8 +220,17 @@ function Share(props) {
                       placeholder="recipe name"
                     />
                   </div>
-                  <div className="nation-add">
-                    <p className="nation-name-add-item">Nation</p>
+                  <div className="recipe-name-add">
+                    <p className="recipe-name-add-item">Nation</p>
+                    <Select
+                      className="nation-select"
+                      required
+                      placeholder="Search..."
+                      options={nations}
+                      onChange={(e) => {
+                        setNation(e.value);
+                      }}
+                    />
                   </div>
                   <div className="recipe-name-add">
                     <p className="recipe-name-add-item">Recipe taste</p>
@@ -323,12 +333,12 @@ function Share(props) {
                     type="text"
                     required
                     className="ytb-url"
-                    id="ytb-url"
-                    name="ytb-url"
-                    value={ytbUrl}
+                    id="video-url"
+                    name="video-url"
+                    value={videoUrl}
                     onChange={handleChangeForm}
                   ></input>
-                  <label className="label-link-url">Link Url</label>
+                  <label className="label-link-url">Link video hướng dẫn</label>
                   <span></span>
                 </div>
                 <div className="styled-input wide">
