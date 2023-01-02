@@ -48,7 +48,7 @@ export class RecipeController {
   //----------------------------------------------------------------
   @Public()
   @Post('/create-recipe-taste')
-  createRecipeTaste(@Body() createRecipeTasteDto: CreateRecipeTasteDto) {
+  createRecipeTaste(@Body() createRecipeTasteDto: CreateRecipeTasteDto[]) {
     return this.recipeService.createRecipeTaste(createRecipeTasteDto);
   }
   // ----------------------------------------------------------------

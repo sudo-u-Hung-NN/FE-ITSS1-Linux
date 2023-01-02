@@ -106,13 +106,15 @@ export class User1661402437884 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`DROP TABLE user;`);
-    await queryRunner.query(`DROP TABLE voting;`);
+    await queryRunner.query(`DROP TABLE recipe_taste;`);
+    await queryRunner.query(`DROP TABLE taste;`);
     await queryRunner.query(`DROP TABLE recipe_raw_material;`);
     await queryRunner.query(`DROP TABLE raw_material;`);
-    await queryRunner.query(`DROP TABLE recipe;`);
-    await queryRunner.query(`DROP TABLE taste;`);
-    await queryRunner.query(`DROP TABLE nation;`);
     await queryRunner.query(`DROP TABLE comment;`);
+    await queryRunner.query(`DROP TABLE voting;`);
+    await queryRunner.query(`DROP TABLE recipe;`);
+    await queryRunner.query(`DROP TABLE user;`);
+    await queryRunner.query(`DROP TABLE privatequestions;`);
+    await queryRunner.query(`DROP TABLE nation;`);
   }
 }

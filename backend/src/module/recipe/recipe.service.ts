@@ -72,7 +72,7 @@ export class RecipeService {
   /* *
    * Insert data to recipe-taste table
    * */
-  createRecipeTaste(createRecipeTaste: CreateRecipeTasteDto) {
+  createRecipeTaste(createRecipeTaste: CreateRecipeTasteDto[]) {
     return this.recipeTasteRepo.save(createRecipeTaste);
   }
 
