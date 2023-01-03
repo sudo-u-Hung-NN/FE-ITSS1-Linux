@@ -6,11 +6,15 @@ import { getAllIngredients } from "../Api/ingredient.api";
 import { getAllRecipes, getRecipesForFilter, getRecipesForSearchByName } from "../Api/recipe.api";
 import { FiSearch } from 'react-icons/fi';
 import { BiFilterAlt } from 'react-icons/bi';
+import { getAllNations } from '../Api/nation.api';
+import { getAllTastesApi } from '../Api/taste.api';
 
 function Search(props) {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [listIngredient, setListIngredient] = useState([]);
+    const [nations, setNations] = useState([]);
+    const [allTastes, setAllTastes] = useState([]);
 
     const getSearchedRecipes = (search) => {
         getRecipesForSearchByName(search).then(
@@ -90,6 +94,28 @@ function Search(props) {
         }
     }, [searchTerm, listIngredient]);
 
+    useEffect(() => {
+        getAllNations()
+            .then((res) => {
+                console.log('nations', res.data)
+                setNations(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
+
+    useEffect(() => {
+        getAllTastesApi()
+            .then((res) => {
+                console.log('tastes', res.data)
+                setAllTastes(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
     return (
         <div className="search-container">
             <div className='search-filter-container'>
@@ -120,22 +146,26 @@ function Search(props) {
                     </div>
                     <div>
                         <select className='country' id='country'>
-                            <option>--Quốc gia--</option>
-                            <option value="">Việt Nam</option>
-                            <option value="">Trung Quốc</option>
-                            <option value="">Pháp</option>
-                            <option value="">Nhật</option>
-                            <option value="">Hàn</option>
+                            <option value="">--Quốc gia--</option>
+                            {nations.map((nation, index) => {
+                                return (
+                                    <option key={index} value={nation.name}>
+                                        {nation.name}
+                                    </option>
+                                )
+                            })}
                         </select>
                     </div>
                     <div>
-                        <select className='taste' id='taste'>
+                        <select className='taste' id='taste' onChange={(e) => { console.log('Huong vi: ', e.target.value) }}>
                             <option value="">--Hương vị--</option>
-                            <option value="">Ngọt</option>
-                            <option value="">Mặn</option>
-                            <option value="">Chua</option>
-                            <option value="">Đắng</option>
-                            <option value="">Ngọt thịt</option>
+                            {allTastes.map((taste, index) => {
+                                return (
+                                    <option key={index} value={taste.id}>
+                                        {taste.name}
+                                    </option>
+                                )
+                            })}
                         </select>
                     </div>
                 </div>

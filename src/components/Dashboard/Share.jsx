@@ -12,6 +12,8 @@ import { createRawMaterialApi, createRecipe } from "../Api/recipe.api";
 import { AiFillWarning } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { set } from "date-fns";
+import { getAllTastesApi, postListTasteApi } from "./../Api/taste.api";
+import { getAllNations } from "./../Api/nation.api";
 
 function Share(props) {
   const user = useSelector((state) => state.auth.login.currentUser);
@@ -27,15 +29,23 @@ function Share(props) {
   const [listIngreForAdd, setListIngreForAdd] = useState([]);
   const [amount, setAmount] = useState(1);
   const [unit, setUnit] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+  const [nation, setNation] = useState("");
+  const [taste, setTaste] = useState([]);
+  const [listTasteForAdd, setListTasteForAdd] = useState([]);
+
+  const [nations, setNations] = useState([]);
+  const [allTastes, setAllTastes] = useState([]);
   const mockup_ingredients = listIngreDropBox.map((item) => ({
     value: item.id,
     label: item.name,
   }));
-
   const handleCreateRecipe = () => {
     createRecipe({
       name: name,
+      videoUrl: videoUrl,
       description: description,
+      nation: nation,
       image: image,
       formula: formula,
       note: note,
@@ -44,19 +54,23 @@ function Share(props) {
       views: 0,
     })
       .then((response) => {
-        console.log("New Recipe", response.data);
         const listIngredientNew = listIngreForAdd.map((item) => ({
           recipe_id: Number(response.data.id),
           raw_material_id: item.id,
           amount: Number(item.amount),
         }));
-        console.log("recipe raw: ", listIngredientNew);
-        return listIngredientNew;
+        const listTasteNew = listTasteForAdd.map((item) => ({
+          recipe_id: Number(response.data.id),
+          taste_id: item.id,
+        }));
+        const listShare = { listIngredientNew, listTasteNew };
+        return listShare;
       })
       .then((res) => {
-        createRawMaterialApi([...res]).then((response) => {
-          console.log(response.data);
-          toast("✅ Chia sẻ thành công!");
+        createRawMaterialApi([...res.listIngredientNew]).then(() => {
+          postListTasteApi([...res.listTasteNew]).then(() => {
+            toast("✅ Chia sẻ thành công!");
+          });
         });
       })
       .catch((err) => {
@@ -65,6 +79,7 @@ function Share(props) {
       });
   };
 
+  //----------------------------------UPLOAD image for create Recipe-------------------------------
   const handleChangeImage = (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
@@ -79,7 +94,6 @@ function Share(props) {
         console.error("Err: ", err);
       });
   };
-
   const handleChangeForm = (e) => {
     switch (e.target.name) {
       case "name":
@@ -97,22 +111,33 @@ function Share(props) {
       case "price":
         setPrice(e.target.value);
         break;
+      case "video-url":
+        setVideoUrl(e.target.value);
+        break;
+      case "nation":
+        setNation(e.target.value);
+        break;
+      case "taste":
+        setTaste(e.target.value);
+        break;
       default:
         console.log("handleChange...");
     }
   };
-  console.log(listIngreDropBox);
   const deleteTagIngredient = (index) => {
     let listIngreForAdd2 = listIngreForAdd.filter((item, i) => i !== index);
     setListIngreForAdd(listIngreForAdd2);
   };
-
+  const deleteTagTaste = (index) => {
+    let listTasteForAdd2 = listTasteForAdd.filter((item, i) => i !== index);
+    setListTasteForAdd(listTasteForAdd2);
+  };
   const handleChangeAmount = (event) => {
     setAmount(Number(event.target.value));
   };
-
   console.log("Recipe: ", {
     name: name,
+    nation: nation,
     description: description,
     image: JSON.stringify(image),
     formula: formula,
@@ -120,6 +145,7 @@ function Share(props) {
     creator: creator,
     price: price,
     views: 0,
+    videoUrl,
   });
 
   const handleChangeIngredient = (event) => {
@@ -129,7 +155,14 @@ function Share(props) {
       amount: amount,
     });
   };
+  const handleChangeTaste = (event) => {
+    setTaste({
+      id: event.value,
+      name: event.label,
+    });
+  };
 
+  //--------------------------------SET Ingredient to state------------------------------------
   useEffect(() => {
     setIngredient({
       ...ingredient,
@@ -137,6 +170,33 @@ function Share(props) {
     });
   }, [setAmount, amount]);
 
+  //-------------------------------GET ALL Tastes----------------------------------
+  useEffect(() => {
+    getAllTastesApi()
+      .then((res) => {
+        return res.data.map((item) => ({ value: item.id, label: item.name }));
+      })
+      .then((res) => {
+        setAllTastes(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  //--------------------------------GET ALL Nations--------------------------------
+  useEffect(() => {
+    getAllNations()
+      .then((res) => {
+        return res.data.map((item) => ({ value: item.id, label: item.name }));
+      })
+      .then((res) => {
+        setNations(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  //---------------------------------GET ALL Ingredients-------------------------------
   useEffect(() => {
     getAllIngredients()
       .then((response) => {
@@ -197,10 +257,21 @@ function Share(props) {
                       value={name}
                       className="recipe-name-add-input"
                       onChange={handleChangeForm}
-                      placeholder="recipe name"
+                      placeholder="VD: Đậu sốt cà chua"
                     />
                   </div>
-
+                  <div className="recipe-name-add">
+                    <p className="recipe-name-add-item">Quốc gia</p>
+                    <Select
+                      className="nation-select"
+                      required
+                      placeholder="Tìm kiếm..."
+                      options={nations}
+                      onChange={(e) => {
+                        setNation(e.value);
+                      }}
+                    />
+                  </div>
                   <div className="recipe-name-add">
                     <p className="recipe-name-add-item">Giá tiền </p>
                     <input
@@ -215,6 +286,7 @@ function Share(props) {
                     />
                   </div>
                   <hr />
+
                   <div className="ingredient-add">
                     <p>Nguyên liệu </p>
                     <div className="ingredient-add-item">
@@ -222,7 +294,7 @@ function Share(props) {
                         <label>Tên:</label>
                         <Select
                           required
-                          placeholder="Search..."
+                          placeholder="Tìm kiếm..."
                           options={mockup_ingredients}
                           onChange={(e) => {
                             listIngreDropBox.find((i) => {
@@ -238,6 +310,7 @@ function Share(props) {
                       <div className="ingredient-add-item-amount">
                         <label>Số lượng:</label>
                         <input
+                          id="amount-input"
                           min={1}
                           type="number"
                           value={amount}
@@ -246,8 +319,11 @@ function Share(props) {
                           }}
                         />
                       </div>
+                      <div className="ingredient-add-item-unit">
+                        <label for="">Đơn vị: </label>
+                        <p>{unit}</p>
+                      </div>
                     </div>
-                    <div className="ingredient-add-item-unit">Đơn vị: {unit}</div>
                     <RiAddCircleFill
                       size={26}
                       className="btn-add-ingredient"
@@ -260,10 +336,53 @@ function Share(props) {
                       }}
                     />
                   </div>
+                  <div className="ingredient-add">
+                    <p>Hương vị món ăn </p>
+                    <div className="ingredient-add-item">
+                      <div className="ingredient-add-item-name">
+                        <label>Tên:</label>
+                        <Select
+                          required
+                          placeholder="Tìm kiếm..."
+                          options={allTastes}
+                          onChange={(e) => {
+                            handleChangeTaste(e);
+                          }} // Handle here
+                        />
+                        {/* <GrClose size={15} className='delete-item-ingredient-add-item' onClick={() => deleteInput(item)} /> */}
+                      </div>
+                    </div>
+                    <RiAddCircleFill
+                      size={26}
+                      className="btn-add-ingredient"
+                      onClick={() => {
+                        if (taste.name !== "") {
+                          setListTasteForAdd([...listTasteForAdd, taste]);
+                          setTaste({ id: 0, name: "" });
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
+
               <div className="other-input">
                 <div>
+                  <h5>Danh sách hương vị:</h5>
+                  <div className="list-ingredient-for-add">
+                    <ul>
+                      {listTasteForAdd.map((taste, index) => (
+                        <li key={index} className="ingredient-for-add-item">
+                          <span className="index">{index + 1}</span>
+                          <span>{taste.name}</span>
+                          <GrClose
+                            className="btn-remove-tag"
+                            onClick={() => deleteTagTaste(index)}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   <h5>Danh sách nguyên liệu:</h5>
                   <div className="list-ingredient-for-add">
                     <ul>
@@ -281,6 +400,18 @@ function Share(props) {
                       ))}
                     </ul>
                   </div>
+                </div>
+                <div className="styled-input wide">
+                  <textarea
+                    required
+                    className="ytb-url"
+                    id="video-url"
+                    name="video-url"
+                    value={videoUrl}
+                    onChange={handleChangeForm}
+                  ></textarea>
+                  <label>Link video hướng dẫn</label>
+                  <span></span>
                 </div>
                 <div className="styled-input wide">
                   <textarea
@@ -316,6 +447,7 @@ function Share(props) {
                     onChange={handleChangeForm}
                   ></textarea>
                   <label>Chú ý</label>
+                  <span></span>
                 </div>
               </div>
 
