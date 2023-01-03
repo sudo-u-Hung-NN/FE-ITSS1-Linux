@@ -60,3 +60,7 @@ export const updatePassword = (id, password, setUpdatePassword, toast) => {
       }
     });
 };
+
+export const getUsersForShowComment = async (id) => {
+  return await axios.get(`${baseURL}/${id}`)
+};

@@ -35,7 +35,6 @@ function Share(props) {
   const [listTasteForAdd, setListTasteForAdd] = useState([]);
 
   const [nations, setNations] = useState([]);
-  const [listTaste, setListTaste] = useState([]);
   const [allTastes, setAllTastes] = useState([]);
   const mockup_ingredients = listIngreDropBox.map((item) => ({
     value: item.id,
@@ -256,15 +255,15 @@ function Share(props) {
                       value={name}
                       className="recipe-name-add-input"
                       onChange={handleChangeForm}
-                      placeholder="recipe name"
+                      placeholder="VD: Đậu sốt cà chua"
                     />
                   </div>
                   <div className="recipe-name-add">
-                    <p className="recipe-name-add-item">Nation</p>
+                    <p className="recipe-name-add-item">Quốc gia</p>
                     <Select
                       className="nation-select"
                       required
-                      placeholder="Search..."
+                      placeholder="Tìm kiếm..."
                       options={nations}
                       onChange={(e) => {
                         setNation(e.value);
@@ -293,7 +292,7 @@ function Share(props) {
                         <label>Tên:</label>
                         <Select
                           required
-                          placeholder="Search..."
+                          placeholder="Tìm kiếm..."
                           options={mockup_ingredients}
                           onChange={(e) => {
                             listIngreDropBox.find((i) => {
@@ -309,6 +308,7 @@ function Share(props) {
                       <div className="ingredient-add-item-amount">
                         <label>Số lượng:</label>
                         <input
+                          id='amount-input'
                           min={1}
                           type="number"
                           value={amount}
@@ -317,9 +317,10 @@ function Share(props) {
                           }}
                         />
                       </div>
-                    </div>
-                    <div className="ingredient-add-item-unit">
-                      Đơn vị: {unit}
+                      <div className="ingredient-add-item-unit">
+                        <label for="">Đơn vị: </label>
+                        <p>{unit}</p>
+                      </div>
                     </div>
                     <RiAddCircleFill
                       size={26}
@@ -340,7 +341,7 @@ function Share(props) {
                         <label>Tên:</label>
                         <Select
                           required
-                          placeholder="Search..."
+                          placeholder="Tìm kiếm..."
                           options={allTastes}
                           onChange={(e) => {
                             handleChangeTaste(e);
@@ -362,6 +363,7 @@ function Share(props) {
                   </div>
                 </div>
               </div>
+
               <div className="other-input">
                 <div>
                   <h5>Danh sách hương vị:</h5>
@@ -398,16 +400,15 @@ function Share(props) {
                   </div>
                 </div>
                 <div className="styled-input wide">
-                  <input
-                    type="text"
+                  <textarea
                     required
                     className="ytb-url"
                     id="video-url"
                     name="video-url"
                     value={videoUrl}
                     onChange={handleChangeForm}
-                  ></input>
-                  <label className="label-link-url">Link video hướng dẫn</label>
+                  ></textarea>
+                  <label>Link video hướng dẫn</label>
                   <span></span>
                 </div>
                 <div className="styled-input wide">
@@ -444,6 +445,7 @@ function Share(props) {
                     onChange={handleChangeForm}
                   ></textarea>
                   <label>Chú ý</label>
+                  <span></span>
                 </div>
               </div>
 

@@ -16,19 +16,17 @@ function Navbar(props) {
   const navigate = useNavigate();
 
   let dropdownRef = useRef();
-
-  const closeDropdown = () => {
-    setTablet(false);
-  }
+  let sidebarRef = useRef();
 
   useEffect(() => {
     let handler = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        closeDropdown()
+      if (dropdownRef.current && !sidebarRef.current.contains(e.target)) {
+        setTablet(false);
       }
     }
-    document.addEventListener("mousedown", handler, tablet === true)
-    return document.removeEventListener("mousedown", handler, tablet === false);
+
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
   })
 
   const closeNavbar = () => {
@@ -51,7 +49,7 @@ function Navbar(props) {
           <span>Soma Recommend</span>
         </Link>
         {
-          <div className={tablet ? "nav-links nav-tablet" : "nav-links"}>
+          <div className={tablet ? "nav-links nav-tablet" : "nav-links"} ref={sidebarRef}>
             <ul className={"navbar"}>
               <GrClose
                 id="close-navbar-icon"
@@ -77,15 +75,6 @@ function Navbar(props) {
           </div>
         }
         {currentUser ? (
-          // <div ref={dropdownRef}>
-          //   <img src='http://res.cloudinary.com/tuantea/image/upload/v1671462670/o8xxmzxjbnnof24atjft.jpg'
-          //     alt=''
-          //     className='user-pic'
-          //     aria-expanded={height !== 0}
-          //     onClick={() => setHeight(height === 0 ? "auto" : 0)}
-          //   />
-          //   <DropdownNavbar2 height={height} currentUser={currentUser} closeDropdown={closeDropdown} />
-          // </div>
           <div className="main" ref={dropdownRef}>
             <DropDownNavbar userInfo={dataUser} setShow={setShow} />
             <div
