@@ -178,10 +178,19 @@ export class RecipeService {
     queryBuilder.where(`recipe_raw_material.recipe_id = :id`, {
       id: recipe.id,
     });
+    const queryBuilder1 = this.recipeTasteRepo.createQueryBuilder(
+      'recipe_taste',
+    );
+    queryBuilder1.leftJoinAndSelect(
+      `recipe_taste.rawmaterial`,
+      `taste`,
+    );
+    queryBuilder1.where(`recipe_taste.recipe_id = :id`, {
+      id: recipe.id,
+    });
     const material = await queryBuilder.getRawMany();
-    console.log('a', queryBuilder.getQuery());
-    console.log('ahihi', material);
-    return [recipe, material];
+    const taste =await queryBuilder1.getRawMany();
+    return [recipe, material,taste];
   }
 
   /* *
