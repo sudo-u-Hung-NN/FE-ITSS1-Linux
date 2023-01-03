@@ -54,7 +54,6 @@ function Share(props) {
       views: 0,
     })
       .then((response) => {
-        console.log("New Recipe", response.data);
         const listIngredientNew = listIngreForAdd.map((item) => ({
           recipe_id: Number(response.data.id),
           raw_material_id: item.id,
@@ -94,7 +93,6 @@ function Share(props) {
         console.error("Err: ", err);
       });
   };
-
   const handleChangeForm = (e) => {
     switch (e.target.name) {
       case "name":
@@ -125,7 +123,6 @@ function Share(props) {
         console.log("handleChange...");
     }
   };
-  console.log(listIngreDropBox);
   const deleteTagIngredient = (index) => {
     let listIngreForAdd2 = listIngreForAdd.filter((item, i) => i !== index);
     setListIngreForAdd(listIngreForAdd2);
@@ -137,7 +134,6 @@ function Share(props) {
   const handleChangeAmount = (event) => {
     setAmount(Number(event.target.value));
   };
-  useEffect(() => {});
   console.log("Recipe: ", {
     name: name,
     nation: nation,
@@ -203,7 +199,6 @@ function Share(props) {
         console.error(err);
       });
   }, []);
-  console.log("listaste", listTasteForAdd);
   return (
     <>
       {user ? (
@@ -308,7 +303,7 @@ function Share(props) {
                       <div className="ingredient-add-item-amount">
                         <label>Số lượng:</label>
                         <input
-                          id='amount-input'
+                          id="amount-input"
                           min={1}
                           type="number"
                           value={amount}
