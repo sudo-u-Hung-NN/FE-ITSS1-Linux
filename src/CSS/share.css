@@ -141,14 +141,17 @@ input[type="file"] {
   height: 25px;
   width: 100%;
 }
+
 .nation-select {
   width: 220px;
   height: 25px;
 }
+
 .ingredient-add {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .ingredient-add .ingredient-add-item {
@@ -157,25 +160,39 @@ input[type="file"] {
   flex-direction: row;
   justify-content: space-between;
   /* margin-right: 15px; */
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   position: relative;
 }
+
 .ingredient-add .ingredient-add-item-name {
   display: flex;
   flex-direction: column;
   /*width: fit-content;*/
-  width: 100%;
+  /* width: 100%; */
   text-align: left;
 }
+
+.ingredient-add .ingredient-add-item-amount input#amount-input {
+  width: 100px;
+  box-shadow: none;
+}
+
 .ingredient-add .ingredient-add-item-unit {
-  background-color: #d7c870;
   width: max-content;
   display: flex;
-  align-self: center;
-  color: #fff;
-  padding: 5px 10px;
+  flex-direction: column;
+  /* align-self: center; */
+  color: rgb(0, 0, 0);
+  /* padding: 5px 10px; */
   border-radius: 5px;
+  /* margin-top: 25px; */
 }
+
+.ingredient-add .ingredient-add-item-unit p {
+  padding: 0 25px;
+  height: 30px;
+}
+
 .ingredient-add .ingredient-add-item-name {
   /*margin-right: 25px;*/
   margin-right: 15px;
@@ -379,8 +396,8 @@ input[type="file"] {
   color: #9d6045;
 }
 
-input:focus ~ label,
-input:valid ~ label {
+input:focus~label,
+input:valid~label {
   left: 0.5rem;
   font-size: 0.75em;
   color: #8e44ad;
@@ -389,8 +406,8 @@ input:valid ~ label {
   transition: all 0.125s ease;
 }
 
-textarea:focus ~ label,
-textarea:valid ~ label {
+textarea:focus~label,
+textarea:valid~label {
   font-size: 0.75em;
   color: #8e44ad;
   top: -2.25rem;
@@ -416,16 +433,20 @@ textarea:valid ~ label {
   pointer-events: none;
 }
 
+.styled-input textarea.ytb-url {
+  min-height: 70px;
+  padding: 10px;
+}
+
 .styled-input.wide {
   width: 100%;
 }
+
 .other-input input {
   height: 50px;
   border-radius: 10px;
 }
-.styled-input .label-link-url {
-  padding: 0;
-}
+
 .other-input input,
 textarea {
   padding: 1rem 1rem;
@@ -434,8 +455,8 @@ textarea {
   font-size: 1rem;
 }
 
-.other-input input ~ span,
-textarea ~ span {
+.other-input textarea~span,
+input~span {
   display: block;
   width: 0;
   height: 3px;
@@ -452,8 +473,8 @@ textarea:focus {
   outline: 0;
 }
 
-.other-input input:focus ~ span,
-textarea:focus ~ span {
+.other-input input:focus~span,
+textarea:focus~span {
   width: 100%;
   -webkit-transition: all 0.075s ease;
   transition: all 0.075s ease;
@@ -462,6 +483,12 @@ textarea:focus ~ span {
 .other-input textarea {
   width: 100%;
   min-height: 7em;
+  border-radius: 10px;
+}
+
+.other-input input {
+  width: 100%;
+  min-height: 2em;
   border-radius: 10px;
 }
 
@@ -475,6 +502,10 @@ textarea:focus ~ span {
   flex-wrap: wrap;
   background: #ffffff;
   border-radius: 10px;
+}
+
+.list-ingredient-for-add {
+  margin-bottom: 20px;
 }
 
 .list-ingredient-for-add .ingredient-for-add-item {
