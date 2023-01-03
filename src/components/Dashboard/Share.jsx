@@ -12,7 +12,7 @@ import { createRawMaterialApi, createRecipe } from "../Api/recipe.api";
 import { AiFillWarning } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { set } from "date-fns";
-import { getAllTastesApi } from "./../Api/taste.api";
+import { getAllTastesApi, postListTasteApi } from "./../Api/taste.api";
 import { getAllNations } from "./../Api/nation.api";
 
 function Share(props) {
@@ -61,13 +61,18 @@ function Share(props) {
           raw_material_id: item.id,
           amount: Number(item.amount),
         }));
-        console.log("recipe raw: ", listIngredientNew);
-        return listIngredientNew;
+        const listTasteNew = listTasteForAdd.map((item) => ({
+          recipe_id: Number(response.data.id),
+          taste_id: item.id,
+        }));
+        const listShare = { listIngredientNew, listTasteNew };
+        return listShare;
       })
       .then((res) => {
-        createRawMaterialApi([...res]).then((response) => {
-          console.log(response.data);
-          toast("✅ Chia sẻ thành công!");
+        createRawMaterialApi([...res.listIngredientNew]).then(() => {
+          postListTasteApi([...res.listTasteNew]).then(() => {
+            toast("✅ Chia sẻ thành công!");
+          });
         });
       })
       .catch((err) => {
