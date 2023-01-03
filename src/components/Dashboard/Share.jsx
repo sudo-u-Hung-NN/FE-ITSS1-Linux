@@ -12,7 +12,7 @@ import { createRawMaterialApi, createRecipe } from "../Api/recipe.api";
 import { AiFillWarning } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { set } from "date-fns";
-import { getAllTastesApi } from "./../Api/taste.api";
+import { getAllTastesApi, postListTasteApi } from "./../Api/taste.api";
 import { getAllNations } from "./../Api/nation.api";
 
 function Share(props) {
@@ -54,19 +54,23 @@ function Share(props) {
       views: 0,
     })
       .then((response) => {
-        console.log("New Recipe", response.data);
         const listIngredientNew = listIngreForAdd.map((item) => ({
           recipe_id: Number(response.data.id),
           raw_material_id: item.id,
           amount: Number(item.amount),
         }));
-        console.log("recipe raw: ", listIngredientNew);
-        return listIngredientNew;
+        const listTasteNew = listTasteForAdd.map((item) => ({
+          recipe_id: Number(response.data.id),
+          taste_id: item.id,
+        }));
+        const listShare = { listIngredientNew, listTasteNew };
+        return listShare;
       })
       .then((res) => {
-        createRawMaterialApi([...res]).then((response) => {
-          console.log(response.data);
-          toast("✅ Chia sẻ thành công!");
+        createRawMaterialApi([...res.listIngredientNew]).then(() => {
+          postListTasteApi([...res.listTasteNew]).then(() => {
+            toast("✅ Chia sẻ thành công!");
+          });
         });
       })
       .catch((err) => {
@@ -90,7 +94,6 @@ function Share(props) {
         console.error("Err: ", err);
       });
   };
-
   const handleChangeForm = (e) => {
     switch (e.target.name) {
       case "name":
@@ -121,7 +124,6 @@ function Share(props) {
         console.log("handleChange...");
     }
   };
-  console.log(listIngreDropBox);
   const deleteTagIngredient = (index) => {
     let listIngreForAdd2 = listIngreForAdd.filter((item, i) => i !== index);
     setListIngreForAdd(listIngreForAdd2);
@@ -133,7 +135,6 @@ function Share(props) {
   const handleChangeAmount = (event) => {
     setAmount(Number(event.target.value));
   };
-
   console.log("Recipe: ", {
     name: name,
     nation: nation,
@@ -205,7 +206,6 @@ function Share(props) {
         console.error(err);
       });
   }, []);
-  console.log("listaste", listTasteForAdd);
   return (
     <>
       {user ? (
@@ -310,7 +310,7 @@ function Share(props) {
                       <div className="ingredient-add-item-amount">
                         <label>Số lượng:</label>
                         <input
-                          id='amount-input'
+                          id="amount-input"
                           min={1}
                           type="number"
                           value={amount}
