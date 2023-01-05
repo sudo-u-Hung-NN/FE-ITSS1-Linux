@@ -137,7 +137,11 @@ export class RecipeController {
   getAllNations() {
     return this.recipeService.findAllNations();
   }
-
+  @Public()
+  @Get('get-by-nations/:id')
+  findRecipeByNations(@Param('id') id:number) {
+    return this.recipeService.findRecipeByNations(id);
+  }
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
   //   return this.recipeService.update(+id, updateRecipeDto);

@@ -56,6 +56,9 @@ export class RecipeService {
   findAllNations () {
     return this.nationRepo.find();
   }
+  findRecipeByNations(id:number){
+    return this.recipeRepo.find({where:{nation:id}});
+  }
   /**
    * Thêm mới hương vị
    * */

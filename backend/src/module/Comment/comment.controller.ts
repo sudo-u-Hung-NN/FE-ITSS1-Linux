@@ -15,6 +15,11 @@ export class CommentController {
         return this.commentService.createComment(createCommentDto);
     }
     @Public()
+    @Patch('/update')
+    update(@Body() createCommentDto: UpdateCommentDto) {
+        return this.commentService.updateComment(createCommentDto);
+    }
+    @Public()
     @Get('/get-by-recipe_id/:id')
     getStars(@Param('id') id:number) {
         return this.commentService.getCommentsByRecipeID(id);

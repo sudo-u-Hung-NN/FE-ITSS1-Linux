@@ -103,6 +103,14 @@ export class User1661402437884 implements MigrationInterface {
         FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE
     ) `,
     );
+    await queryRunner.query(
+      `CREATE TABLE IF NOT EXISTS vipuser (
+        id    INT NOT NULL UNIQUE AUTO_INCREMENT,
+        user_id     INT NOT NULL,
+        expireDate DATE NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE
+    ) `,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
@@ -113,6 +121,7 @@ export class User1661402437884 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE comment;`);
     await queryRunner.query(`DROP TABLE voting;`);
     await queryRunner.query(`DROP TABLE recipe;`);
+    await queryRunner.query(`DROP TABLE vipuser;`);
     await queryRunner.query(`DROP TABLE user;`);
     await queryRunner.query(`DROP TABLE privatequestions;`);
     await queryRunner.query(`DROP TABLE nation;`);

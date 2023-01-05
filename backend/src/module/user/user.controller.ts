@@ -14,6 +14,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/public.decorator';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { ForgotPassword } from './dto/forgot-password.dto';
+import { CreateVipUserDto } from './dto/create-vip.dto';
 @ApiBearerAuth()
 @ApiTags('User')
 @Controller('user')
@@ -29,6 +30,11 @@ export class UserController {
   @Post('')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
+  }
+  @Public()
+  @Post('/vip')
+  createVip(@Body() createUserDto: CreateVipUserDto) {
+    return this.userService.createVip(createUserDto);
   }
   // @Get()
   // findAll() {

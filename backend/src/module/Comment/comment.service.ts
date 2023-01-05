@@ -26,9 +26,37 @@ export class CommentService {
         }
         return "người dùng đã comment";
     }
+    async updateComment(updateCommentDto: UpdateCommentDto) {
+        const comment = await this.commentRepository.findOne({
+            where: {
+                recipe_id: updateCommentDto.recipe_id,
+                user_id: updateCommentDto.user_id
+            }
+        });
+        if (comment) {
+            comment.content=updateCommentDto.content;
+            comment.date_comment=updateCommentDto.date_comment;
+            return this.commentRepository.save(comment)
+        }
+        else  
+        {
+            return "Nguoi dung chua comment"
+        }
+        return "người dùng đã  chỉnh sửa comment";
+    }
 
     async getCommentsByRecipeID(recipe_id: number) {
-        const comments = this.commentRepository.findBy({recipe_id: recipe_id});
+          const queryBuilder = this.commentRepository.createQueryBuilder(
+            'comment',
+          );
+          queryBuilder.leftJoinAndSelect(
+            `comment.user`,
+            `user`,
+          );
+          queryBuilder.where(`comment.recipe_id = :recipe_id`, {
+            recipe_id: recipe_id,
+          });
+          const comments=queryBuilder.getRawMany();
         if (!comments) {
       return 'Chưa có comment, vui lòng để lại comment!';
         }

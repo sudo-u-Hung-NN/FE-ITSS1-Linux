@@ -8,12 +8,16 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { JwtPayload } from '../auth/payload.interface';
 import { ForgotPassword } from './dto/forgot-password.dto';
+import { VipUser } from './entities/vipuser.entity';
+import { CreateVipUserDto } from './dto/create-vip.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
+    @InjectRepository(VipUser)
+    private readonly userVipRepo: Repository<VipUser>,
   ) { }
   async createAdmin(createUserDto: CreateUserDto) {
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
@@ -23,6 +27,15 @@ export class UserService {
     // createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     // createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     return this.userRepo.save(createUserDto);
+  } 
+  async createVip(createUserDto: CreateVipUserDto) {
+    const datenow = new Date(createUserDto.expireDate);
+    if(createUserDto.option===1)
+    createUserDto.expireDate=new Date(datenow.getTime() + (1000 * 60 * 60 * 24*365));
+    if(createUserDto.option===2)
+    createUserDto.expireDate=new Date(datenow.getTime() + (1000 * 60 * 60 * 24*365*100));
+    const {option,...vipUser}=createUserDto;
+    return this.userVipRepo.save(vipUser);
   }
 
   findAll() {
