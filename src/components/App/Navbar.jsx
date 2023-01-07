@@ -6,6 +6,8 @@ import { clearRedux } from "../../Redux/auth.slice";
 import Profile from "../Profile/Profile";
 import { GrClose } from "react-icons/gr";
 import { getUser } from "../Api/user.api";
+import DropdownMenu from "../OtherComponent/IsLogined/DropdownMenu";
+import '../../CSS/dropdown.scss';
 
 function Navbar(props) {
   const dispatch = useDispatch();
@@ -13,15 +15,29 @@ function Navbar(props) {
   const dataUser = useSelector((state) => state.user.dataUser.data);
   const [show, setShow] = useState(false);
   const [tablet, setTablet] = useState(false);
+  const [height, setHeight] = useState(0);
   const navigate = useNavigate();
+
+  console.log(dataUser);
 
   let dropdownRef = useRef();
   let sidebarRef = useRef();
 
   useEffect(() => {
     let handler = (e) => {
-      if (dropdownRef.current && !sidebarRef.current.contains(e.target)) {
+      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
         setTablet(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  })
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setHeight(0);
       }
     }
 
@@ -76,7 +92,14 @@ function Navbar(props) {
         }
         {currentUser ? (
           <div className="main" ref={dropdownRef}>
-            <DropDownNavbar userInfo={dataUser} setShow={setShow} />
+            {/* <DropDownNavbar userInfo={dataUser} setShow={setShow} /> */}
+            <img src={currentUser.avatar ? currentUser.avatar : "https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"}
+              alt=''
+              className='user-pic'
+              aria-expanded={height !== 0}
+              onClick={() => setHeight(height === 0 ? "auto" : 0)}
+            />
+            <DropdownMenu height={height} userInfo={currentUser} setHeight={setHeight} setShow={setShow}/>
             <div
               className="bx bx-menu"
               id="menu-icon"

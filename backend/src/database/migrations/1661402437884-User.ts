@@ -28,7 +28,7 @@ export class User1661402437884 implements MigrationInterface {
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         name VARCHAR(50) NOT NULL
     )`,
-  );  
+    );
     await queryRunner.query(
       `CREATE TABLE IF NOT EXISTS recipe (
           id 						INT 					NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -54,7 +54,7 @@ export class User1661402437884 implements MigrationInterface {
       )`,
     );
     await queryRunner.query(
-    `CREATE TABLE IF NOT EXISTS taste (
+      `CREATE TABLE IF NOT EXISTS taste (
       id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
       name VARCHAR(50) NOT NULL
   )`,
@@ -105,10 +105,12 @@ export class User1661402437884 implements MigrationInterface {
     );
     await queryRunner.query(
       `CREATE TABLE IF NOT EXISTS vipuser (
-        id    INT NOT NULL UNIQUE AUTO_INCREMENT,
-        user_id     INT NOT NULL,
-        expireDate DATE NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE
+        id    INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	      user_id     INT NOT NULL UNIQUE,
+        vip_option INT NOT NULL,
+	      expireDate DATETIME NOT NULL DEFAULT now(),
+	      CONSTRAINT CHK_VIP CHECK(vip_option>=1 AND vip_option<=2), 
+	      FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE
     ) `,
     );
   }
