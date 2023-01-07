@@ -23,17 +23,15 @@ function Navbar(props) {
       if (dropdownRef.current && !sidebarRef.current.contains(e.target)) {
         setTablet(false);
       }
-    }
+    };
 
-    document.addEventListener("mousedown", handler)
-    return () => document.removeEventListener("mousedown", handler)
-  })
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  });
 
   const closeNavbar = () => {
     setTablet(false);
   };
-
-
 
   useEffect(() => {
     if (currentUser) {
@@ -49,7 +47,10 @@ function Navbar(props) {
           <span>Soma Recommend</span>
         </Link>
         {
-          <div className={tablet ? "nav-links nav-tablet" : "nav-links"} ref={sidebarRef}>
+          <div
+            className={tablet ? "nav-links nav-tablet" : "nav-links"}
+            ref={sidebarRef}
+          >
             <ul className={"navbar"}>
               <GrClose
                 id="close-navbar-icon"
