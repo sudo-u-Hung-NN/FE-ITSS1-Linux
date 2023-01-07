@@ -9,6 +9,9 @@ const userSlice = createSlice({
             isErrors: false,
             dataError: null,
         },
+        vipUser: {
+            vip: null
+        }
     },
     reducers: {
         getUserStart: (state) => {
@@ -43,7 +46,26 @@ const userSlice = createSlice({
             state.dataUser.isFetching = false;
             state.dataUser.dataError = action.payload;
         },
+        getVip: (state, action) => {
+            state.vipUser.vip = action.payload;
+        },
+        buyVip: (state, action) => {
+            state.vipUser.vip = action.payload;
+        },
+        upgradeVip: (state, action) => {
+            state.vipUser.vip = action.payload;
+        }
     },
 });
-export const { getUserStart, getUserSuccess, getUserError, updateUserStart, updateUserSuccess, updateUserError } = userSlice.actions;
+export const { 
+    getUserStart, 
+    getUserSuccess, 
+    getUserError, 
+    updateUserStart, 
+    updateUserSuccess, 
+    updateUserError,
+    getVip, 
+    buyVip, 
+    upgradeVip
+} = userSlice.actions;
 export default userSlice.reducer;

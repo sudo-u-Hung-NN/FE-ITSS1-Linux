@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import DropDownNavbar from "../OtherComponent/IsLogined/DropDownNavbar";
 import { clearRedux } from "../../Redux/auth.slice";
 import Profile from "../Profile/Profile";
 import { GrClose } from "react-icons/gr";
 import { getUser } from "../Api/user.api";
 import DropdownMenu from "../OtherComponent/IsLogined/DropdownMenu";
 import '../../CSS/dropdown.scss';
+import VipContainer from "../OtherComponent/VIP/VipContainer";
+import { getVIPUser } from "../Api/user.api";
 
 function Navbar(props) {
   const dispatch = useDispatch();
@@ -16,9 +17,9 @@ function Navbar(props) {
   const [show, setShow] = useState(false);
   const [tablet, setTablet] = useState(false);
   const [height, setHeight] = useState(0);
+  const [showVip, setShowVip] = useState(false);
+  const vip = useSelector(state => state.user.vipUser.vip);
   const navigate = useNavigate();
-
-  console.log(dataUser);
 
   let dropdownRef = useRef();
   let sidebarRef = useRef();
@@ -56,6 +57,18 @@ function Navbar(props) {
       getUser(currentUser?.id, dispatch);
     }
   }, [currentUser, dispatch]);
+
+  useEffect(() => {
+    if (currentUser) {
+      getVIPUser(currentUser.id)
+        .then(res => {
+          // setVip(res.data.vip_option);
+        }).catch(err => {
+          console.log(err);
+          // setVip(0);
+        })
+    }
+  }, [])
 
   return (
     <>
@@ -99,7 +112,13 @@ function Navbar(props) {
               aria-expanded={height !== 0}
               onClick={() => setHeight(height === 0 ? "auto" : 0)}
             />
-            <DropdownMenu height={height} userInfo={currentUser} setHeight={setHeight} setShow={setShow}/>
+            <DropdownMenu
+              height={height}
+              userInfo={currentUser}
+              vip={vip}
+              setHeight={setHeight}
+              setShow={setShow}
+              setShowVip={setShowVip} />
             <div
               className="bx bx-menu"
               id="menu-icon"
@@ -129,6 +148,7 @@ function Navbar(props) {
       <div className="App-content">
         <Outlet />
         <Profile show={show} setShow={setShow} />
+        {showVip && <VipContainer setShowVip={setShowVip} />}
       </div>
     </>
   );

@@ -71,9 +71,9 @@ export const getVIPUser = async (id) => {
 };
 
 export const addVIPForUser = async (data) => {
-  return await axios.post(`/vip`, data);
+  return await axios.post(`${baseURL}/vip`, data);
 }
 
 export const upgradeVIPForUser = async (userId) => {
-  return await axios.put(`/vip/update/${userId}`);
+  return await axios.patch(`${baseURL}/vip/update/${userId}`);
 }
