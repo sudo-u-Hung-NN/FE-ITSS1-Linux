@@ -7,23 +7,21 @@ const Convert = ({ text }) => {
   useEffect(() => {
     const response = axios
       .post(
-        'https://translation.googleapis.com/language/translate/v2',
-        {},
+        'https://deep-translator-api.azurewebsites.net/google/',
         {
-          params: {
-            q: text,
-            target: "vi",
-            key: 'AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM'
-          }
+            "source": "auto",
+            "target": "vi",
+            "text": text,
+            "proxies": []
         }
       )
       .then((response) => {
-        setConvertedText(response.data.data.translations[0].translatedText);
+        setConvertedText(response);
       })
       .catch((err) => {
         console.log('rest api error', err);
       });
-  }, [text]);
+  });
 
   return convertedText;
 };
