@@ -4,7 +4,7 @@ export class CreateVipUserDto {
   user_id: number;
 
   @ApiProperty()
-  option: number;
+  vip_option: number;
 
   @ApiProperty()
   expireDate: Date;

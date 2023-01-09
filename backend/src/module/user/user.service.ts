@@ -27,15 +27,44 @@ export class UserService {
     // createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     // createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     return this.userRepo.save(createUserDto);
-  } 
+  }
   async createVip(createUserDto: CreateVipUserDto) {
-    const datenow = new Date(createUserDto.expireDate);
-    if(createUserDto.option===1)
-    createUserDto.expireDate=new Date(datenow.getTime() + (1000 * 60 * 60 * 24*365));
-    if(createUserDto.option===2)
-    createUserDto.expireDate=new Date(datenow.getTime() + (1000 * 60 * 60 * 24*365*100));
-    const {option,...vipUser}=createUserDto;
-    return this.userVipRepo.save(vipUser);
+    const VipUser = await this.findVipByUserId(createUserDto.user_id);
+    if (VipUser) {
+      return "Bạn đã mua vip, chỉ có thể nâng cấp vip!"
+    } else {
+      const datenow = new Date(createUserDto.expireDate);
+      if (createUserDto.vip_option === 1)
+        createUserDto.expireDate = new Date(datenow.getTime() + (1000 * 60 * 60 * 24 * 365));
+      if (createUserDto.vip_option === 2)
+        createUserDto.expireDate = new Date(datenow.getTime() + (1000 * 60 * 60 * 24 * 365 * 100));
+      // const {option,...vipUser}=createUserDto;
+      const vipUser = { ...createUserDto }
+      return this.userVipRepo.save(vipUser);
+    }
+  }
+
+  async updateVIP(userID: number) {
+    const user = await this.userRepo.findOne({ where: { id: userID } });
+    if (!user) {
+      return "Người dùng không tồn tại!"
+    } else {
+      const vipUser: CreateVipUserDto = await this.userVipRepo.findOne({ where: { user_id: userID } });
+      if (vipUser && vipUser.vip_option === 1) {
+        const datenow = new Date();
+        vipUser.vip_option = 2;
+        vipUser.expireDate = new Date(datenow.getTime() + (1000 * 60 * 60 * 24 * 365 * 100));
+        return this.userVipRepo.save(vipUser);
+      } else if (vipUser && vipUser.vip_option === 2) {
+        return "Bạn đã sở hữu tài khoản VIP vĩnh viễn, không thể nâng cấp nữa!"
+      } else {
+        return "Bạn chưa mua gói vip nào, hãy mua vip!"
+      }
+    }
+  }
+
+  findVipByUserId(id: number) {
+    return this.userVipRepo.findOne({ where: { user_id: id } });
   }
 
   findAll() {

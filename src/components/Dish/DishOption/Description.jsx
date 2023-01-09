@@ -1,6 +1,6 @@
 import Parser from "html-react-parser";
 import React from "react";
-import Convert from "../../OtherComponent/Translate/Translate"
+import Convert from "../../Api/translate.api"
 
 export const Description = ({dishData}) => {
     return (

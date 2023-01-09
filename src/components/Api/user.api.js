@@ -64,3 +64,16 @@ export const updatePassword = (id, password, setUpdatePassword, toast) => {
 export const getUsersForShowComment = async (id) => {
   return await axios.get(`${baseURL}/${id}`)
 };
+
+
+export const getVIPUser = async (id) => {
+  return await axios.get(`${baseURL}/vip/get-by-userId/${id}`);
+};
+
+export const addVIPForUser = async (data) => {
+  return await axios.post(`${baseURL}/vip`, data);
+}
+
+export const upgradeVIPForUser = async (userId) => {
+  return await axios.patch(`${baseURL}/vip/update/${userId}`);
+}

@@ -15,7 +15,30 @@ import { Description } from "../Dish/DishOption/Description";
 import { Formula } from "../Dish/DishOption/Formula";
 import { Note } from "../Dish/DishOption/Note";
 import VideoTutorial from "../Dish/DishOption/VideoTutorial";
+import { getVip } from "../../Redux/user.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getVIPUser } from "../Api/user.api";
+
 function App() {
+
+  const currentUser = useSelector(state => state.auth.login.currentUser);
+  const dispatch = useDispatch();
+
+  if (currentUser) {
+    getVIPUser(currentUser.id)
+      .then((response) => {
+        if (response.data === null) {
+          dispatch(getVip(0))
+        } else {
+          dispatch(getVip(response.data.vip_option))
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Navbar />}>

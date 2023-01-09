@@ -26,7 +26,7 @@ function Home(props) {
     useEffect(() => {
         getAllRecipes().then(
             res => {
-                console.log('res: ', res.data);
+                // console.log('res: ', res.data);
                 setListRecipes(res.data);
             }
         ).catch(
@@ -36,7 +36,7 @@ function Home(props) {
         )
     }, [])
 
-    console.log("list", listRecipes);
+    // console.log("list", listRecipes);
 
     return (
         <div className='home-page-container'>
