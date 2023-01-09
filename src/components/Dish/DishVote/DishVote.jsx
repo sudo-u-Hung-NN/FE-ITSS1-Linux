@@ -13,18 +13,15 @@ const colors = {
 };
 
 function DishVote() {
-
   const param = useParams();
   const user = useSelector((state) => state.auth.login.currentUser);
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0);
 
-
   const handleClickStar = (value) => {
     setCurrentValue(value);
   };
-
 
   const handleClick = () => {
     const data = {
@@ -36,7 +33,6 @@ function DishVote() {
     userVote(data);
   };
 
-  
   const handleMouseOver = (newHoverValue) => {
     setHoverValue(newHoverValue);
   };
@@ -82,7 +78,7 @@ const styles = {
     alignItems: "center",
     height: "120px",
     justifyContent: "space-between",
-    marginBottom: "50px"
+    marginBottom: "50px",
   },
   stars: {
     display: "flex",

@@ -20,7 +20,10 @@ function Search(props) {
   const [listIngredient, setListIngredient] = useState([]);
   const [nations, setNations] = useState([]);
   const [allTastes, setAllTastes] = useState([]);
-
+  const [hiddenTaste, sethiddenTaste] = useState([]);
+  const [moreClicked1, setMoreClicked] = useState(false);
+  const [checkedListTastes, setCheckedListTastes] = useState({});
+  const [backSearched, setBackSearched] = useState([]);
   const getSearchedRecipes = (search) => {
     getRecipesForSearchByName(search)
       .then((res) => {
@@ -71,10 +74,28 @@ function Search(props) {
           console.log(err);
         });
     } else {
-      setSearchedRecipes([]);
+      setSearchedRecipes(backSearched);
     }
   };
-
+  const handleCheck1 = (isCheck, id) => {
+    const checkedListClone = { ...checkedListTastes };
+    checkedListClone[id] = isCheck;
+    setCheckedListTastes(checkedListClone);
+    const filter_item_ids = Object.keys(checkedListClone).filter(
+      (key) => checkedListClone[key] === true
+    );
+    const converted_request = filter_item_ids.join("+");
+    console.log("list taste", converted_request);
+    if (converted_request.length > 0) {
+      getRecipesByTaste(converted_request)
+        .then((res) => {
+          setSearchedRecipes(res.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setSearchedRecipes(backSearched);
+    }
+  };
   useEffect(() => {
     getAllIngredients()
       .then((res) => {
@@ -92,6 +113,7 @@ function Search(props) {
   useEffect(() => {
     if (searchTerm === "" || listIngredient === null) {
       getAllRecipes().then((res) => {
+        setBackSearched(res.data);
         setSearchedRecipes(res.data);
       });
     }
@@ -136,6 +158,9 @@ function Search(props) {
         console.log(err);
       });
   };
+  useEffect(() => {
+    sethiddenTaste(allTastes.slice(0, 4));
+  }, [allTastes]);
   return (
     <div className="search-container">
       <div className="search-filter-container">
@@ -185,22 +210,25 @@ function Search(props) {
               })}
             </select>
           </div>
-          <div>
-            <select
-              className="taste"
-              id="taste"
-              onChange={(e) => handleSearchByTaste(e.target.value)}
-            >
-              <option value="">--Hương vị--</option>
-              {allTastes.map((taste, index) => {
-                return (
-                  <option key={index} value={taste.id}>
-                    {taste.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+        </div>
+      </div>
+      <div className="form-check filter-tastes">
+        <p>Hương vị</p>
+        <div className="check-list-item">
+          {(moreClicked1 ? hiddenTaste : allTastes).map((item) => (
+            <div key={item.id} className="check-item">
+              <label key={item.id} className="container-checkbox">
+                <span>{item.name}</span>
+                <input
+                  type="checkbox"
+                  onChange={(e) =>
+                    handleCheck1(e.currentTarget.checked, item.id)
+                  }
+                />
+                <span className="checkmark"></span>
+              </label>
+            </div>
+          ))}
         </div>
       </div>
       <div className="form-check">

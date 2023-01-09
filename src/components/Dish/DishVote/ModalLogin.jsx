@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowFalse, setShowTrue } from "../../../Redux/isShow.slice";
 import FormLoginModal from "./FormLoginModal";
 import "./modalLogin.scss";
 export default function ModalLogin({ handleClick }) {
   const isUser = useSelector((state) => state.auth.login.currentUser);
   // const isUser = localStorage.getItem('access_token');
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-
+  const isShow = useSelector((state) => state.isShow.show);
+  const dispatch = useDispatch();
+  const handleClose = () => dispatch(setShowFalse());
 
   const handleClickButton = () => {
     if (isUser === null) {
-      setShow(true);
+      dispatch(setShowTrue());
     } else {
       handleClick();
     }
@@ -30,7 +30,7 @@ export default function ModalLogin({ handleClick }) {
         Bình chọn
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Bạn phải đăng nhập</Modal.Title>
         </Modal.Header>

@@ -5,6 +5,9 @@ export const getAllCommentById = async (id) => {
   return await axios.get(`${base_url}/get-by-recipe_id/${id}`);
 };
 
-export const createComment = async (data) => {
+export const createCommentApi = async (data) => {
   return await axios.post(base_url, data);
-}
+};
+export const updateCommentApi = async (data) => {
+  return await axios.patch(`${base_url}/update`, data);
+};

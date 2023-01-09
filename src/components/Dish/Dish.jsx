@@ -11,7 +11,7 @@ import { Description } from "./DishOption/Description";
 import { Formula } from "./DishOption/Formula";
 import { Note } from "./DishOption/Note";
 import VideoTutorial from "./DishOption/VideoTutorial";
-import CommentRecipe from "../OtherComponent/Comment/Comment"
+import CommentRecipe from "../OtherComponent/Comment/Comment";
 import { getAllCommentById } from "../Api/comment.api";
 export default function Dish() {
   const dispatch = useDispatch();
@@ -19,9 +19,8 @@ export default function Dish() {
   const [voted, setVoted] = useState(0);
   const param = useParams();
   const [option, setOption] = useState(1);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [listComments, setListComments] = useState([]);
-
   useEffect(() => {
     getDish(param.id, dispatch);
   }, [param, dispatch]);
@@ -37,12 +36,12 @@ export default function Dish() {
   useEffect(() => {
     getAllCommentById(dishData?.data[0].id)
       .then((res) => {
-        setListComments(res.data)
+        setListComments(res.data);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }, [dishData])
+        console.log(err);
+      });
+  }, [dishData]);
 
   return (
     <div className="dish">
@@ -108,7 +107,7 @@ export default function Dish() {
           </Col>
         </Row>
       </Container>
-      <CommentRecipe listComments={listComments} />
+      <CommentRecipe listComments={listComments} recipe_id={param.id} />
     </div>
   );
 }
