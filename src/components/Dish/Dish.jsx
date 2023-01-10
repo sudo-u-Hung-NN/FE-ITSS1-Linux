@@ -25,6 +25,8 @@ export default function Dish() {
     getDish(param.id, dispatch);
   }, [param, dispatch]);
 
+  console.log(dishData?.data[2])
+
   useEffect(() => {
     userVoted(param.id).then((res) => {
       if (res.data.avg !== null) {
@@ -81,6 +83,22 @@ export default function Dish() {
                   </tr>
                 ))}
               </tbody>
+            </table>
+            <table className="taste-table">
+              <b>Hương vị: </b>
+              {/* {
+              dishData?.data[2].map((taste, index) => <i key={index} style={{color:"red"}}>* {taste.taste_name} </i>)
+              } */}
+              {dishData?.data[2].map((taste, i) => {
+                if (i === dishData.data[2].length - 1) {
+                  return <i>{taste.taste_name}.</i>;
+                }
+                return <i>{taste.taste_name}, </i>;
+              })}
+              {/* <tr className="taste-row">
+                <td>Hương vị</td>
+                {dishData?.data[2].map((taste, index) => <td key={index} style={{color:"red"}}>{taste.taste_name}</td>)}
+              </tr> */}
             </table>
           </Col>
         </Row>

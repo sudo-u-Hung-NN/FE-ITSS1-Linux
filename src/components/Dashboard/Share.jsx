@@ -94,6 +94,7 @@ function Share(props) {
         console.error("Err: ", err);
       });
   };
+  
   const handleChangeForm = (e) => {
     switch (e.target.name) {
       case "name":

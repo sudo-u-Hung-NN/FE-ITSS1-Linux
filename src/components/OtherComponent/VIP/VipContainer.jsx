@@ -4,12 +4,88 @@ import '../../../CSS/vip.scss';
 import { addVIPForUser, upgradeVIPForUser } from '../../Api/user.api';
 import { useDispatch, useSelector } from 'react-redux';
 import { buyVip, upgradeVip } from '../../../Redux/user.slice';
+import { useFormik } from 'formik';
+import * as yup from 'yup'
 
 const VipContainer = ({ setShowVip }) => {
 
     const currentUser = useSelector(state => state.auth.login.currentUser)
     const vip = useSelector(state => state.user.vipUser.vip);
     const dispatch = useDispatch();
+
+    const formik = useFormik({
+        initialValues: {
+            bankName: '',
+            accountNumber: ''
+        },
+        validationSchema: yup.object().shape({
+            bankName: yup.string().required('required'),
+            accountNumber: yup.number().min(1).required('required'),
+        }),
+        onSubmit: values => {
+            console.log(values);
+            swal({
+                text: "Hãy lựa chọn",
+                buttons: {
+                    cancel: "Thoát",
+                    buy1: "Mua VIP 1",
+                    buy2: "Mua VIP Vĩnh viễn"
+                }
+            }).then((value) => {
+                switch (value) {
+                    case "buy1":
+                        switch (vip) {
+                            case undefined:
+                                handleBuyVIPUser(1);
+                                break
+                            case 1:
+                                swal({
+                                    icon: 'warning',
+                                    text: "Bạn đang sở hữu tài khoản VIP 1 và không thể mua lại! Bạn có thể lựa chọn nâng cấp lên tài khoản VIP vĩnh viễn!",
+                                    button: "Thoát"
+                                }).then(() => {
+                                    setShowVip(false);
+                                })
+                                break
+                            case 2:
+                                swal({
+                                    icon: 'warning',
+                                    text: "Bạn đang sở hữu tài khoản VIP vĩnh viễn, không thể mua hay nâng cấp VIP nữa!",
+                                    button: "Thoát"
+                                }).then(() => {
+                                    setShowVip(false);
+                                })
+                                break
+                            default:
+                                console.log("Mua vip 1");
+                        }
+                        break;
+                    case "buy2":
+                        switch (vip) {
+                            case undefined:
+                                handleBuyVIPUser(2);
+                                break
+                            case 1:
+                                handleUpgradeVIPUser();
+                                break
+                            case 2:
+                                swal({
+                                    icon: 'warning',
+                                    text: "Bạn đang sở hữu tài khoản VIP vĩnh viễn, không thể mua hay nâng cấp VIP nữa!"
+                                }).then(() => {
+                                    setShowVip(false);
+                                })
+                                break
+                            default:
+                                console.log("Mua vip 2");
+                                break;
+                        }
+                        break;
+                    default:
+                }
+            })
+        }
+    })
 
     const handleBuyVIPUser = (option) => {
         addVIPForUser({
@@ -72,26 +148,38 @@ const VipContainer = ({ setShowVip }) => {
 
     return (
         <div className='vip-container'>
-            <div className='vip-popup'>
+            <form className='vip-popup' onSubmit={formik.handleSubmit}>
                 <div className='popup-title'>
                     ⭐ Mua VIP ⭐
                 </div>
                 <div className='popup-content'>
                     <div className='input-container'>
-                        <label htmlFor='bank-name'>Tên ngân hàng: </label>
+                        <label htmlFor='bankName'>Tên ngân hàng: </label>
                         <input
                             type="text"
-                            id='bank-name'
+                            id='bankName'
+                            name='bankName'
+                            value={formik.values.bankName}
+                            onChange={formik.handleChange}
                             placeholder='VD: Vietcombank'
                         />
+                        <p>{formik.errors.bankName && "Yêu cầu nhập tên ngân hàng!"}</p>
                     </div>
                     <div className='input-container'>
-                        <label htmlFor='stk-name'>Số tài khoản: </label>
+                        <label htmlFor='accountNumber'>Số tài khoản: </label>
                         <input
                             type="text"
-                            id='stk-name'
+                            id='accountNumber'
+                            name='accountNumber'
+                            value={formik.values.accountNumber}
+                            onChange={formik.handleChange}
                             placeholder='VD: 1234 567 899'
                         />
+                        <p>{formik.errors.accountNumber && "Yêu cầu nhập số tài khoản ngân hàng!"}</p>
+                    </div>
+                    <div className='text-prices'>
+                        <p><strong>VIP 1:</strong> 300.000 VND</p>
+                        <p><strong>VIP VĨNH VIỄN:</strong> 300.000 VND</p>
                     </div>
                 </div>
                 <div className='popup-footer'>
@@ -102,63 +190,12 @@ const VipContainer = ({ setShowVip }) => {
                         Thoát
                     </button>
                     <button
-                        onClick={() => {
-                            switch (vip) {
-                                case undefined:
-                                    handleBuyVIPUser(1);
-                                    break
-                                case 1:
-                                    swal({
-                                        icon: 'warning',
-                                        text: "Bạn đang sở hữu tài khoản VIP 1 và không thể mua lại! Bạn có thể lựa chọn nâng cấp lên tài khoản VIP vĩnh viễn!",
-                                        button: "Thoát"
-                                    }).then(() => {
-                                        setShowVip(false);
-                                    })
-                                    break
-                                case 2:
-                                    swal({
-                                        icon: 'warning',
-                                        text: "Bạn đang sở hữu tài khoản VIP vĩnh viễn, không thể mua hay nâng cấp VIP nữa!",
-                                        button: "Thoát"
-                                    }).then(() => {
-                                        setShowVip(false);
-                                    })
-                                    break
-                                default:
-                                    console.log("Mua vip 1");
-                            }
-                        }}
+                        type="submit"
                     >
-                        Mua VIP 1
-                    </button>
-                    <button
-                        onClick={() => {
-                            switch (vip) {
-                                case undefined:
-                                    handleBuyVIPUser(2);
-                                    break
-                                case 1:
-                                    handleUpgradeVIPUser();
-                                    break
-                                case 2:
-                                    swal({
-                                        icon: 'warning',
-                                        text: "Bạn đang sở hữu tài khoản VIP vĩnh viễn, không thể mua hay nâng cấp VIP nữa!"
-                                    }).then(() => {
-                                        setShowVip(false);
-                                    })
-                                    break
-                                default:
-                                    console.log("Mua vip 2");
-                                    break;
-                            }
-                        }}
-                    >
-                        Mua VIP vĩnh viễn
+                        Mua VIP
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
