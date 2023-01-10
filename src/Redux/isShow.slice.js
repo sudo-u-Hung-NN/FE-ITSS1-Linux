@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const isShowSlice = createSlice({
   name: "isShow",
   initialState: {
-    show: true,
+    show: false,
   },
   reducers: {
     setShowFalse: (state) => {

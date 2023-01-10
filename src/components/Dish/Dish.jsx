@@ -25,6 +25,8 @@ export default function Dish() {
     getDish(param.id, dispatch);
   }, [param, dispatch]);
 
+  console.log(dishData)
+
   useEffect(() => {
     userVoted(param.id).then((res) => {
       if (res.data.avg !== null) {
