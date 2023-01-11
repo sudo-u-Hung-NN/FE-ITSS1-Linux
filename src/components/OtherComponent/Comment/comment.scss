@@ -1,17 +1,22 @@
 .comment-session {
     width: 100%;
     height: auto;
-    margin: 0 auto;
+    margin: 0px auto;
+    padding: 20px;
 
     .comment-box,
     .post-comment .list {
-        background-color: #fff;
+        // background-color: #fff;
         border-radius: 6px;
         box-shadow: 0 2px 2px #0002;
 
         .day {
             font-size: 12px;
         }
+    }
+
+    .comment-box {
+        background-color: #ffffff;
     }
 
     .post-comment {
@@ -32,13 +37,25 @@
                         margin-right: 10px;
                     }
                 }
+
+                .user-meta {
+                    display: flex;
+                    flex-direction: column;
+                    min-width: 100px;
+                    
+                    .day {
+                        text-align: left;
+                        width: 100%;
+                    }
+                }
             }
 
             .content {
-                padding: 10px 40px 0 58px;
+                padding: 10px 40px 20px 50px;
                 text-align: left;
                 font-size: 14px;
                 line-height: 16px;
+                font-weight: 600;
             }
         }
     }

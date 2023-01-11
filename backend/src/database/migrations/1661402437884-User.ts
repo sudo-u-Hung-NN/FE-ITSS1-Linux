@@ -97,7 +97,7 @@ export class User1661402437884 implements MigrationInterface {
         recipe_id INT NOT NULL,
         user_id     INT NOT NULL,
         content LONGTEXT NOT NULL,
-        date_comment DATE NOT NULL,
+        date_comment DATETIME NOT NULL DEFAULT now(),
         PRIMARY KEY (recipe_id, user_id),
         FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE

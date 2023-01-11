@@ -21,9 +21,10 @@ const Comment = ({ listComments, recipe_id }) => {
   const handleSubmitComment = (e) => {
     e.preventDefault();
     const time = new Date();
-    const timeNow = `${time.getFullYear()}-0${
-      time.getMonth() + 1
-    }-0${time.getDate()}`;
+    // const timeNow = `${time.getFullYear()}-${
+    //   time.getMonth() + 1
+    // }-0${time.getDate()}`;
+    const timeNow = new Date();
     console.log(timeNow);
     const formComment = {
       recipe_id,
@@ -99,6 +100,7 @@ const Comment = ({ listComments, recipe_id }) => {
   // getComments();
   return (
     <div className="comment-session">
+        <h4>BÌNH LUẬN</h4>
       <div className="post-comment">
         {comments?.map((comment, index) => (
           <div className="list" key={index}>
