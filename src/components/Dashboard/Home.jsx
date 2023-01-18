@@ -59,7 +59,6 @@ function Home(props) {
                     </div>
                 ))}
             </div>
-
             <ReactPaginate
                 breakLabel="..."
                 nextLabel="next >"
