@@ -16,7 +16,8 @@ export class User1661402437884 implements MigrationInterface {
         password	  VARCHAR(100) 	NOT NULL,
         avatar			LONGTEXT 			NULL, 
         phone 			VARCHAR(20) 	NULL, 
-        birth_date 	DATE 					NULL, 
+        birth_date 	DATE 					NULL,
+        status INT NOT NULL DEFAULT 0,
         gender 			ENUM('MALE','FEMALE') NULL,
         qid int NOT NULL,
         answer varchar(100),
@@ -111,6 +112,20 @@ export class User1661402437884 implements MigrationInterface {
         FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE
     ) `,
     );
+    await queryRunner.query(
+      `CREATE TABLE IF NOT EXISTS chat (
+        id    INT NOT NULL UNIQUE AUTO_INCREMENT,
+        sender_id     INT NOT NULL,
+        reciver_id     INT NOT NULL,
+        time DATE NOT NULL,
+        content varchar(100),
+        recipe_id INT NOT NULL,
+        FOREIGN KEY (sender_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (reciver_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON UPDATE CASCADE ON DELETE CASCADE
+
+    ) `,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
@@ -120,6 +135,7 @@ export class User1661402437884 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE raw_material;`);
     await queryRunner.query(`DROP TABLE comment;`);
     await queryRunner.query(`DROP TABLE voting;`);
+    await queryRunner.query(`DROP TABLE chat;`);
     await queryRunner.query(`DROP TABLE recipe;`);
     await queryRunner.query(`DROP TABLE vipuser;`);
     await queryRunner.query(`DROP TABLE user;`);

@@ -94,4 +94,12 @@ export class UserService {
     }
     return `Accout khong ton tai`;
   }
+  async blockUser(id: number) {
+    const user: User = await this.userRepo.findOne({ where: { id: id } });
+    if (user) {
+      user.status = 1;
+      return this.userRepo.save(user);
+    }
+    return `Accout khong ton tai`;
+  }
 }

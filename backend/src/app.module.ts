@@ -11,6 +11,7 @@ import { VotingModule } from './module/voting/voting.module';
 import { CommentModule } from './module/comment/comment.module';
 import { RecipeModule } from './module/recipe/recipe.module';
 import { CloudinaryModule } from './module/cloudinary/cloudinary.module';
+import { ChatModule } from './module/chat/chat.module';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -33,6 +34,7 @@ dotenv.config();
     CommentModule,
     RecipeModule,
     CloudinaryModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }],
