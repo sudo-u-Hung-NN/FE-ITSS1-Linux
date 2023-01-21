@@ -1,6 +1,11 @@
 
 Djavascript:S1128"#Remove this unused import of 'set'.(ÄâÂŠûÿÿÿÿ
-Ujavascript:S1481&":Remove the declaration of the unused 'listTaste' variable.(âÈ;
-Rjavascript:S1854&"7Remove this useless assignment to variable "listTaste".(âÈ;
-Xjavascript:S1481&"=Remove the declaration of the unused 'setListTaste' variable.(âÈ;
-Ujavascript:S1854&":Remove this useless assignment to variable "setListTaste".(âÈ;
+Jjavascript:S6480"(JSX props should not use arrow functions(—Î‚šüÿÿÿÿ
+Jjavascript:S6480«"(JSX props should not use arrow functions(—Î‚šüÿÿÿÿ
+Ejavascript:S6480Ê"(JSX props should not use arrow functions(­î¶ı
+Jjavascript:S6480Ü"(JSX props should not use arrow functions(—Î‚šüÿÿÿÿ
+Ejavascript:S6480æ"(JSX props should not use arrow functions(­î¶ı
+:javascript:S6479÷"Do not use Array index in keys(–ıİ'
+Jjavascript:S6480ü"(JSX props should not use arrow functions(úùÛùùÿÿÿÿ
+:javascript:S6479†"Do not use Array index in keys(–ıİ'
+Jjavascript:S6480"(JSX props should not use arrow functions(ÙçÇúùÿÿÿÿ

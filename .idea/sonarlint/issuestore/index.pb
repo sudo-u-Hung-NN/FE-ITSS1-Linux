@@ -227,6 +227,10 @@ w
 G.idea/sonarlint/issuestore/d/d/dd9478e7ffd74bb960295f96d989206695b29aa6,a\7\a7753af0bb195671fc0ae2bdd53abe6d8689a56e
 w
 G.idea/sonarlint/issuestore/a/c/acf5e65139fb20f4245bf916ed266099a09839e8,0\0\000b6c8f549f5f9d11f9f2a2116229833d95d6ce
+M
+src/components/App/Navbar.jsx,a\0\a0aed0b635547ec7b84678e7ddb208f1962a99ac
+j
+:src/components/OtherComponent/IsLogined/DropDownNavbar.jsx,c\2\c2042c2a36fe53600725ae308b6859021595a3b8
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 <
@@ -235,9 +239,5 @@ P
  src/components/Api/nation.api.js,5\6\560a865b6ffd1cbae468246746059257c5b06f5e
 R
 "src/components/Dashboard/Share.jsx,b\9\b9ae8a6e51a56e567e6aceb459eb5267e772af0e
-M
-src/components/App/Navbar.jsx,a\0\a0aed0b635547ec7b84678e7ddb208f1962a99ac
-j
-:src/components/OtherComponent/IsLogined/DropDownNavbar.jsx,c\2\c2042c2a36fe53600725ae308b6859021595a3b8
 A
 src/CSS/share.css,1\8\186fa09c4f672f0cde0fc2ab3b8e67b3ff38e49a

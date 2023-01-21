@@ -9,6 +9,9 @@ export class VipUser {
   user_id: number;
 
   @Column()
+  vip_option: number;
+
+  @Column()
   expireDate: Date;
 
 }

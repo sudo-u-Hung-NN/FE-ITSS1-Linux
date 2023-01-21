@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import DropDownNavbar from "../OtherComponent/IsLogined/DropDownNavbar";
 import { clearRedux } from "../../Redux/auth.slice";
 import Profile from "../Profile/Profile";
 import { GrClose } from "react-icons/gr";
 import { getUser } from "../Api/user.api";
+import DropdownMenu from "../OtherComponent/IsLogined/DropdownMenu";
+import '../../CSS/dropdown.scss';
+import VipContainer from "../OtherComponent/VIP/VipContainer";
+import { getVIPUser } from "../Api/user.api";
 
 function Navbar(props) {
   const dispatch = useDispatch();
@@ -13,6 +16,9 @@ function Navbar(props) {
   const dataUser = useSelector((state) => state.user.dataUser.data);
   const [show, setShow] = useState(false);
   const [tablet, setTablet] = useState(false);
+  const [height, setHeight] = useState(0);
+  const [showVip, setShowVip] = useState(false);
+  const vip = useSelector(state => state.user.vipUser.vip);
   const navigate = useNavigate();
 
   let dropdownRef = useRef();
@@ -20,8 +26,19 @@ function Navbar(props) {
 
   useEffect(() => {
     let handler = (e) => {
-      if (dropdownRef.current && !sidebarRef.current.contains(e.target)) {
+      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
         setTablet(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  });
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setHeight(0);
       }
     }
 
@@ -33,13 +50,23 @@ function Navbar(props) {
     setTablet(false);
   };
 
-
-
   useEffect(() => {
     if (currentUser) {
       getUser(currentUser?.id, dispatch);
     }
   }, [currentUser, dispatch]);
+
+  useEffect(() => {
+    if (currentUser) {
+      getVIPUser(currentUser.id)
+        .then(res => {
+          // setVip(res.data.vip_option);
+        }).catch(err => {
+          console.log(err);
+          // setVip(0);
+        })
+    }
+  }, [])
 
   return (
     <>
@@ -49,7 +76,10 @@ function Navbar(props) {
           <span>Soma Recommend</span>
         </Link>
         {
-          <div className={tablet ? "nav-links nav-tablet" : "nav-links"} ref={sidebarRef}>
+          <div
+            className={tablet ? "nav-links nav-tablet" : "nav-links"}
+            ref={sidebarRef}
+          >
             <ul className={"navbar"}>
               <GrClose
                 id="close-navbar-icon"
@@ -76,7 +106,20 @@ function Navbar(props) {
         }
         {currentUser ? (
           <div className="main" ref={dropdownRef}>
-            <DropDownNavbar userInfo={dataUser} setShow={setShow} />
+            {/* <DropDownNavbar userInfo={dataUser} setShow={setShow} /> */}
+            <img src={currentUser.avatar ? currentUser.avatar : "https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"}
+              alt=''
+              className='user-pic'
+              aria-expanded={height !== 0}
+              onClick={() => setHeight(height === 0 ? "auto" : 0)}
+            />
+            <DropdownMenu
+              height={height}
+              userInfo={currentUser}
+              vip={vip}
+              setHeight={setHeight}
+              setShow={setShow}
+              setShowVip={setShowVip} />
             <div
               className="bx bx-menu"
               id="menu-icon"
@@ -106,6 +149,7 @@ function Navbar(props) {
       <div className="App-content">
         <Outlet />
         <Profile show={show} setShow={setShow} />
+        {showVip && <VipContainer setShowVip={setShowVip} />}
       </div>
     </>
   );

@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f4f70cd-99ae-4656-9733-f5ca1336e70b" name="Changes" comment="Merge branch 'master' of github.com:sudo-u-Hung-NN/FE-ITSS1-Linux">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/3/f30451335edfb80e231f658d0defc83bb7e4c3a7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/8/186fa09c4f672f0cde0fc2ab3b8e67b3ff38e49a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/560a865b6ffd1cbae468246746059257c5b06f5e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/9/b9ae8a6e51a56e567e6aceb459eb5267e772af0e" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CSS/share.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSS/share.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard/Share.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OtherComponent/IsLogined/DropdownNavbar2.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,21 +28,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Git\\FE-ITSS2-clone\\backend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Git/mock2022-2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\Git\\FE-ITSS2-clone\\backend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Git\FE-ITSS2-clone\backend\src\module\Comment\entities" />
@@ -89,6 +88,9 @@
       <workItem from="1672651362351" duration="1723000" />
       <workItem from="1672653117539" duration="12329000" />
       <workItem from="1672676016863" duration="5392000" />
+      <workItem from="1673038769244" duration="73000" />
+      <workItem from="1673038899090" duration="61000" />
+      <workItem from="1673038982174" duration="182000" />
     </task>
     <task id="LOCAL-00001" summary="aresky-commit-7-update-backend-update-profile-update-search">
       <created>1670873829990</created>

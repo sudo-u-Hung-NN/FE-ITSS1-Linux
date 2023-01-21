@@ -93,6 +93,7 @@ body {
 .main {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .main a {

@@ -19,7 +19,7 @@ import { CreateVipUserDto } from './dto/create-vip.dto';
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
   // @Public()
   // @Post('/admin')
   // createAdmin(@Body() createUserDto: CreateUserDto) {
@@ -35,6 +35,16 @@ export class UserController {
   @Post('/vip')
   createVip(@Body() createUserDto: CreateVipUserDto) {
     return this.userService.createVip(createUserDto);
+  }
+  @Public()
+  @Get('/vip/get-by-userId/:id')
+  getVipByUserId(@Param('id') id: string) {
+    return this.userService.findVipByUserId(+id);
+  }
+  @Public()
+  @Patch('/vip/update/:userId')
+  updateVIPForUser(@Param('userId') id: number) {
+    return this.userService.updateVIP(id);
   }
   // @Get()
   // findAll() {

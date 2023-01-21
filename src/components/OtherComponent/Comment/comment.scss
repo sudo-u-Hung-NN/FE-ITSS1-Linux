@@ -1,17 +1,22 @@
 .comment-session {
     width: 100%;
     height: auto;
-    margin: 0 auto;
+    margin: 0px auto;
+    padding: 20px;
 
     .comment-box,
     .post-comment .list {
-        background-color: #fff;
+        // background-color: #fff;
         border-radius: 6px;
         box-shadow: 0 2px 2px #0002;
 
         .day {
             font-size: 12px;
         }
+    }
+
+    .comment-box {
+        background-color: #ffffff;
     }
 
     .post-comment {
@@ -26,26 +31,47 @@
 
                 &-image {
                     img {
-                        height: 38px;
-                        width: 38px;
+                        height: 30px;
+                        width: 30px;
                         border-radius: 50%;
                         margin-right: 10px;
+                    }
+                }
+
+                .user-meta {
+                    display: flex;
+                    flex-direction: column;
+                    min-width: 100px;
+                    
+                    .day {
+                        text-align: left;
+                        width: 100%;
                     }
                 }
             }
 
             .content {
-                padding: 10px 40px 15px 58px;
+                padding: 10px 40px 20px 50px;
                 text-align: left;
-                font-size: 12px;
+                font-size: 14px;
                 line-height: 16px;
+                font-weight: 600;
             }
         }
     }
 
-    .username {
-        text-transform: uppercase;
-        font-weight: 500;
+    .user-meta{
+        .username {
+            display: inline;
+            text-transform: uppercase;
+            font-weight: 500;
+            width: max-content;
+            text-align: left;
+        }
+        .day{
+            margin-left: 20px;
+            display: inline;
+        }
     }
 
     .comment-box {
@@ -54,8 +80,8 @@
 
         .image {
             img {
-                width: 24px;
-                height: 24px;
+                width: 40px;
+                height: 40px;
                 border-radius: 50%;
                 margin-right: 10px;
             }
@@ -69,7 +95,7 @@
         textarea {
             background-color: #eee;
             width: -webkit-fill-available;
-            height: 152px;
+            height: 60px;
             margin: 10px 0;
             padding: 10px;
             resize: inherit;

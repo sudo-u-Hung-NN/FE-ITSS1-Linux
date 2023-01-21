@@ -11,20 +11,22 @@ import { Description } from "./DishOption/Description";
 import { Formula } from "./DishOption/Formula";
 import { Note } from "./DishOption/Note";
 import VideoTutorial from "./DishOption/VideoTutorial";
-import CommentRecipe from "../OtherComponent/Comment/Comment"
+import CommentRecipe from "../OtherComponent/Comment/Comment";
 import { getAllCommentById } from "../Api/comment.api";
+import ChatPopup from "../OtherComponent/Chat/ChatPopup";
 export default function Dish() {
   const dispatch = useDispatch();
   const dishData = useSelector((state) => state.dish.dataDish.data);
   const [voted, setVoted] = useState(0);
   const param = useParams();
   const [option, setOption] = useState(1);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [listComments, setListComments] = useState([]);
-
   useEffect(() => {
     getDish(param.id, dispatch);
   }, [param, dispatch]);
+
+  console.log(dishData?.data[2])
 
   useEffect(() => {
     userVoted(param.id).then((res) => {
@@ -37,12 +39,12 @@ export default function Dish() {
   useEffect(() => {
     getAllCommentById(dishData?.data[0].id)
       .then((res) => {
-        setListComments(res.data)
+        setListComments(res.data);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }, [dishData])
+        console.log(err);
+      });
+  }, [dishData]);
 
   return (
     <div className="dish">
@@ -83,6 +85,22 @@ export default function Dish() {
                 ))}
               </tbody>
             </table>
+            <table className="taste-table">
+              <b>Hương vị: </b>
+              {/* {
+              dishData?.data[2].map((taste, index) => <i key={index} style={{color:"red"}}>* {taste.taste_name} </i>)
+              } */}
+              {dishData?.data[2].map((taste, i) => {
+                if (i === dishData.data[2].length - 1) {
+                  return <i>{taste.taste_name}.</i>;
+                }
+                return <i>{taste.taste_name}, </i>;
+              })}
+              {/* <tr className="taste-row">
+                <td>Hương vị</td>
+                {dishData?.data[2].map((taste, index) => <td key={index} style={{color:"red"}}>{taste.taste_name}</td>)}
+              </tr> */}
+            </table>
           </Col>
         </Row>
         <Row className="row-2">
@@ -108,7 +126,8 @@ export default function Dish() {
           </Col>
         </Row>
       </Container>
-      <CommentRecipe listComments={listComments} />
+      <CommentRecipe listComments={listComments} recipe_id={param.id} />
+      <ChatPopup/>
     </div>
   );
 }

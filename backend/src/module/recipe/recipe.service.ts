@@ -94,7 +94,7 @@ export class RecipeService {
   }
 
   /* *
-  * Lấy công thức có tên giống chuỗi đã nhập vào
+   * Lấy công thức có tên giống chuỗi đã nhập vào
   * */
   search(name: string) {
     console.log('abc', name);
