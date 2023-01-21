@@ -28,6 +28,8 @@ export class AuthService {
     );
     if (user === null)
       throw new HttpException('Incorrect password', HttpStatus.NOT_FOUND);
+    if(user.status===1)
+      return 'account bị block'
     const payload: JwtPayload = {
       email: loginUserDto.email,
     };

@@ -79,4 +79,11 @@ export class UserController {
   ) {
     return this.userService.updatePassword(+id, updatePasswordDto);
   }
+  @Public()
+  @Patch('/block/:id')
+  blockUser(
+    @Param('id') id: string
+  ) {
+    return this.userService.blockUser(+id);
+  }
 }
