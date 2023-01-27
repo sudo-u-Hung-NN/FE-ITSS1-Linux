@@ -21,6 +21,9 @@ export class User {
   gender: string;
 
   @Column()
+  status: number;
+
+  @Column()
   birth_date: Date;
 
   @Column()

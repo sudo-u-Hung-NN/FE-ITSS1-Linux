@@ -13,6 +13,7 @@ import { Note } from "./DishOption/Note";
 import VideoTutorial from "./DishOption/VideoTutorial";
 import CommentRecipe from "../OtherComponent/Comment/Comment";
 import { getAllCommentById } from "../Api/comment.api";
+import ChatPopup from "../OtherComponent/Chat/ChatPopup";
 export default function Dish() {
   const dispatch = useDispatch();
   const dishData = useSelector((state) => state.dish.dataDish.data);
@@ -126,6 +127,7 @@ export default function Dish() {
         </Row>
       </Container>
       <CommentRecipe listComments={listComments} recipe_id={param.id} />
+      <ChatPopup/>
     </div>
   );
 }
