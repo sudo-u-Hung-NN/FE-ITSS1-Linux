@@ -1,0 +1,94 @@
+@mixin itemTotal{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 10px 0;
+    border-radius: 5px;
+    border: solid 1px #333; 
+    width: 25%;
+}
+
+
+.right-admin-bgr{
+    margin-left: 1px;
+    width: 80%;
+    background-color: #0075ba;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .right-admin{
+        background-color: #ffffff;
+        width: 96%;
+        height: 96%;
+        &-total{
+            margin-top: -16px;
+            padding:1%;
+            width: 100%;
+            &-title{
+                text-align: left;
+                animation-name: rightTextTitle;
+                animation-duration: 3s;
+                animation-iteration-count: infinite;
+            }
+            &-item{
+                display: flex;
+                justify-content: space-around;
+                &-recipes{
+                    @include itemTotal;
+                    background-image: linear-gradient(#2cc6b6,#41e296);
+                }
+                &-vip-options{
+                    @include itemTotal;
+                    background-image: linear-gradient(#a054f2,#df6add);
+                }
+                &-users{
+                    @include itemTotal;
+                    background-image: linear-gradient(#ffb329,#f981a7);
+                }
+            }
+        }
+        &-main{
+            position: relative;
+            border-top: solid 1px #0075ba;
+            &-head{
+                background-color: #f3f8fc;
+                display: flex;
+                padding:16px 0px;
+                justify-content: space-around;
+                &-title{
+                    font-size: 24px;
+                    font-weight: 500;
+                }
+                &-search{
+                    input{
+                        width: 300px;
+                        font-size: 16px;
+                        padding: 5px;
+                        border-radius: 5px;
+                        border: none;
+                        &:focus{
+                            outline: #eee;
+                        }
+                    }
+                    button {
+                        margin-left: 26px;
+                        padding:0 20px;
+                        background-color: #0075ba;
+                        color: #fff;
+                        font-size: 20px;
+                        outline: none;
+                        border: none;
+                        border: solid 1px #eee;
+                        &:focus{
+                            border: solid 1px #a3cae7;
+                        }
+                    }
+                }
+
+            }
+            &-table{
+                height: 55vh;
+            }
+        }
+    }
+}

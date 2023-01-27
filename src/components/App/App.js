@@ -21,22 +21,21 @@ import { useEffect } from "react";
 import { getVIPUser } from "../Api/user.api";
 
 function App() {
-
-  const currentUser = useSelector(state => state.auth.login.currentUser);
+  const currentUser = useSelector((state) => state.auth.login.currentUser);
   const dispatch = useDispatch();
 
   if (currentUser) {
     getVIPUser(currentUser.id)
       .then((response) => {
         if (response.data === null) {
-          dispatch(getVip(0))
+          dispatch(getVip(0));
         } else {
-          dispatch(getVip(response.data.vip_option))
+          dispatch(getVip(response.data.vip_option));
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   return (
