@@ -160,6 +160,30 @@
         }
 
     }
+
+    .chat-icon {
+        position: fixed;
+        right: 15px;
+        bottom: 35px;
+        overflow: hidden;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #ffb79993;
+        padding: 10px;
+        cursor: pointer;
+        box-shadow: 0 0px 10px rgba(0, 0, 0, 0.358);
+        transition: background-color 0.2s linear;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        &:hover {
+            background-color: #d6dded;
+        }
+    }
 }
 
 @import '../OtherComponent/Comment/comment.scss'

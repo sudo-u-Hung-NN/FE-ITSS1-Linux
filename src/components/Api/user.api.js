@@ -65,6 +65,10 @@ export const getUsersForShowComment = async (id) => {
   return await axios.get(`${baseURL}/${id}`)
 };
 
+export const getUsersForChat = async (id) => {
+  return await axios.get(`${baseURL}/${id}`)
+};
+
 
 export const getVIPUser = async (id) => {
   return await axios.get(`${baseURL}/vip/get-by-userId/${id}`);
