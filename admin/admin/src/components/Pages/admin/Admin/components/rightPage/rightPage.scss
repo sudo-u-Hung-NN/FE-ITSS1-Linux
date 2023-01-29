@@ -88,6 +88,25 @@
             }
             &-table{
                 height: 55vh;
+                &-active{
+                    color:green ;
+                }
+                &-blocked{
+                    color: red;
+                }
+                &-button{
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+                &-button-blocked{
+                    cursor: no-drop;
+                    text-decoration: line-through;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: #888;
+                }
+
             }
         }
     }

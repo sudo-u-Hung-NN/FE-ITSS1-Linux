@@ -37,8 +37,8 @@ export default function AdminTable() {
   };
   const isDisable = (i) => {
     return i
-      ? "main-admin-table-item-button-unblock main-admin-table-item-button"
-      : "main-admin-table-item-button main-admin-table-item-button-blocked ";
+      ? "right-admin-main-table-active right-admin-main-table-circle"
+      : "right-admin-main-table-circle right-admin-main-table-blocked ";
   };
   useEffect(() => {
     const a = limitForPage(users, 9);
@@ -47,9 +47,12 @@ export default function AdminTable() {
   useEffect(() => {
     console.log(page);
   }, [page]);
-  const handleChangePage = useCallback((e) => {
-    setPage(e);
-  }, []);
+  const handleChangePage = useCallback(
+    (e) => {
+      setPage(e);
+    },
+    [users]
+  );
   return (
     <div>
       <Table bordered hover striped>
@@ -69,7 +72,23 @@ export default function AdminTable() {
                 <td>{index}</td>
                 <td>{item?.name}</td>
                 <td>{item?.id}</td>
-                <td>{item?.status}</td>
+                <td>
+                  <div className="main-admin-table-item-choose">
+                    <BsCircleFill className={isDisable(item?.status)} />
+                  </div>
+                </td>
+                <td>
+                  <div
+                    className={
+                      item?.status
+                        ? "right-admin-main-table-button"
+                        : "right-admin-main-table-button-blocked"
+                    }
+                    onClick={() => handleClickBlockButton(index, item?.status)}
+                  >
+                    Block
+                  </div>
+                </td>
               </tr>
             );
           })}

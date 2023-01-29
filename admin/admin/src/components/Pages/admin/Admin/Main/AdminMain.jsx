@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FormLoginAdmin from "../../../../FormLogin/FormLoginAdmin/FormLoginAdmin";
 import AdminTable from "./AdminTable";
-import "./adminMain.scss";
 export default function AdminMain() {
   console.log(process.env.REACT_APP_ADMIN_PASSWORD);
   const [isLogin, setIsLogin] = useState(false);
