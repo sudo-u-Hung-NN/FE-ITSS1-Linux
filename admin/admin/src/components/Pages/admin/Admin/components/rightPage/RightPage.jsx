@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getAllRecipes } from "../../../../../../api/apiUser";
+import { getAllRecipes, getAllUsers } from "../../../../../../api/apiUser";
 import AdminMain from "../../Main/AdminMain";
 import "./rightPage.scss";
+
 const RightPage = () => {
   const [recipes, setRecipes] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     getAllRecipes()
       .then((res) => {
@@ -14,6 +16,15 @@ const RightPage = () => {
         console.log(err);
       });
   }, [setRecipes, getAllRecipes]);
+  useEffect(() => {
+    getAllUsers()
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [setUsers, getAllUsers]);
   return (
     <div className="right-admin-bgr">
       <div className="right-admin">
@@ -25,7 +36,7 @@ const RightPage = () => {
             </div>
             <div className="right-admin-total-item-vip-options">4 gói vip</div>
             <div className="right-admin-total-item-users">
-              253 người sử dụng
+              {users.length} người sử dụng
             </div>
           </div>
         </div>
