@@ -21,7 +21,11 @@ export class ChatController {
   @Param('recipe_id') recipe_id:number) {
     return this.chatService.findAll(sender_id,reciver_id,recipe_id);
   }
-
+  @Public()
+  @Get('list/:id')
+  list(@Param('id') id:number) {
+    return this.chatService.list(id);
+  }
   // @Get(':id')
   // findOne(@Param('id') id: string) {
   //   return this.chatService.findOne(+id);

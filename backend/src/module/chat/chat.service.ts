@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Recipe } from '../recipe/entities/recipe.entity';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
 import { Chat } from './entities/chat.entity';
@@ -10,6 +11,8 @@ export class ChatService {
   constructor(
     @InjectRepository(Chat)
     private readonly chatRepo:Repository<Chat>,
+    @InjectRepository(Recipe)
+    private readonly recipeRepo:Repository<Recipe>,
   ){}
   create(createChatDto: CreateChatDto) {
     createChatDto.time=new Date();
@@ -43,7 +46,17 @@ export class ChatService {
   //   const data = await queryBuilder.getRawMany();
   //   return data;
   }
-
+  async list(id: number) {
+    const chat = await this.chatRepo.find({where:{recipe_id:id}});
+    const user=await this.recipeRepo.findOne({where:{id:id}});
+    const data=[]
+    for(  let i = 0; i < chat.length; ++i)
+    { 
+      if(chat[i].sender_id!==user.creator)
+      data.push(chat[i].sender_id)
+    }
+    return Array.from(new Set(data));
+  }
   findOne(id: number) {
     return `This action returns a #${id} chat`;
   }

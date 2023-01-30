@@ -51,6 +51,11 @@ export class UserController {
   //   return this.userService.findAll();
   // }
   @Public()
+  @Get('/getall')
+  findAll() {
+    return this.userService.findAll();
+  }
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
