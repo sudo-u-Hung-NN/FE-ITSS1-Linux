@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useFetcher, useParams } from "react-router-dom";
 import { getDish, userVoted } from "../Api/dish.api";
 import "./dish.scss";
 import DishOption from "./DishOption/DishOption";
@@ -14,19 +14,41 @@ import VideoTutorial from "./DishOption/VideoTutorial";
 import CommentRecipe from "../OtherComponent/Comment/Comment";
 import { getAllCommentById } from "../Api/comment.api";
 import ChatPopup from "../OtherComponent/Chat/ChatPopup";
+import { getUsersForChat } from "../Api/user.api";
+
+
 export default function Dish() {
   const dispatch = useDispatch();
   const dishData = useSelector((state) => state.dish.dataDish.data);
+  const creatorId = dishData?.data[0].creator;
+  const [creator, setCreator] = useState();
   const [voted, setVoted] = useState(0);
   const param = useParams();
   const [option, setOption] = useState(1);
   const [comment, setComment] = useState("");
   const [listComments, setListComments] = useState([]);
+  const currentUser = useSelector((state) => state.auth.login.currentUser);
+
+  const getCreatorById = () => {
+    getUsersForChat(creatorId)
+      .then((res) => {
+        setCreator(res.data);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  console.log(dishData?.data)
+  console.log('creator', creator);
+
+  useEffect(() => {
+    getCreatorById()
+  }, [dishData]);
+
   useEffect(() => {
     getDish(param.id, dispatch);
   }, [param, dispatch]);
-
-  console.log(dishData?.data[2])
 
   useEffect(() => {
     userVoted(param.id).then((res) => {
@@ -127,7 +149,11 @@ export default function Dish() {
         </Row>
       </Container>
       <CommentRecipe listComments={listComments} recipe_id={param.id} />
-      <ChatPopup/>
+      {currentUser.id !== creatorId ?
+        <ChatPopup creator={creator} sender_id={currentUser.id} reciver_id={creatorId} recipe_id={dishData?.data[0].id} />
+        :
+        <></>
+      }
     </div>
   );
 }

@@ -119,7 +119,7 @@ export class User1661402437884 implements MigrationInterface {
         id    INT NOT NULL UNIQUE AUTO_INCREMENT,
         sender_id     INT NOT NULL,
         reciver_id     INT NOT NULL,
-        time DATE NOT NULL,
+        time DATETIME NOT NULL DEFAULT now(),
         content varchar(100),
         recipe_id INT NOT NULL,
         FOREIGN KEY (sender_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE,
