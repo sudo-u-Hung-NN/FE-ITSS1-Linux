@@ -1,0 +1,17 @@
+.form-login{
+    padding-top: 60px;
+    min-height: 100vh;
+    background-image: url('https://storage.needpix.com/rsynced_images/background-2203989_1280.jpg');
+    h1{
+        color: rgba(37, 59, 25, 0.615);
+    }
+    .form-login-main{
+        width: 50%;
+        margin: auto;
+        background-color: #fff;
+        border: solid 1px #333;
+        border-radius: 10px;
+        margin-top: 50px;
+        padding: 20px 40px;
+    }
+}
