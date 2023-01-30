@@ -36,10 +36,11 @@ export class UserController {
   createVip(@Body() createUserDto: CreateVipUserDto) {
     return this.userService.createVip(createUserDto);
   }
-  // @Get()
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
+  @Public()
+  @Get('/getall')
+  findAll() {
+    return this.userService.findAll();
+  }
   @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
