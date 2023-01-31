@@ -185,7 +185,7 @@
     .chatbox-list-senders {
         position: fixed;
         right: 2rem;
-        bottom: 8rem;
+        bottom: 2rem;
         width: 420px;
         border-radius: .5rem;
         overflow: hidden;
@@ -194,13 +194,32 @@
         transform-origin: bottom right;
         transition: .2s;
 
-        .chatbox-list-senders-title {            
+        .chatbox-list-senders-title {
             background: var(--grey-d-1);
             padding: .75rem 1.5rem;
             text-align: center;
             color: var(--dark);
             font-weight: 600;
             font-size: 1.3rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .ai-outline-close-icon {
+                display: inline-flex;
+                align-items: center;
+                position: absolute;
+                right: 20px;
+                cursor: pointer;
+                border-radius: 50%;
+                padding: 5px;
+                transition: all 50ms linear;
+
+                &:hover {
+                    background-color: var(--grey-d-2);
+                    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, 0.2);
+                }
+            }
         }
 
         .chatbox-list-senders-body {
@@ -229,7 +248,14 @@
                     border-radius: 50%;
                     overflow: hidden;
                     margin-right: 30px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
                 }
+
                 .username {
                     color: var(--dark);
                 }

@@ -47,10 +47,9 @@ const ChatPopup = ({ creator, recipe_id, sender_id, reciver_id }) => {
         setShowPopup(!showPopup);
     }
 
-    function getCurrentChat() {
+    const getCurrentChat = () => {
         getMessage(sender_id, reciver_id, recipe_id)
             .then((res) => {
-                console.log(res.data);
                 setCurrentChat(res.data);
             })
             .catch((err) => {

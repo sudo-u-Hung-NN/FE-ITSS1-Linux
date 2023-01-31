@@ -17,6 +17,7 @@ import ChatPopupForCreator from "../OtherComponent/Chat/ChatPopupForCreator";
 import { getUsersForChat } from "../Api/user.api";
 import { getListSenderId } from "../Api/chat.api";
 import { BsMessenger } from 'react-icons/bs';
+import { AiOutlineClose } from 'react-icons/ai';
 
 
 export default function Dish() {
@@ -43,7 +44,7 @@ export default function Dish() {
   ]
 
   const [sender, setSender] = useState();
-  const [senders, setSenders] = useState(initialSenders);
+  const [senders, setSenders] = useState([]);
 
   const getCreatorById = () => {
     getUsersForChat(creatorId)
@@ -53,20 +54,6 @@ export default function Dish() {
       .catch((err) => {
         console.log(err)
       })
-  }
-
-  const getListSenderForChat = (listId) => {
-    listId.forEach(id => {
-      getUsersForChat(id)
-        .then((res) => {
-          const sender = res.data;
-          const newListSender = [...senders, sender]
-          setSenders(newListSender);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    });
   }
 
   // console.log(dishData?.data)
@@ -97,27 +84,19 @@ export default function Dish() {
       });
   }, [dishData]);
 
-  // useEffect(() => {
-  //   console.log('recipe_id', dishData?.data[0].id);
-  //   getListSenderId(dishData?.data[0].id)
-  //     .then(
-  //       res => {
-  //         console.log('List sender id', res.data)
-  //         return res.data;
-  //       }
-  //     )
-  //     .then((listId) => {
-  //       getListSenderForChat(listId);
-  //       console.log('list sender', listSender);
-  //     })
-  //     .catch(
-  //       err => {
-  //         console.log(err);
-  //       }
-  //     )
-  // }, [dishData, setListSender])
-
-  console.log('Sender', sender);
+  useEffect(() => {
+    getListSenderId(dishData?.data[0].id)
+      .then(
+        res => {
+          setSenders(res.data);
+        }
+      )
+      .catch(
+        err => {
+          console.log(err);
+        }
+      )
+  }, [dishData])
 
   return (
     <div className="dish">
@@ -204,20 +183,29 @@ export default function Dish() {
         <ChatPopup creator={creator} sender_id={currentUser?.id} reciver_id={creatorId} recipe_id={dishData?.data[0].id} />
         :
         <>
-          <div className="chatbox-toggle"
-            onClick={() => setshowPopupListSender(!showPopupListSender)}
-          >
-            {/* <i className='bx bx-message-dots'></i> */}
-            <BsMessenger />
-          </div>
+          {
+            !showPopupListSender &&
+            <div className="chatbox-toggle"
+              onClick={() => setshowPopupListSender(!showPopupListSender)}
+            >
+              {/* <i className='bx bx-message-dots'></i> */}
+              <BsMessenger />
+            </div>
+          }
           {showPopupListSender &&
             <div className="chatbox-list-senders">
               <div className="chatbox-list-senders-title">
                 Chat
+                <div className="ai-outline-close-icon"
+                  onClick={() => setshowPopupListSender(false)}
+                >
+                  <AiOutlineClose />
+                </div>
               </div>
               <div className="chatbox-list-senders-body">
                 {senders.map((sender) => (
                   <div className="chatbox-list-senders-item"
+                    key={sender.id}
                     onClick={() => {
                       setSender(sender);
                       setShowPopupChat(true)
@@ -225,7 +213,7 @@ export default function Dish() {
                     }}
                   >
                     <div className="avatar">
-                      <img src="" alt="" />
+                      <img src={sender.avatar ? sender.avatar : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="" />
                     </div>
                     <div className="username">
                       {sender.username}
