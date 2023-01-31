@@ -9,3 +9,7 @@ export const getMessage = async (sender_id, reciver_id, recipe_id) => {
 export const createMessage = async (data) => {
     return await axios.post(baseURL, data)
 }
+
+export const getListSenderId = async (recipe_id) => {
+    return await axios.get(`${baseURL}/get-list-by-recipe_id/${recipe_id}`)
+}

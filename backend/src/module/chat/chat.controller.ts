@@ -8,7 +8,7 @@ import { UpdateChatDto } from './dto/update-chat.dto';
 @Controller('chat')
 @ApiTags('Chat')
 export class ChatController {
-  constructor(private readonly chatService: ChatService) {}
+  constructor(private readonly chatService: ChatService) { }
   @Public()
   @Post()
   create(@Body() createChatDto: CreateChatDto) {
@@ -16,14 +16,14 @@ export class ChatController {
   }
   @Public()
   @Get('/:sender_id/:reciver_id/:recipe_id')
-  findAll(@Param('sender_id') sender_id:number,
-  @Param('reciver_id') reciver_id :number,
-  @Param('recipe_id') recipe_id:number) {
-    return this.chatService.findAll(sender_id,reciver_id,recipe_id);
+  findAll(@Param('sender_id') sender_id: number,
+    @Param('reciver_id') reciver_id: number,
+    @Param('recipe_id') recipe_id: number) {
+    return this.chatService.findAll(sender_id, reciver_id, recipe_id);
   }
   @Public()
-  @Get('list/:id')
-  list(@Param('id') id:number) {
+  @Get('get-list-by-recipe_id/:id')
+  list(@Param('id') id: number) {
     return this.chatService.list(id);
   }
   // @Get(':id')

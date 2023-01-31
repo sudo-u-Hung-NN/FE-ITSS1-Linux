@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetcher, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getDish, userVoted } from "../Api/dish.api";
 import "./dish.scss";
 import DishOption from "./DishOption/DishOption";
 import DishVote from "./DishVote/DishVote";
-import Parser from "html-react-parser";
 import { Description } from "./DishOption/Description";
 import { Formula } from "./DishOption/Formula";
 import { Note } from "./DishOption/Note";
@@ -14,7 +13,10 @@ import VideoTutorial from "./DishOption/VideoTutorial";
 import CommentRecipe from "../OtherComponent/Comment/Comment";
 import { getAllCommentById } from "../Api/comment.api";
 import ChatPopup from "../OtherComponent/Chat/ChatPopup";
+import ChatPopupForCreator from "../OtherComponent/Chat/ChatPopupForCreator";
 import { getUsersForChat } from "../Api/user.api";
+import { getListSenderId } from "../Api/chat.api";
+import { BsMessenger } from 'react-icons/bs';
 
 
 export default function Dish() {
@@ -25,9 +27,23 @@ export default function Dish() {
   const [voted, setVoted] = useState(0);
   const param = useParams();
   const [option, setOption] = useState(1);
-  const [comment, setComment] = useState("");
   const [listComments, setListComments] = useState([]);
   const currentUser = useSelector((state) => state.auth.login.currentUser);
+  const [showPopupListSender, setshowPopupListSender] = useState(false);
+  const [showPopupChat, setShowPopupChat] = useState(false);
+
+  const initialSenders = [
+    { id: 1, username: 'username1' },
+    { id: 2, username: 'username2' },
+    { id: 3, username: 'username3' },
+    { id: 4, username: 'username4' },
+    { id: 5, username: 'username5' },
+    { id: 6, username: 'username6' },
+    { id: 7, username: 'username7' },
+  ]
+
+  const [sender, setSender] = useState();
+  const [senders, setSenders] = useState(initialSenders);
 
   const getCreatorById = () => {
     getUsersForChat(creatorId)
@@ -39,8 +55,21 @@ export default function Dish() {
       })
   }
 
-  console.log(dishData?.data)
-  console.log('creator', creator);
+  const getListSenderForChat = (listId) => {
+    listId.forEach(id => {
+      getUsersForChat(id)
+        .then((res) => {
+          const sender = res.data;
+          const newListSender = [...senders, sender]
+          setSenders(newListSender);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    });
+  }
+
+  // console.log(dishData?.data)
 
   useEffect(() => {
     getCreatorById()
@@ -67,6 +96,28 @@ export default function Dish() {
         console.log(err);
       });
   }, [dishData]);
+
+  // useEffect(() => {
+  //   console.log('recipe_id', dishData?.data[0].id);
+  //   getListSenderId(dishData?.data[0].id)
+  //     .then(
+  //       res => {
+  //         console.log('List sender id', res.data)
+  //         return res.data;
+  //       }
+  //     )
+  //     .then((listId) => {
+  //       getListSenderForChat(listId);
+  //       console.log('list sender', listSender);
+  //     })
+  //     .catch(
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     )
+  // }, [dishData, setListSender])
+
+  console.log('Sender', sender);
 
   return (
     <div className="dish">
@@ -149,10 +200,50 @@ export default function Dish() {
         </Row>
       </Container>
       <CommentRecipe listComments={listComments} recipe_id={param.id} />
-      {currentUser.id !== creatorId ?
-        <ChatPopup creator={creator} sender_id={currentUser.id} reciver_id={creatorId} recipe_id={dishData?.data[0].id} />
+      {currentUser?.id !== creatorId ?
+        <ChatPopup creator={creator} sender_id={currentUser?.id} reciver_id={creatorId} recipe_id={dishData?.data[0].id} />
         :
-        <></>
+        <>
+          <div className="chatbox-toggle"
+            onClick={() => setshowPopupListSender(!showPopupListSender)}
+          >
+            {/* <i className='bx bx-message-dots'></i> */}
+            <BsMessenger />
+          </div>
+          {showPopupListSender &&
+            <div className="chatbox-list-senders">
+              <div className="chatbox-list-senders-title">
+                Chat
+              </div>
+              <div className="chatbox-list-senders-body">
+                {senders.map((sender) => (
+                  <div className="chatbox-list-senders-item"
+                    onClick={() => {
+                      setSender(sender);
+                      setShowPopupChat(true)
+                      setshowPopupListSender(false);
+                    }}
+                  >
+                    <div className="avatar">
+                      <img src="" alt="" />
+                    </div>
+                    <div className="username">
+                      {sender.username}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          }
+          {sender && <ChatPopupForCreator
+            creator={creator}
+            sender={sender}
+            recipe_id={dishData?.data[0].id}
+            showPopupChat={showPopupChat}
+            setShowPopupChat={setShowPopupChat}
+          />
+          }
+        </>
       }
     </div>
   );

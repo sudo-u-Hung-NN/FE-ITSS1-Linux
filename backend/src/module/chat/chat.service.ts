@@ -10,50 +10,49 @@ import { Chat } from './entities/chat.entity';
 export class ChatService {
   constructor(
     @InjectRepository(Chat)
-    private readonly chatRepo:Repository<Chat>,
+    private readonly chatRepo: Repository<Chat>,
     @InjectRepository(Recipe)
-    private readonly recipeRepo:Repository<Recipe>,
-  ){}
+    private readonly recipeRepo: Repository<Recipe>,
+  ) { }
   create(createChatDto: CreateChatDto) {
-    createChatDto.time=new Date();
+    createChatDto.time = new Date();
     return this.chatRepo.save(createChatDto);
   }
 
-  async findAll(sender_id:number,reciver_id:number,recipe_id:number) {
-    const data=this.chatRepo.find({
-      where: [{ sender_id : sender_id,reciver_id :reciver_id,recipe_id : recipe_id },
-        { sender_id : reciver_id,reciver_id :sender_id,recipe_id : recipe_id }],
-      take:10,
+  async findAll(sender_id: number, reciver_id: number, recipe_id: number) {
+    const data = this.chatRepo.find({
+      where: [{ sender_id: sender_id, reciver_id: reciver_id, recipe_id: recipe_id },
+      { sender_id: reciver_id, reciver_id: sender_id, recipe_id: recipe_id }],
+      take: 10,
       order: {
-        id:  "desc"
-    }
+        id: "desc"
+      }
     });
 
-   return data;
-  //   const queryBuilder =this.chatRepo.createQueryBuilder('chat');
-  //   queryBuilder.where(`chat.recipe_id :recipe_id`, { recipe_id: recipe_id});
-  //   queryBuilder.where(`chat.sender_id :sender_id and chat.reciver_id:reciver_id and chat.recipe_id :recipe_id`, { sender_id: sender_id,
-  //   reciver_id:reciver_id,
-  //   recipe_id: recipe_id,
-  // });
-  //   queryBuilder.orWhere(`chat.sender_id :sender_id and chat.reciver_id:reciver_id and chat.recipe_id :recipe_id`, { sender_id: reciver_id,
-  //     reciver_id:sender_id,
-  //     recipe_id: recipe_id
-  //   });
-  //   queryBuilder.orderBy('chat.time', 'ASC')
-  //   queryBuilder.having('count(recipe_id)=:length', { length: 10 })
-  //   console.log(queryBuilder.getQuery())
-  //   const data = await queryBuilder.getRawMany();
-  //   return data;
+    return data;
+    //   const queryBuilder =this.chatRepo.createQueryBuilder('chat');
+    //   queryBuilder.where(`chat.recipe_id :recipe_id`, { recipe_id: recipe_id});
+    //   queryBuilder.where(`chat.sender_id :sender_id and chat.reciver_id:reciver_id and chat.recipe_id :recipe_id`, { sender_id: sender_id,
+    //   reciver_id:reciver_id,
+    //   recipe_id: recipe_id,
+    // });
+    //   queryBuilder.orWhere(`chat.sender_id :sender_id and chat.reciver_id:reciver_id and chat.recipe_id :recipe_id`, { sender_id: reciver_id,
+    //     reciver_id:sender_id,
+    //     recipe_id: recipe_id
+    //   });
+    //   queryBuilder.orderBy('chat.time', 'ASC')
+    //   queryBuilder.having('count(recipe_id)=:length', { length: 10 })
+    //   console.log(queryBuilder.getQuery())
+    //   const data = await queryBuilder.getRawMany();
+    //   return data;
   }
   async list(id: number) {
-    const chat = await this.chatRepo.find({where:{recipe_id:id}});
-    const user=await this.recipeRepo.findOne({where:{id:id}});
-    const data=[]
-    for(  let i = 0; i < chat.length; ++i)
-    { 
-      if(chat[i].sender_id!==user.creator)
-      data.push(chat[i].sender_id)
+    const chat = await this.chatRepo.find({ where: { recipe_id: id } });
+    const recipe = await this.recipeRepo.findOne({ where: { id: id } });
+    const data = []
+    for (let i = 0; i < chat.length; ++i) {
+      if (chat[i].sender_id !== recipe.creator)
+        data.push(chat[i].sender_id)
     }
     return Array.from(new Set(data));
   }

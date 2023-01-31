@@ -88,7 +88,7 @@
                     }
                 }
 
-                .taste-table{
+                .taste-table {
                     width: 90%;
                     text-align: left;
                 }
@@ -161,27 +161,79 @@
 
     }
 
-    .chat-icon {
+    .chatbox-toggle {
         position: fixed;
-        right: 15px;
-        bottom: 35px;
-        overflow: hidden;
+        right: 2rem;
+        bottom: 2rem;
         width: 80px;
         height: 80px;
+        background-color: var(--blue);
+        color: var(--white);
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 50%;
-        background-color: #ffb79993;
-        padding: 10px;
         cursor: pointer;
-        box-shadow: 0 0px 10px rgba(0, 0, 0, 0.358);
-        transition: background-color 0.2s linear;
+        transition: .2s;
+    }
 
-        img {
-            width: 100%;
-            height: 100%;
+    .chatbox-toggle:active {
+        transform: scale(0.9);
+    }
+
+    .chatbox-list-senders {
+        position: fixed;
+        right: 2rem;
+        bottom: 8rem;
+        width: 420px;
+        border-radius: .5rem;
+        overflow: hidden;
+        box-shadow: .5rem .5rem 2rem rgba(0, 0, 0, 0.3);
+        transform: scale(1);
+        transform-origin: bottom right;
+        transition: .2s;
+
+        .chatbox-list-senders-title {            
+            background: var(--grey-d-1);
+            padding: .75rem 1.5rem;
+            text-align: center;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.3rem;
         }
 
-        &:hover {
-            background-color: #d6dded;
+        .chatbox-list-senders-body {
+            background-color: var(--white);
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+
+            .chatbox-list-senders-item {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                border-radius: 10px;
+                height: 90px;
+                cursor: pointer;
+                padding: 0 15px;
+
+                &:hover {
+                    background: var(--grey-d-1);
+                }
+
+                .avatar {
+                    background-color: #9d6045;
+                    width: 65px;
+                    height: 65px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    margin-right: 30px;
+                }
+                .username {
+                    color: var(--dark);
+                }
+            }
         }
     }
 }
