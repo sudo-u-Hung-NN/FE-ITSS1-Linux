@@ -16,14 +16,13 @@ import { getAllCommentById } from "../Api/comment.api";
 import ChatPopup from "../OtherComponent/Chat/ChatPopup";
 import { getUsersForChat } from "../Api/user.api";
 
-
 export default function Dish() {
   const dispatch = useDispatch();
+  const param = useParams();
   const dishData = useSelector((state) => state.dish.dataDish.data);
   const creatorId = dishData?.data[0].creator;
   const [creator, setCreator] = useState();
   const [voted, setVoted] = useState(0);
-  const param = useParams();
   const [option, setOption] = useState(1);
   const [comment, setComment] = useState("");
   const [listComments, setListComments] = useState([]);
@@ -35,15 +34,11 @@ export default function Dish() {
         setCreator(res.data);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  console.log(dishData?.data)
-  console.log('creator', creator);
-
+        console.log(err);
+      });
+  };
   useEffect(() => {
-    getCreatorById()
+    getCreatorById();
   }, [dishData]);
 
   useEffect(() => {
@@ -149,11 +144,16 @@ export default function Dish() {
         </Row>
       </Container>
       <CommentRecipe listComments={listComments} recipe_id={param.id} />
-      {currentUser.id !== creatorId ?
-        <ChatPopup creator={creator} sender_id={currentUser.id} reciver_id={creatorId} recipe_id={dishData?.data[0].id} />
-        :
+      {currentUser?.id !== creatorId ? (
+        <ChatPopup
+          creator={creator}
+          sender_id={currentUser?.id}
+          reciver_id={creatorId}
+          recipe_id={dishData?.data[0].id}
+        />
+      ) : (
         <></>
-      }
+      )}
     </div>
   );
 }
