@@ -5,7 +5,8 @@ import Table from "react-bootstrap/Table";
 import { limitForPage } from "../../../../utils/limitForPage";
 import { AdminPagination } from "./pagination";
 import { Container, Row, Col } from "react-bootstrap";
-import { getAllUsers } from "../../../../../api/apiUser";
+import { changeStatus, getAllUsers } from "../../../../../api/apiUser";
+import { ToastContainer, toast } from "react-toastify";
 export default function AdminTable() {
   const [totalPages, setTotalPages] = useState([]);
   const [page, setPage] = useState(1);
@@ -25,13 +26,21 @@ export default function AdminTable() {
       setUsers(
         users.map((item, index) => {
           if (item.id === i) {
-            return { ...item, status: 1 };
+            changeStatus(item.id)
+              .then(() => {
+                toast.success("Block thành công !!", {
+                  position: toast.POSITION.TOP_RIGHT,
+                });
+              })
+              .catch(() => {
+                toast.error("Block thất bại !!", {
+                  position: toast.POSITION.TOP_RIGHT,
+                });
+              });
           }
-          return item;
+          return { ...item, status: 1 };
         })
       );
-    } else {
-      console.log("Khong the block");
     }
   };
   const isDisable = (i) => {
@@ -109,6 +118,7 @@ export default function AdminTable() {
           </Row>
         </Container>
       )}
+      <ToastContainer />
     </div>
   );
 }

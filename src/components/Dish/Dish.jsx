@@ -22,11 +22,11 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 export default function Dish() {
   const dispatch = useDispatch();
+  const param = useParams();
   const dishData = useSelector((state) => state.dish.dataDish.data);
   const creatorId = dishData?.data[0].creator;
   const [creator, setCreator] = useState();
   const [voted, setVoted] = useState(0);
-  const param = useParams();
   const [option, setOption] = useState(1);
   const [listComments, setListComments] = useState([]);
   const currentUser = useSelector((state) => state.auth.login.currentUser);
@@ -59,7 +59,7 @@ export default function Dish() {
   // console.log(dishData?.data)
 
   useEffect(() => {
-    getCreatorById()
+    getCreatorById();
   }, [dishData]);
 
   useEffect(() => {
