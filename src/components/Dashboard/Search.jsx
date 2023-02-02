@@ -177,7 +177,7 @@ function Search(props) {
           <div id="filter-icon">
             <BiFilterAlt size={34} />
           </div>
-          <div>
+          {/* <div>
             <select className="orderBy" id="orderBy-select">
               <option>--Sắp xếp theo:--</option>
               <option value="name">Tên</option>
@@ -185,15 +185,15 @@ function Search(props) {
               <option value="vote">Bình chọn</option>
               <option value="view">Lượt xem</option>
             </select>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <select className="price" id="price-select">
               <option>--Giá tiền--</option>
               <option value="">0 - $1.99</option>
               <option value="">$2 - $5</option>
               <option value="">$5 - $10</option>
             </select>
-          </div>
+          </div> */}
           <div>
             <select
               className="country"
