@@ -260,6 +260,17 @@
                     color: var(--dark);
                 }
             }
+
+            .not-sender {
+                margin: 10px;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #e7e7e7;
+                border-radius: 10px;
+                user-select: none;
+            }
         }
     }
 }

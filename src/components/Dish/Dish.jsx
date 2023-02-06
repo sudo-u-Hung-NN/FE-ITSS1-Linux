@@ -220,6 +220,11 @@ export default function Dish() {
                     </div>
                   </div>
                 ))}
+                {senders.length === 0 && (
+                  <div className="not-sender">
+                    <p>Không có ai gửi tin nhắn cho bạn!</p>
+                  </div>
+                )}
               </div>
             </div>
           }
